@@ -17,9 +17,8 @@ class HomeController extends Controller
     {
         // dd($request->all());
         $prodi = Prodi::get();
-        $data = User::get();
         $dataDosen = Dosen::get();
-        return view('admin/dashboard', compact('dataDosen', 'data', 'prodi'));
+        return view('admin/dashboard', compact('dataDosen', 'prodi'));
     }
 
 
@@ -93,14 +92,13 @@ class HomeController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $data = User::find($id); //mencari data berdasarkan id
 
+
+        $data = User::find($id); //mencari data berdasarkan id
         if ($data) {
             $data->delete();
         }
 
         return redirect()->route('admin.index');
-
-        $prodi = Prodi::find($id);
     }
 }

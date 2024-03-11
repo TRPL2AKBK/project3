@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class UserController extends Controller
+class ProdiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = User::get();
+        $prodi = Prodi::get();
 
-        return view('admin/index', compact('data'));
+        return view('admin/dashboard', compact('prodi'));
     }
 
     /**
@@ -63,10 +63,11 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = User::find($id); //mencari data berdasarkan id
-        if ($data) {
-            $data->delete();
+        $prodi = Prodi::find($id); //mencari data berdasarkan id
+
+        if ($prodi) {
+            $prodi->delete();
         }
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.dashboard');
     }
 }

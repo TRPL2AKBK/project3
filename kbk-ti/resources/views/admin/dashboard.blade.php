@@ -91,7 +91,7 @@
                                             <th>Prodi</th>
                                             <th>Jurusan</th>
                                             <th>Jenjang</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -102,13 +102,13 @@
                                                 <td> {{ $p->prodi }} </td>
                                                 <td> {{ $p->jurusan->jurusan }} </td>
                                                 <td> {{ $p->jenjang }} </td>
-                                                <td>
+                                                {{-- <td>
                                                     <a
                                                         href="{{ route('admin.user.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
                                                             class="fas fa-pen"></i> Edit</a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $p->id }}"
                                                         class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                             <div class="modal fade" id="modal-hapus{{ $p->id }}">
                                                 <div class="modal-dialog">
@@ -121,8 +121,8 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Apakah kamu yakin ingin menghapus data user
-                                                                <b>{{ $p->name }}</b>
+                                                            <p>Apakah kamu yakin ingin menghapus data Prodi
+                                                                <b>{{ $p->prodi }}</b>
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
@@ -150,7 +150,9 @@
                         </div>
                         <!-- /.card -->
 
-                        @include('admin.data')
+
+                        {{-- =========================== --}}
+                        {{-- @include('admin.datauser') --}}
 
                     </div>
                     <!-- /.col -->
