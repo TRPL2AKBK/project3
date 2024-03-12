@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $data = User::get();
 
-        return view('admin/index', compact('data'));
+        return view('user/dashboard', compact('data'));
     }
 
     /**

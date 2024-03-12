@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
    // Manipulasi Data user 
-   Route::get('/user', [HomeController::class, 'index'])->name('index');
+   Route::get('/datauser', [HomeController::class, 'dataUser'])->name('users');
    Route::get('/create', [HomeController::class, 'create'])->name('user.create');
    Route::post('/store', [HomeController::class, 'store'])->name('user.store');
 
@@ -79,5 +79,6 @@ Route::group(['prefix' => 'kaprodi', 'middleware' => ['auth'], 'as' => 'kaprodi.
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth'], 'as' => 'user.'], function () {
    // Rute untuk dashboard dosen
-   Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
+   Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+   Route::get('/', [UserController::class, 'index'])->name('dashboard');
 });

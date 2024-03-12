@@ -23,11 +23,11 @@ class HomeController extends Controller
 
 
 
-    public function index()
+    public function dataUser()
     {
         $data = User::get();
 
-        return view('admin/index', compact('data'));
+        return view('admin/dataUser', compact('data'));
     }
 
     public function create()
@@ -54,7 +54,7 @@ class HomeController extends Controller
 
         User::create($data);
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.dataUser');
         // 'admin.user.create'
     }
 
@@ -87,7 +87,7 @@ class HomeController extends Controller
 
         User::whereId($id)->update($data);
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.dataUser');
     }
 
     public function delete(Request $request, $id)
@@ -99,7 +99,7 @@ class HomeController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.dataUser');
     }
 
     // Manipulasi data Prodi
@@ -175,6 +175,6 @@ class HomeController extends Controller
             $prodi->delete();
         }
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.dataUser');
     }
 }
