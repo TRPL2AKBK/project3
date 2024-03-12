@@ -42,6 +42,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
 
    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
+   // Manipulasi Data user 
    Route::get('/user', [HomeController::class, 'index'])->name('index');
    Route::get('/create', [HomeController::class, 'create'])->name('user.create');
    Route::post('/store', [HomeController::class, 'store'])->name('user.store');
@@ -49,6 +50,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
    Route::get('/edit/{id}', [HomeController::class, 'edit'])->name('user.edit');
    Route::put('/update/{id}', [HomeController::class, 'update'])->name('user.update');
    Route::delete('/delete/{id}', [HomeController::class, 'delete'])->name('user.delete');
+
+   // Manipulasi Data Prodi
+   Route::get('/create/prodi', [HomeController::class, 'createProdi'])->name('prodi.create');
+   Route::post('/store/prodi', [HomeController::class, 'storeProdi'])->name('prodi.store');
+
+   Route::get('/edit/prodi/{id}', [HomeController::class, 'editProdi'])->name('prodi.edit');
+   Route::put('/update/prodi/{id}', [HomeController::class, 'updateProdi'])->name('prodi.update');
+   Route::delete('/delete/prodi/{id}', [HomeController::class, 'deleteProdi'])->name('prodi.delete');
 });
 
 

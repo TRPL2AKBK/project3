@@ -7,16 +7,16 @@
     <title>Sibeka | Dashboard</title>
 
     {{-- dashboard --}}
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    {{-- <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('lte/plugins/fontawesome-free/css/all.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('lte/plugins/fontawesome-free/css/all.min.css') }}"> --}}
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}"> --}}
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}"> --}}
     {{-- end dashboard table --}}
 
     <!-- Google Font: Source Sans Pro -->
@@ -46,10 +46,10 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        <!-- Preloader -->
+        {{-- <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="img/logo.jpg" alt="Sibeka" height="60" width="60">
-        </div>
+        </div> --}}
 
         {{-- Navabar --}}
         @include('layout.navbar')
@@ -179,7 +179,8 @@
     <script src="{{ asset('lte/dist/js/pages/dashboard.js') }}"></script>
 
     {{-- dashboard --}}
-    <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
+    {{-- table --}}
+    {{-- <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- DataTables  & Plugins -->
@@ -218,7 +219,7 @@
                 "responsive": true,
             });
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

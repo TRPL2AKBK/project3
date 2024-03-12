@@ -25,12 +25,13 @@
                 <div class="row">
                     <div class="col-12">
 
+                        {{-- Table Dosen --}}
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Data Dosen</h3>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body">
+                            <div class="card-body table-responsive p-0">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -45,9 +46,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($dataDosen as $d)
+                                        @foreach ($dataDosen as $index => $d)
                                             <tr>
-                                                <td> {{ $loop->iteration }} </td>
+                                                <td> {{ $dataDosen->firstitem() + $index }} </td>
                                                 <td> {{ $d->name }} </td>
                                                 <td> {{ $d->nidn }} </td>
                                                 <td> {{ $d->nip }} </td>
@@ -57,26 +58,30 @@
                                                 <td> {{ $d->email }} </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>NIDN</th>
-                                            <th>NIP</th>
-                                            <th>Gender</th>
-                                            <th>Prodi</th>
-                                            <th>Bidang</th>
-                                            <th>email</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
+                                <div class="card-footer">
+
+                                    <div style=" float: left;">
+                                        Showing
+                                        {{ $dataDosen->firstitem() }}
+                                        to
+                                        {{ $dataDosen->lastitem() }}
+                                        of
+                                        {{ $dataDosen->total() }}
+                                        entries
+                                    </div>
+                                    <div style=" float: right;">
+                                        {{ $dataDosen->links() }}
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
 
+                        <!-- /.Table Dosen -->
+
+                        {{-- Table Prodi --}}
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Data Prodi</h3>
@@ -91,24 +96,24 @@
                                             <th>Prodi</th>
                                             <th>Jurusan</th>
                                             <th>Jenjang</th>
-                                            {{-- <th>Action</th> --}}
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($prodi as $p)
+                                        @foreach ($dataProdi as $p)
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
                                                 <td> {{ $p->kode_prodi }} </td>
                                                 <td> {{ $p->prodi }} </td>
                                                 <td> {{ $p->jurusan->jurusan }} </td>
                                                 <td> {{ $p->jenjang }} </td>
-                                                {{-- <td>
+                                                <td>
                                                     <a
-                                                        href="{{ route('admin.user.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
+                                                        href="{{ route('admin.prodi.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
                                                             class="fas fa-pen"></i> Edit</a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $p->id }}"
                                                         class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
-                                                </td> --}}
+                                                </td>
                                             </tr>
                                             <div class="modal fade" id="modal-hapus{{ $p->id }}">
                                                 <div class="modal-dialog">
@@ -127,7 +132,7 @@
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <form
-                                                                action="{{ route('admin.user.delete', ['id' => $p->id]) }}"
+                                                                action="{{ route('admin.prodi.delete', ['id' => $p->id]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -146,9 +151,10 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
-                        <!-- /.card -->
+                        {{-- /Table Dosen --}}
 
 
                         {{-- =========================== --}}
