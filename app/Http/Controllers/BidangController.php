@@ -2,23 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kaprodi;
+use App\Models\Bidang;
 use Illuminate\Http\Request;
 
-class KaprodiController extends Controller
+class BidangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return view('kaprodi\dashboard');
+        //
     }
 
     /**
@@ -40,7 +34,7 @@ class KaprodiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Kaprodi $kaprodi)
+    public function show(Bidang $bidang)
     {
         //
     }
@@ -48,7 +42,7 @@ class KaprodiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kaprodi $kaprodi)
+    public function edit(Bidang $bidang)
     {
         //
     }
@@ -56,7 +50,7 @@ class KaprodiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kaprodi $kaprodi)
+    public function update(Request $request, Bidang $bidang)
     {
         //
     }
@@ -64,7 +58,7 @@ class KaprodiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kaprodi $kaprodi)
+    public function destroy(Bidang $bidang)
     {
         //
     }

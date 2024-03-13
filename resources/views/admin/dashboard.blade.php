@@ -1,4 +1,5 @@
 @extends('layout.main')
+@section('title', 'Admin')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -32,7 +33,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="example" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -46,9 +47,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($dataDosen as $index => $d)
+                                        {{-- @foreach ($dataDosen as $index => $d) --}}
+                                        @foreach ($dataDosen as $d)
                                             <tr>
-                                                <td> {{ $dataDosen->firstitem() + $index }} </td>
+                                                {{-- <td> {{ $dataDosen->firstitem() + $index }} </td> --}}
+                                                <td> {{ $loop->iteration }} </td>
                                                 <td> {{ $d->name }} </td>
                                                 <td> {{ $d->nidn }} </td>
                                                 <td> {{ $d->nip }} </td>
@@ -60,8 +63,8 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="card-footer">
 
+                                {{-- <div class="card-footer">
                                     <div style=" float: left;">
                                         Showing
                                         {{ $dataDosen->firstitem() }}
@@ -74,12 +77,45 @@
                                     <div style=" float: right;">
                                         {{ $dataDosen->links() }}
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- /.card-body -->
                         </div>
-
                         <!-- /.Table Dosen -->
+
+                        {{-- Table Matkul --}}
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Data Mata Kuliah</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table id="example" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Mata Kuliah</th>
+                                            <th>Bidang</th>
+                                            <th>Dosen Pengampu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{-- @foreach ($dataDosen as $index => $d) --}}
+                                        @foreach ($dataMatkul as $m)
+                                            <tr>
+                                                {{-- <td> {{ $dataDosen->firstitem() + $index }} </td> --}}
+                                                <td> {{ $loop->iteration }} </td>
+                                                <td> {{ $m->matkul }} </td>
+                                                <td> {{ $m->bidang->bidang_keahlian }} </td>
+                                                <td> {{ $m->dosen->name }} </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        {{-- /Tabel Matkul --}}
 
                         {{-- Table Prodi --}}
                         <div class="card">
@@ -88,7 +124,7 @@
                             </div>
                             <div class="card-body table-responsive p-0">
                                 {{-- <table class="table table-hover text-nowrap"> --}}
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -112,7 +148,8 @@
                                                         href="{{ route('admin.prodi.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
                                                             class="fas fa-pen"></i> Edit</a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $p->id }}"
-                                                        class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
+                                                        class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+                                                        Hapus</a>
                                                 </td>
                                             </tr>
                                             <div class="modal fade" id="modal-hapus{{ $p->id }}">
@@ -151,15 +188,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                         {{-- /Table Dosen --}}
-
-
-                        {{-- =========================== --}}
-                        {{-- @include('admin.datauser') --}}
-
                     </div>
                     <!-- /.col -->
                 </div>

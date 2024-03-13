@@ -11,11 +11,17 @@ class ProdiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $prodi = Prodi::get();
 
-        return view('admin/dashboard', compact('prodi'));
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index(Request $request)
+    {
+        $dataProdi = Prodi::get();
+
+        return view('admin/dashboard', compact('dataProdi'));
     }
 
     /**

@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kaprodi;
+use App\Models\Matkul;
 use Illuminate\Http\Request;
 
-class KaprodiController extends Controller
+class MatkulController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
-    }
+        $dataMatkul = Matkul::get();
 
-    public function index()
-    {
-        return view('kaprodi\dashboard');
+        return view('admin/dashboard', compact('dataMatkul'));
     }
 
     /**
@@ -40,7 +36,7 @@ class KaprodiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Kaprodi $kaprodi)
+    public function show(Matkul $matkul)
     {
         //
     }
@@ -48,7 +44,7 @@ class KaprodiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kaprodi $kaprodi)
+    public function edit(Matkul $matkul)
     {
         //
     }
@@ -56,7 +52,7 @@ class KaprodiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kaprodi $kaprodi)
+    public function update(Request $request, Matkul $matkul)
     {
         //
     }
@@ -64,7 +60,7 @@ class KaprodiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kaprodi $kaprodi)
+    public function destroy(Matkul $matkul)
     {
         //
     }

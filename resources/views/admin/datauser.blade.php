@@ -44,7 +44,6 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
-                                <!-- {{-- <table class="table table-hover text-nowrap"> --}} -->
                                 <table id="example" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>

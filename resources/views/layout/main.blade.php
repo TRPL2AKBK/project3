@@ -4,25 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sibeka | Dashboard</title>
+    <title>Sibeka | @yield('title')</title>
 
+    {{-- datatables --}}
     <a href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" rel="stylesheet"></a>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
-
-
-    {{-- dashboard --}}
-    {{-- <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
-    <!-- Font Awesome -->
-    {{-- <link rel="stylesheet" href="{{ asset('lte/plugins/fontawesome-free/css/all.min.css') }}"> --}}
-    <!-- DataTables -->
-    {{-- <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}"> --}}
-    <!-- Theme style -->
-    {{-- <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}"> --}}
-    {{-- end dashboard table --}}
+    {{-- /datatables --}}
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -76,6 +64,7 @@
                         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
+
                         <a href="#" class="d-block">User Name</a>
                     </div>
                 </div>
@@ -98,25 +87,54 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class               with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a href="{{ route('admin.dashboard') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.users') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Users
-                                </p>
-                            </a>
-                        </li>
+                        @if (auth()->user()->id_level == 1)
+                            <li class="nav-item">
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-home" aria-hidden="true"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.users') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Users
+                                    </p>
+                                </a>
+                            </li>
+                        @elseif (auth()->user()->id_level == 2)
+                            <li class="nav-item">
+                                <a href="{{ route('pengurus.dashboard') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                        @elseif (auth()->user()->id_level == 3)
+                            <li class="nav-item">
+                                <a href="{{ route('kaprodi.dashboard') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                        @elseif (auth()->user()->id_level == 4)
+                            <li class="nav-item">
+                                <a href="{{ route('dosen.dashboard') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-arrow-circle-left "></i>
                                 <p>
                                     Logout
                                 </p>
@@ -183,52 +201,13 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('lte/dist/js/pages/dashboard.js') }}"></script>
 
-    {{-- dashboard --}}
-    {{-- table --}}
-    {{-- <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="{{ asset('lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('lte/dist/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('lte/dist/js/demo.js') }}"></script>
-    <!-- Page specific script -->
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script> --}}
-
-<script>
-    new DataTable('#example');
-</script>
+        new DataTable('#example');
+        new DataTable('#example2');
+        new DataTable('#example3');
+        new DataTable('#example4');
+        new DataTable('#example5');
+    </script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dosen;
+use App\Models\Matkul;
 use App\Models\Prodi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,14 +12,21 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function dashboard(Request $request)
     {
         // dd($request->all());
         $dataProdi = Prodi::get();
-        $dataDosen = Dosen::paginate(10);
-        return view('admin/dashboard', compact('dataDosen', 'dataProdi'));
+        $dataDosen = Dosen::get();
+        $dataMatkul = Matkul::get();
+        // $dataDosen = Dosen::paginate(10);
+        return view('admin/dashboard', compact('dataDosen', 'dataMatkul', 'dataProdi'));
     }
 
 

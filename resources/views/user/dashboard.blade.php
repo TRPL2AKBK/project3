@@ -1,4 +1,5 @@
 @extends('layout.main')
+@section('title', 'User Dashboard')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -6,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Home Page</h1>
+                        <h1 class="m-0">Dashboard</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -23,9 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h1 class="m-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet sed at,
-                            quibusdam expedita quo tempora obcaecati soluta ullam sint dolore libero aliquam earum aliquid
-                            itaque facere. Molestiae deserunt quas est!</h1>
+                        <h1 class="m-4">Ini Dashboard User</h1>
                     </div>
                     <!-- /.col -->
                 </div>

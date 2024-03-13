@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('auth.login');
     }
 
-    public function login_proses(Request $request){
+    public function login_proses(Request $request)
+    {
         // dd($request->all());
 
         $request->validate([
@@ -25,7 +27,7 @@ class LoginController extends Controller
             // 'id_role'   => $request->id_role, // Menambahkan id_role ke array data
         ];
 
-        if(Auth::attempt($data)){
+        if (Auth::attempt($data)) {
             // Otentikasi berhasil, dapatkan id_role pengguna yang terotentikasi
             //$id_level = Auth::user()->id_level;
             // Berdasarkan nilai id_role, arahkan pengguna ke rute yang sesuai
@@ -50,31 +52,31 @@ class LoginController extends Controller
                     // Jika id_role adalah 1, arahkan ke halaman dashboard admin
                     return redirect()->route('user.dashboard');
                     break;
-
                 default:
                     // Jika id_role tidak sesuai dengan yang diharapkan, arahkan ke halaman tertentu
-                    return redirect()->route('login')->with('failed','Anda tidak memiliki akses yang sesuai');
+                    return redirect()->route('login')->with('failed', 'Anda tidak memiliki akses yang sesuai');
             }
         } else {
-        // Otentikasi gagal, arahkan pengguna kembali ke halaman login dengan pesan kesalahan
-        return redirect()->route('login')->with('failed','Email atau Password Salah');
-    }
+            // Otentikasi gagal, arahkan pengguna kembali ke halaman login dengan pesan kesalahan
+            return redirect()->route('login')->with('failed', 'Email atau Password Salah');
+        }
 
         // $data = [
-        //     'email'     =>$request->email,
-        //     'password'  =>$request->password,
-            
+        //     'email'     => $request->email,
+        //     'password'  => $request->password,
+
         // ];
 
-        // if(Auth::attempt($data)){
-        //     return redirect()->route('admin.dashboard');
-        // }else{
-        //     return redirect()->route('login')->with('failed','Email atau Password Salah');
+        // if (Auth::attempt($data)) {
+        //     return redirect()->route('home');
+        // } else {
+        //     return redirect()->route('login')->with('failed', 'Email atau Password Salah');
         // }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
-        return redirect()->route('login')->with('success','Kamu Telah Logout');
+        return redirect()->route('login')->with('success', 'Kamu Telah Logout');
     }
 }
