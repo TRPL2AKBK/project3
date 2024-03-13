@@ -87,7 +87,7 @@ class HomeController extends Controller
 
         User::whereId($id)->update($data);
 
-        return redirect()->route('admin.dataUser');
+        return redirect()->route('admin.users');
     }
 
     public function delete(Request $request, $id)
@@ -99,7 +99,7 @@ class HomeController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('admin.dataUser');
+        return redirect()->route('admin.users');
     }
 
     // Manipulasi data Prodi
@@ -175,6 +175,6 @@ class HomeController extends Controller
             $prodi->delete();
         }
 
-        return redirect()->route('admin.dataUser');
+        return redirect()->route('admin.dashboard');
     }
 }
