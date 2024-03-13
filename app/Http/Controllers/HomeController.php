@@ -54,7 +54,7 @@ class HomeController extends Controller
 
         User::create($data);
 
-        return redirect()->route('admin.dataUser');
+        return redirect()->route('admin.users');
         // 'admin.user.create'
     }
 

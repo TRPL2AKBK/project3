@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sibeka | Dashboard</title>
 
+    <a href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" rel="stylesheet"></a>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+
+
     {{-- dashboard --}}
     {{-- <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
@@ -220,6 +225,10 @@
             });
         });
     </script> --}}
+
+<script>
+    new DataTable('#example');
+</script>
 </body>
 
 </html>
