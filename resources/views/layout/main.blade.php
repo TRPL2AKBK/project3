@@ -64,8 +64,7 @@
                         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-
-                        <a href="#" class="d-block">User Name</a>
+                        <a href="#" class="d-block">Username</a>
                     </div>
                 </div>
 
@@ -100,9 +99,33 @@
                                 <a href="{{ route('admin.users') }}" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
-                                        Users
+                                        Data User
                                     </p>
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.dosens') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-graduation-cap"></i>
+                                    <p>
+                                        Data Dosen
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.matkuls') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Data Mata Kuliah
+                                    </p>
+                                </a>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.prodis') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Data Prodi
+                                    </p>
+                                </a>
+                            </li>
                             </li>
                         @elseif (auth()->user()->id_level == 2)
                             <li class="nav-item">

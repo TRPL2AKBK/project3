@@ -25,17 +25,37 @@ class AdminController extends Controller
         $dataProdi = Prodi::get();
         $dataDosen = Dosen::get();
         $dataMatkul = Matkul::get();
+        $dataUser = User::get();
         // $dataDosen = Dosen::paginate(10);
-        return view('admin/dashboard', compact('dataDosen', 'dataMatkul', 'dataProdi'));
+        return view('admin/dashboard', compact('dataDosen', 'dataMatkul', 'dataProdi', 'dataUser'));
     }
-
-
 
     public function dataUser()
     {
         $data = User::get();
 
         return view('admin/dataUser', compact('data'));
+    }
+
+    public function dataDosen()
+    {
+        $dosen = Dosen::get();
+
+        return view('admin/dataDosen', compact('dosen'));
+    }
+
+    public function dataProdi()
+    {
+        $prodi = Prodi::get();
+
+        return view('admin/dataProdi', compact('prodi'));
+    }
+
+    public function dataMatkul()
+    {
+        $matkul = Matkul::get();
+
+        return view('admin/dataMatkul', compact('matkul'));
     }
 
     public function create()

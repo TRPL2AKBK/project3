@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Admin')
+@section('title', 'Admin Dashboard')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -24,173 +24,68 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>150</h3>
 
-                        {{-- Table Dosen --}}
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Data Dosen</h3>
+                                <p>Lorem ipsum</p>
                             </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table id="example" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>NIDN</th>
-                                            <th>NIP</th>
-                                            <th>Gender</th>
-                                            <th>Prodi</th>
-                                            <th>Bidang</th>
-                                            <th>email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{-- @foreach ($dataDosen as $index => $d) --}}
-                                        @foreach ($dataDosen as $d)
-                                            <tr>
-                                                {{-- <td> {{ $dataDosen->firstitem() + $index }} </td> --}}
-                                                <td> {{ $loop->iteration }} </td>
-                                                <td> {{ $d->name }} </td>
-                                                <td> {{ $d->nidn }} </td>
-                                                <td> {{ $d->nip }} </td>
-                                                <td> {{ $d->gender }} </td>
-                                                <td> {{ $d->prodi->prodi }} </td>
-                                                <td> {{ $d->id_bidang }} </td>
-                                                <td> {{ $d->email }} </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-
-                                {{-- <div class="card-footer">
-                                    <div style=" float: left;">
-                                        Showing
-                                        {{ $dataDosen->firstitem() }}
-                                        to
-                                        {{ $dataDosen->lastitem() }}
-                                        of
-                                        {{ $dataDosen->total() }}
-                                        entries
-                                    </div>
-                                    <div style=" float: right;">
-                                        {{ $dataDosen->links() }}
-                                    </div>
-                                </div> --}}
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
                             </div>
-                            <!-- /.card-body -->
+                            <a href="#" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        <!-- /.Table Dosen -->
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                        {{-- Table Matkul --}}
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Data Mata Kuliah</h3>
+                                <p>Lorem ipsum</p>
                             </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table id="example" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Mata Kuliah</th>
-                                            <th>Bidang</th>
-                                            <th>Dosen Pengampu</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{-- @foreach ($dataDosen as $index => $d) --}}
-                                        @foreach ($dataMatkul as $m)
-                                            <tr>
-                                                {{-- <td> {{ $dataDosen->firstitem() + $index }} </td> --}}
-                                                <td> {{ $loop->iteration }} </td>
-                                                <td> {{ $m->matkul }} </td>
-                                                <td> {{ $m->bidang->bidang_keahlian }} </td>
-                                                <td> {{ $m->dosen->name }} </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
                             </div>
-                            <!-- /.card-body -->
+                            <a href="#" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        {{-- /Tabel Matkul --}}
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>44</h3>
 
-                        {{-- Table Prodi --}}
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Data Prodi</h3>
+                                <p>Lorem ipsum</p>
                             </div>
-                            <div class="card-body table-responsive p-0">
-                                {{-- <table class="table table-hover text-nowrap"> --}}
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Kode Prodi</th>
-                                            <th>Prodi</th>
-                                            <th>Jurusan</th>
-                                            <th>Jenjang</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($dataProdi as $p)
-                                            <tr>
-                                                <td> {{ $loop->iteration }} </td>
-                                                <td> {{ $p->kode_prodi }} </td>
-                                                <td> {{ $p->prodi }} </td>
-                                                <td> {{ $p->jurusan->jurusan }} </td>
-                                                <td> {{ $p->jenjang }} </td>
-                                                <td>
-                                                    <a
-                                                        href="{{ route('admin.prodi.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
-                                                            class="fas fa-pen"></i> Edit</a>
-                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id }}"
-                                                        class="btn btn-danger"><i class="fas fa-trash-alt"></i>
-                                                        Hapus</a>
-                                                </td>
-                                            </tr>
-                                            <div class="modal fade" id="modal-hapus{{ $p->id }}">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Konfirmasi Hapus Data</h4>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Apakah kamu yakin ingin menghapus data Prodi
-                                                                <b>{{ $p->prodi }}</b>
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <form
-                                                                action="{{ route('admin.prodi.delete', ['id' => $p->id]) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Ya,
-                                                                    Hapus</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.modal-content -->
-                                                </div>
-                                                <!-- /.modal-dialog -->
-                                            </div>
-                                            <!-- /.modal -->
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
                             </div>
+                            <a href="#" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        {{-- /Table Dosen --}}
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>65</h3>
+
+                                <p>Lorem ipsum</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
+                        </div>
                     </div>
                     <!-- /.col -->
                 </div>

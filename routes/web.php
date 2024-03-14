@@ -44,8 +44,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
 
    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-   // Manipulasi Data user 
+   // view halaman admin
    Route::get('/datauser', [AdminController::class, 'dataUser'])->name('users');
+   Route::get('/datadosen', [AdminController::class, 'dataDosen'])->name('dosens');
+   Route::get('/datamatkul', [AdminController::class, 'dataMatkul'])->name('matkuls');
+   Route::get('/dataprodi', [AdminController::class, 'dataProdi'])->name('prodis');
+
+   // Manipulasi Data user 
    Route::get('/create', [AdminController::class, 'create'])->name('user.create');
    Route::post('/store', [AdminController::class, 'store'])->name('user.store');
 
