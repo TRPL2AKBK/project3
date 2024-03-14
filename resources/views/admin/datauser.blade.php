@@ -1,4 +1,5 @@
 @extends('layout.main')
+@section('title', 'Data User')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -18,33 +19,43 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-
+        @if (session('status'))
+            <div class="alert">{{ session('status') }}</div>
+        @endif
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-3"> Insert</a>
                         <div class="card">
-                            <div class="card-header mb-3">
-                                <h3 class="card-title">Responsive Hover Table</h3>
-
-                                {{-- <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                            placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
+                            <div class="card-header mb-1">
+                                <h3 class="card-title mt-3">Responsive Hover Table</h3>
+                                {{-- Tombol Insert --}}
+                                {{-- <div class="card-tittle mt-2 float-right">
+                                    <div class="margin">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info">Tambah</button>
+                                            <button type="button"
+                                                class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon"
+                                                data-toggle="dropdown">
+                                                <span class="sr-only">Toggle Dropdown</span>
                                             </button>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" href="{{ route('admin.user.create') }}">Insert 1
+                                                    Data</a>
+                                                <a class="dropdown-item" href="{{ route('admin.user.importfile') }}">Insert
+                                                    From
+                                                    File</a>
+                                            </div>
                                         </div>
                                     </div>
+                                    .
                                 </div> --}}
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
-                                <table id="example" class="table table-bordered table-striped">
+                                {{-- <table id="example" class="table table-bordered table-striped"> --}}
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>

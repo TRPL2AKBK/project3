@@ -1,4 +1,5 @@
 @extends('layout.main')
+@section('title', 'Edit Prodi')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->

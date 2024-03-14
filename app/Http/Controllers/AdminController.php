@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UserImport;
 use App\Models\Dosen;
 use App\Models\Matkul;
 use App\Models\Prodi;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class AdminController extends Controller
@@ -40,7 +42,7 @@ class AdminController extends Controller
     public function dataDosen()
     {
         $dosen = Dosen::get();
-
+        // $dosen = Dosen::paginate(10);
         return view('admin/dataDosen', compact('dosen'));
     }
 
@@ -61,6 +63,25 @@ class AdminController extends Controller
     public function create()
     {
         return view('admin/create');
+    }
+
+    public function importFile(Request $request)
+    {
+        return view('admin/importfile');
+    }
+
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'import_file' => [
+                'required',
+                'file'
+            ]
+        ]);
+
+        Excel::import(new UserImport, $request->file('import_file'));
+
+        return redirect()->route('admin.users')->with('status', 'Data berhasil di tambahkan');
     }
 
     public function store(Request $request)
@@ -157,7 +178,7 @@ class AdminController extends Controller
 
         Prodi::create($prodi);
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.prodis');
         // 'admin.user.create'
     }
 
@@ -191,7 +212,7 @@ class AdminController extends Controller
         Prodi::updateProdi($id, $prodi);
         // Prodi::whereId($id)->updateProdi($prodi);
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.prodis');
     }
 
     public function deleteProdi(Request $request, $id)
@@ -203,6 +224,6 @@ class AdminController extends Controller
             $prodi->delete();
         }
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.prodis');
     }
 }

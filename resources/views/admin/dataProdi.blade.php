@@ -25,11 +25,16 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-
                         {{-- Table Prodi --}}
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Data Prodi</h3>
+                                <h3 class="card-title mt-3">Data Prodi</h3>
+                                {{-- Tombol Insert --}}
+                                {{-- <div class="card-title mt-2" style="float: right"><a
+                                        href="{{ route('admin.prodi.create') }}" class="btn btn-primary mb-3"
+                                        style="float: right">
+                                        Insert</a>
+                                </div> --}}
                             </div>
                             <div class="card-body table-responsive p-0">
                                 {{-- <table class="table table-hover text-nowrap"> --}}

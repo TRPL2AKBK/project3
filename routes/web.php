@@ -53,6 +53,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    // Manipulasi Data user 
    Route::get('/create', [AdminController::class, 'create'])->name('user.create');
    Route::post('/store', [AdminController::class, 'store'])->name('user.store');
+   Route::post('/insert', [AdminController::class, 'importExcel'])->name('user.import');
+   Route::get('/importfile', [AdminController::class, 'importFile'])->name('user.importfile');
 
    Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('user.edit');
    Route::put('/update/{id}', [AdminController::class, 'update'])->name('user.update');
