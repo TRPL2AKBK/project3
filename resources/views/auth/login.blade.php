@@ -31,18 +31,20 @@
                 <form action="{{ route('login-proses') }}" method="post">
                     @csrf
                     <div class="input-group mt-0 ">
-                        <input type="text" name="email" class="form-control" placeholder="Email">
+                        <input type="text" name="email" class="form-control" placeholder="Email"
+                            value="{{ old('email') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
-                    @error('id')
+                    @error('email')
                         <small style="color:red;">{{ $message }}</small>
                     @enderror
                     <div class="input-group mt-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password"
+                            value="{{ old('password') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -70,11 +72,12 @@
                 </form>
                 <!-- /.social-auth-links -->
                 <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
+                    <a href="#">I forgot my password</a>
                 </p>
-                {{-- <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-      </p> --}}
+                <p class="mb-0">
+                    {{-- {{ route('register') }} --}}
+                    <a href="#" class="text-center">Register a new account</a>
+                </p>
             </div>
             <!-- /.card-body -->
         </div>

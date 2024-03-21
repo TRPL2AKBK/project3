@@ -26,4 +26,9 @@ class Matkul extends Model
     {
         return $this->belongsTo('App\Models\Dosen', 'id_dosen');
     }
+
+    public function tahun()
+    {
+        return $this->belongsTo('App\Models\Tahun', 'id_tahun');
+    }
 }

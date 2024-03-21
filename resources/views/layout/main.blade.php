@@ -7,9 +7,9 @@
     <title>Sibeka | @yield('title')</title>
 
     {{-- datatables --}}
-    <a href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" rel="stylesheet"></a>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+    <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     {{-- /datatables --}}
 
     <!-- Google Font: Source Sans Pro -->
@@ -39,9 +39,9 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        {{-- <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="img/logo.jpg" alt="Sibeka" height="60" width="60">
+        <!-- Preloader -->
+        {{-- <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="img/bg3.png" alt="Sibeka" height="60" width="60">
         </div> --}}
 
         {{-- Navabar --}}
@@ -51,20 +51,27 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
-                <img src="#" alt="Sibeka Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            {{-- <a href="#" class="brand-link">
+                <img src="{{ asset('img/logo1.jpg') }}" alt="Sibeka Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">Sibeka</span>
-            </a>
+            </a> --}}
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('lte/dist/img/avatar2.png') }}" class="img-circle elevation-2"
+                            alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Username</a>
+                        {{-- Nama user yang login class="d-block"> --}}
+                        <a href="#" class="d-block">
+                            @if (auth()->check())
+                                {{ auth()->user()->name }}
+                            @endif
+                        </a>
                     </div>
                 </div>
 
@@ -115,9 +122,10 @@
                                 <a href="{{ route('admin.matkuls') }}" class="nav-link">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
-                                        Data Mata Kuliah
+                                        Dosen Mata Kuliah
                                     </p>
                                 </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.prodis') }}" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
@@ -126,6 +134,13 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.jurusan') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Data Jurusan
+                                    </p>
+                                </a>
                             </li>
                         @elseif (auth()->user()->id_level == 2)
                             <li class="nav-item">
@@ -224,13 +239,45 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('lte/dist/js/pages/dashboard.js') }}"></script>
 
+    {{-- datatables --}}
+    <script src="{{ asset('lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script>
-        new DataTable('#example');
-        new DataTable('#example2');
-        new DataTable('#example3');
-        new DataTable('#example4');
-        new DataTable('#example5');
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+            $("#example3").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
     </script>
+    {{-- /datatables --}}
 </body>
 
 </html>

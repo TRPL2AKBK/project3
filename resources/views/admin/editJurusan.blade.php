@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Edit Prodi')
+@section('title', 'Edit Jurusan')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">User</h1>
+                        <h1 class="m-0">Jurusan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Update Prodi</li>
+                            <li class="breadcrumb-item active">Update Jurusan</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -22,7 +22,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('admin.prodi.update', ['id' => $prodi->id]) }}" method="POST">
+                <form action="{{ route('admin.jurusan.update', ['id' => $jurusan->id]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -31,47 +31,30 @@
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Prodi</h3>
+                                    <h3 class="card-title">Form Jurusan</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="exampleInputName1">Kode Prodi</label>
-                                            <input type="text" class="form-control" id="exampleInputProdi"
-                                                name="kode_prodi" value="{{ $prodi->kode_prodi }}" placeholder="Enter nama">
-                                            @error('kode_prodi')
+                                            <label for="exampleInputName1">Kode Jurusan</label>
+                                            <input type="text" class="form-control" id="exampleInputJurusan"
+                                                name="kode_jurusan" value="{{ $jurusan->kode_jurusan }}"
+                                                placeholder="Enter kode jurusan">
+                                            @error('kode_jurusan')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputProdi1">Prodi</label>
-                                            <input type="text" class="form-control" id="exampleInputProdi1"
-                                                name="prodi" value="{{ $prodi->prodi }}" placeholder="Enter Prodi">
-                                            @error('prodi')
-                                                <p style="color:red;"><small>{{ $message }}</small></p>
-                                            @enderror
-                                        </div>
-                                        {{-- <div class="form-group">
-                                            <label for="exampleInputPassword1">ID Jurusan</label>
-                                            <input type="text" class="form-control" id="exampleInputProdi1"
-                                                name="id_jurusan" value="{{ $prodi->id_jurusan }}"
-                                                placeholder="New ID Jurusan">
-                                            @error('id_jurusan')
-                                                <p style="color:red;"><small>{{ $message }}</small></p>
-                                            @enderror
-                                        </div> --}}
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Jenjang</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                                name="jenjang" value="{{ $prodi->jenjang }}" placeholder="Enter Jenjng">
-                                            @error('jenjang')
+                                            <label for="exampleInputJurusan1">Jurusan</label>
+                                            <input type="text" class="form-control" id="exampleInputJurusan2"
+                                                name="jurusan" value="{{ $jurusan->jurusan }}" placeholder="Enter jurusan">
+                                            @error('jurusan')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>
                                     </div>
-
                                     <!-- /.card-body -->
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>

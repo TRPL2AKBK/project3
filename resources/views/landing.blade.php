@@ -11,38 +11,94 @@
 <style>
     /* Styles for the landing page */
     body {
+        height: 100vh;
+        background-image: url('img/bg3.png');
+        background-size: cover;
+        background-position: center;
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
         background-color: #f4f4f4;
     }
 
+    .img {
+        width: 200px;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+    }
+
     .container {
         width: 80%;
         margin: 0 auto;
-        text-align: center;
+        text-align: left;
+
     }
 
     h1 {
+        width: 30%;
         color: #333;
-        margin-top: 100px;
+        position: absolute;
+        top: 25%;
+        left: 10%;
+        font-size: 50px;
+        text-transform: uppercase;
     }
 
     p {
+        width: 25%;
         color: #666;
-        margin-bottom: 40px;
+        position: absolute;
+        top: 48%;
+        left: 10%;
+        font-size: 16px;
     }
 
-    .cta-button {
-        background-color: #007bff;
-        color: #fff;
+    .login-button {
+        background-color: #eef6ff;
+        color: #2E3951;
         padding: 10px 20px;
-        border-radius: 5px;
+        border-radius: 50px;
         text-decoration: none;
+        position: absolute;
+        top: 20px;
+        /* Sesuaikan dengan jarak dari atas */
+        right: 15px;
+        /* Sesuaikan dengan jarak dari kanan */
     }
 
-    .cta-button:hover {
-        background-color: #0056b3;
+    .login-button:hover {
+        background-color: #8f9294;
+    }
+
+    .register-button {
+        font-style: initial;
+        color: #eef6ff;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        position: absolute;
+        top: 20px;
+        right: 106px;
+    }
+
+    .register-button:hover {
+        background-color: #8f9294;
+    }
+
+    .button {
+        background-color: #2E3951;
+        color: #eef6ff;
+        padding: 15px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        position: absolute;
+        top: 58%;
+        left: 10%;
+    }
+
+    .button:hover {
+        background-color: #8f9294;
     }
 
     @media (max-width: 768px) {
@@ -51,26 +107,24 @@
         .container {
             width: 90%;
         }
-
-        h1 {
-            font-size: 24px;
-            margin-top: 50px;
-        }
-
-        p {
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
     }
 </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Selamat Datang di Website Sibeka</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident sequi molestias facere aliquam et quasi
-            sapiente quas incidunt magnam perspiciatis.</p>
-        <a href="{{ route('login') }}" class="cta-button">Get Started</a>
+        <div>
+            <h1 class="h1">SISTEM INFORMASI KELOMPOK BIDANG KEAHLIAN</h1>
+        </div>
+        <div>
+            <p>Kami membantu pekerjaan anda dengan mempermudah menyediakan informasi KBK, RPS dan Soal UAS</p>
+        </div>
+        <div class="button">
+            Pelajari Lebih Lanjut
+        </div>
+        <a href="{{ route('login') }}" class="login-button">Sign In</a>
+        <a href="#" class="register-button">Sign Up</a>
+        <img src="img/logo1.png" class="img" alt="">
     </div>
 
 </body>

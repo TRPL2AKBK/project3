@@ -6,6 +6,7 @@ use App\Imports\UserImport;
 use App\Models\Dosen;
 use App\Models\Matkul;
 use App\Models\Prodi;
+use App\Models\Tahun;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -23,13 +24,12 @@ class AdminController extends Controller
 
     public function dashboard(Request $request)
     {
-        // dd($request->all());
-        $dataProdi = Prodi::get();
-        $dataDosen = Dosen::get();
-        $dataMatkul = Matkul::get();
-        $dataUser = User::get();
-        // $dataDosen = Dosen::paginate(10);
-        return view('admin/dashboard', compact('dataDosen', 'dataMatkul', 'dataProdi', 'dataUser'));
+        // $dataProdi = Prodi::get();
+        // $dataDosen = Dosen::get();
+        // $dataMatkul = Matkul::get();
+        // $dataUser = User::get();
+        // $dataDosen = Dosen::paginate(10);  |  , compact('dataDosen', 'dataMatkul', 'dataProdi', 'dataUser')
+        return view('admin/dashboard');
     }
 
     public function dataUser()
@@ -56,8 +56,9 @@ class AdminController extends Controller
     public function dataMatkul()
     {
         $matkul = Matkul::get();
+        $tahun = Tahun::get();
 
-        return view('admin/dataMatkul', compact('matkul'));
+        return view('admin/dataMatkul', compact('matkul', 'tahun'));
     }
 
     public function create()
@@ -89,12 +90,12 @@ class AdminController extends Controller
         //dd($request->all()); //untuk mengecek request
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email|unique:user',
             'password' => 'required',
 
         ]);
 
-        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+        if ($validator->fails()) return redirect()->back()->withErrors($validator);
 
         $data['name'] = $request->nama;
         $data['email'] = $request->email;
@@ -117,7 +118,7 @@ class AdminController extends Controller
 
     public function update(Request $request, $id)
     {
-        //dd($request->all()); //untuk mengecek request
+        //dd($request->all());
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
@@ -164,7 +165,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'kode_prodi' => 'required',
             'prodi' => 'required',
-            'id_jurusan' => 'required',
+            // 'id_jurusan' => 'required',
             'jenjang' => 'required',
 
         ]);
@@ -173,7 +174,7 @@ class AdminController extends Controller
 
         $prodi['kode_prodi'] = $request->kode_prodi;
         $prodi['prodi'] = $request->prodi;
-        $prodi['id_jurusan'] = $request->id_jurusan;
+        // $prodi['id_jurusan'] = $request->id_jurusan;
         $prodi['jenjang'] = $request->jenjang;
 
         Prodi::create($prodi);
@@ -197,7 +198,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'kode_prodi' => 'required',
             'prodi' => 'required',
-            'id_jurusan' => 'required',
+            // 'id_jurusan' => 'required',
             'jenjang' => 'required',
         ]);
 
@@ -206,7 +207,7 @@ class AdminController extends Controller
         // data baru
         $prodi['kode_prodi'] = $request->kode_prodi;
         $prodi['prodi'] = $request->prodi;
-        $prodi['id_jurusan'] = $request->id_jurusan;
+        // $prodi['id_jurusan'] = $request->id_jurusan;
         $prodi['jenjang'] = $request->jenjang;
         unset($prodi['updated_at']);
         Prodi::updateProdi($id, $prodi);

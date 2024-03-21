@@ -11,8 +11,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Data User</li>
+                            <li class="breadcrumb-item active"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="#">Data User</a></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -29,10 +29,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header mb-1">
-                                <h3 class="card-title mt-3">Responsive Hover Table</h3>
+                                <h3 class="card-title mt-2">Data User</h3>
                                 {{-- Tombol Insert --}}
-                                {{-- <div class="card-tittle mt-2 float-right">
-                                    <div class="margin">
+                                <div class="card-tittle float-right">
+                                    <div class="">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-info">Tambah</button>
                                             <button type="button"
@@ -49,13 +49,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    .
-                                </div> --}}
+                                </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 {{-- <table id="example" class="table table-bordered table-striped"> --}}
-                                <table class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>

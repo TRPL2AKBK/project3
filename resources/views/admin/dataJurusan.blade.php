@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Data Prodi')
+@section('title', 'Data Jurusan')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Prodi</h1>
+                        <h1 class="m-0">Jurusan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Data Prodi</li>
+                            <li class="breadcrumb-item active">Data Jurusan</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -25,12 +25,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        {{-- Table Prodi --}}
+                        {{-- Table Jurusan --}}
                         <div class="card">
                             <div class="card-header mb-3">
-                                <h3 class="card-title mt-2">Data Prodi</h3>
+                                <h3 class="card-title mt-2">Data Jurusan</h3>
                                 {{-- Tombol Insert --}}
-                                <div class="card-title" style="float: right"><a href="{{ route('admin.prodi.create') }}"
+                                <div class="card-title" style="float: right"><a href="{{ route('admin.jurusan.create') }}"
                                         class="btn btn-primary" style="float: right">
                                         Insert</a>
                                 </div>
@@ -41,24 +41,20 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Kode Prodi</th>
-                                            <th>Prodi</th>
-                                            {{-- <th>Jurusan</th> --}}
-                                            <th>Jenjang</th>
+                                            <th>Kode Jurusan</th>
+                                            <th>Jurusan</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($prodi as $p)
+                                        @foreach ($jurusan as $p)
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
-                                                <td> {{ $p->kode_prodi }} </td>
-                                                <td> {{ $p->prodi }} </td>
-                                                {{-- <td> {{ $p->jurusan->jurusan }} </td> --}}
-                                                <td> {{ $p->jenjang }} </td>
+                                                <td> {{ $p->kode_jurusan }} </td>
+                                                <td> {{ $p->jurusan }} </td>
                                                 <td>
                                                     <a
-                                                        href="{{ route('admin.prodi.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
+                                                        href="{{ route('admin.jurusan.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
                                                             class="fas fa-pen"></i> Edit</a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $p->id }}"
                                                         class="btn btn-danger"><i class="fas fa-trash-alt"></i>
@@ -76,13 +72,13 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Apakah kamu yakin ingin menghapus data Prodi
-                                                                <b>{{ $p->prodi }}</b>
+                                                            <p>Apakah kamu yakin ingin menghapus data Jurusan
+                                                                <b>{{ $p->jurusan }}</b>
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <form
-                                                                action="{{ route('admin.prodi.delete', ['id' => $p->id]) }}"
+                                                                action="{{ route('admin.jurusan.delete', ['id' => $p->id]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -103,7 +99,7 @@
                                 </table>
                             </div>
                         </div>
-                        {{-- /Table Prodi --}}
+                        {{-- /Table Jurusan --}}
                     </div>
                     <!-- /.col -->
                 </div>

@@ -13,6 +13,12 @@ class Jurusan extends Model
         'id',
         'kode_jurusan',
         'jurusan',
-
     ];
+
+    public $timestamps = false;
+    public static function updateJurusan($id, $jurusan)
+    {
+        // Lakukan pembaruan data pada model Prodi
+        return self::whereId($id)->update($jurusan);
+    }
 }

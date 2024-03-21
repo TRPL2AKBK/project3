@@ -58,7 +58,7 @@ class LoginController extends Controller
             }
         } else {
             // Otentikasi gagal, arahkan pengguna kembali ke halaman login dengan pesan kesalahan
-            return redirect()->route('login')->with('failed', 'Email atau Password Salah');
+            return redirect()->back()->withInput()->with('failed', 'Email atau Password Salah');
         }
 
         // $data = [

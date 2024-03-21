@@ -1,4 +1,5 @@
 @extends('layout.main')
+@section('title', 'Tambah Jurusan')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -6,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">User</h1>
+                        <h1 class="m-0">Jurusan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Tambah User</li>
+                            <li class="breadcrumb-item active">Tambah Jurusan</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -21,7 +22,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('admin.user.store') }}" method="POST">
+                <form action="{{ route('admin.jurusan.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <!-- left column -->
@@ -29,40 +30,27 @@
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Tambah User</h3>
+                                    <h3 class="card-title">Form Tambah Jurusan</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="exampleInputName1">Nama</label>
-                                            <input type="text" class="form-control" id="exampleInputName" name="nama"
-                                                placeholder="Enter nama" value="{{ old('nama') }}">
-                                            @error('nama')
+                                            <label for="exampleInputName1">Kode Jurusan</label>
+                                            <input type="text" class="form-control" id="exampleInputJurusan1"
+                                                name="kode_jurusan" placeholder="Enter kode jurusan">
+                                            @error('kode_jurusan')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Email</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                name="email" placeholder="Enter email" value="{{ old('email') }}">
-                                            @error('email')
+                                            <label for="exampleInputEmail1">Jurusan</label>
+                                            <input type="text" class="form-control" id="exampleInputJurusan1"
+                                                name="jurusan" placeholder="Enter jurusan">
+                                            @error('jurusan')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                                name="password" placeholder="Password" value="{{ old('password') }}">
-                                            @error('password')
-                                                <p style="color:red;"><small>{{ $message }}</small></p>
-                                            @enderror
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Level</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1"
-                                                    name="id_level" placeholder="id level" value="{{ old('id_level') }}">
-                                            </div>
                                         </div>
 
                                         <!-- /.card-body -->

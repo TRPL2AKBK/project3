@@ -13,7 +13,7 @@ class Prodi extends Model
         'id',
         'kode_prodi',
         'prodi',
-        'id_jurusan',
+        // 'id_jurusan',
         'jenjang',
 
     ];
@@ -33,8 +33,4 @@ class Prodi extends Model
     {
         return $this->belongsTo('App\Models\Jurusan', 'id_jurusan');
     }
-
-    //     public function prodi(){
-
-    //     }
 }

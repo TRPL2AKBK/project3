@@ -1,14 +1,18 @@
 <?php
 
-use App\Http\Controllers\DosenController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KaprodiController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Models\Jurusan;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -33,6 +37,8 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', [LandingController::class, 'index'])->name('login');
 
+Route::resource('register', RegisterController::class);
+
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -49,6 +55,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::get('/datadosen', [AdminController::class, 'dataDosen'])->name('dosens');
    Route::get('/datamatkul', [AdminController::class, 'dataMatkul'])->name('matkuls');
    Route::get('/dataprodi', [AdminController::class, 'dataProdi'])->name('prodis');
+   Route::get('/datajurusan', [JurusanController::class, 'dataJurusan'])->name('jurusan');
 
    // Manipulasi Data user 
    Route::get('/create', [AdminController::class, 'create'])->name('user.create');
@@ -67,6 +74,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::get('/edit/prodi/{id}', [AdminController::class, 'editProdi'])->name('prodi.edit');
    Route::put('/update/prodi/{id}', [AdminController::class, 'updateProdi'])->name('prodi.update');
    Route::delete('/delete/prodi/{id}', [AdminController::class, 'deleteProdi'])->name('prodi.delete');
+
+   // Manipulasi Data Jurusan
+   Route::get('/create/jurusan', [JurusanController::class, 'createJurusan'])->name('jurusan.create');
+   Route::post('/store/jurusan', [JurusanController::class, 'storeJurusan'])->name('jurusan.store');
+
+   Route::get('/edit/jurusan/{id}', [JurusanController::class, 'editJurusan'])->name('jurusan.edit');
+   Route::put('/update/jurusan/{id}', [JurusanController::class, 'updateJurusan'])->name('jurusan.update');
+   Route::delete('/delete/jurusan/{id}', [JurusanController::class, 'deleteJurusan'])->name('jurusan.delete');
 });
 
 
