@@ -59,7 +59,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>User ID</th>
+                                            {{-- <th>User ID</th> --}}
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Action</th>
@@ -70,7 +70,7 @@
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
                                                 <td> {{ $d->name }} </td>
-                                                <td> {{ $d->id }} </td>
+                                                {{-- <td> {{ $d->id }} </td> --}}
                                                 <td> {{ $d->email }} </td>
                                                 <td> {{ $d->level->level }} </td>
                                                 <td>

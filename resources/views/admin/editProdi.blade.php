@@ -22,7 +22,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('admin.prodi.update', ['id' => $prodi->id]) }}" method="POST">
+                <form action="{{ route('admin.prodi.update', ['id' => $prodi->id_prodi]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -53,7 +53,7 @@
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>
-                                        {{-- <div class="form-group">
+                                        <div class="form-group">
                                             <label for="exampleInputPassword1">ID Jurusan</label>
                                             <input type="text" class="form-control" id="exampleInputProdi1"
                                                 name="id_jurusan" value="{{ $prodi->id_jurusan }}"
@@ -61,11 +61,12 @@
                                             @error('id_jurusan')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
-                                        </div> --}}
+                                        </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Jenjang</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1"
-                                                name="jenjang" value="{{ $prodi->jenjang }}" placeholder="Enter Jenjng">
+                                                name="id_jenjang" value="{{ $prodi->id_jenjang }}"
+                                                placeholder="Enter Jenjng">
                                             @error('jenjang')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror

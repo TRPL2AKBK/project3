@@ -95,7 +95,8 @@
                         <!-- Add icons to the links using the .nav-icon class               with font-awesome or any other icon font library -->
                         @if (auth()->user()->id_level == 1)
                             <li class="nav-item">
-                                <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="nav-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-home" aria-hidden="true"></i>
                                     <p>
                                         Dashboard
@@ -103,42 +104,100 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.users') }}" class="nav-link">
+                                <a href="{{ route('admin.users') }}"
+                                    class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }} ">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
-                                        Data User
+                                        User
                                     </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.dosens') }}" class="nav-link">
+                                <a href="{{ route('admin.dosens') }}"
+                                    class="nav-link {{ request()->is('admin/dosen*') ? 'active' : '' }} ">
                                     <i class="nav-icon fas fa-graduation-cap"></i>
                                     <p>
-                                        Data Dosen
+                                        Dosen
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('admin.matkuls') }}" class="nav-link">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
                                         Dosen Mata Kuliah
                                     </p>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
-                                <a href="{{ route('admin.prodis') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
+                                <a href="{{ route('admin.jurusan') }}"
+                                    class="nav-link {{ request()->is('admin/jurusan*') ? 'active' : '' }}">
+                                    <i class="nav-icon fa fa-building"></i>
                                     <p>
-                                        Data Prodi
+                                        Jurusan
                                     </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.jurusan') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
+                                <a href="{{ route('admin.prodis') }}"
+                                    class="nav-link {{ request()->is('admin/prodi*') ? 'active' : '' }}">
+                                    <i class="nav-icon fa fa-building"></i>
                                     <p>
-                                        Data Jurusan
+                                        Prodi
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.tahun') }}"
+                                    class="nav-link {{ request()->is('admin/tahun*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-calendar"></i>
+                                    <p>
+                                        Tahun Akademik
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.kajur') }}"
+                                    class="nav-link {{ request()->is('admin/kajur*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Pimpinan Jurusan
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.kaprodi') }}"
+                                    class="nav-link {{ request()->is('admin/kaprodi*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Pimpinan Prodi
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.kurikulum') }}"
+                                    class="nav-link {{ request()->is('admin/kurikulum*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fa fa-th"></i>
+                                    <p>
+                                        Kurikulum
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.matakuliah') }}"
+                                    class="nav-link {{ request()->is('admin/matakuliah*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fa fa-book"></i>
+                                    <p>
+                                        Matakuliah
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.pengampu') }}"
+                                    class="nav-link {{ request()->is('admin/pengampu*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fa fa-book-reader"></i>
+                                    <p>
+                                        Dosen Pengampu
                                     </p>
                                 </a>
                             </li>

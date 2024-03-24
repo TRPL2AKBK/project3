@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class tahun extends Model
 {
-    use HasFactory;
-
-    protected $table = 'tahun_ajaran';
-    protected $primarykey = 'id';
+    protected $table = 'ref_smt_thn_akd';
+    protected $primaryKey = 'id_smt_thn_akd';
     protected $fillable = [
-        'id',
-        'thn_ajaran',
+        'id_smt_thn_akd',
+        'smt_thn_akd',
         'status',
     ];
+
+    public $timestamps = false;
+
+    public static function updateTahun($id_smt_thn_akd, $tahun)
+    {
+        return self::where('id_smt_thn_akd', $id_smt_thn_akd)->update($tahun);
+    }
 }

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Level extends Model
 {
-    protected $table = 'level';
-    protected $primarykey = 'id';
+    protected $table = 'ref_level';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'level',

@@ -54,14 +54,14 @@
                                                 <td> {{ $p->jurusan }} </td>
                                                 <td>
                                                     <a
-                                                        href="{{ route('admin.jurusan.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
+                                                        href="{{ route('admin.jurusan.edit', ['id' => $p->id_jurusan]) }}"class="btn btn-primary"><i
                                                             class="fas fa-pen"></i> Edit</a>
-                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id }}"
+                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id_jurusan }}"
                                                         class="btn btn-danger"><i class="fas fa-trash-alt"></i>
                                                         Hapus</a>
                                                 </td>
                                             </tr>
-                                            <div class="modal fade" id="modal-hapus{{ $p->id }}">
+                                            <div class="modal fade" id="modal-hapus{{ $p->id_jurusan }}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -78,7 +78,7 @@
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <form
-                                                                action="{{ route('admin.jurusan.delete', ['id' => $p->id]) }}"
+                                                                action="{{ route('admin.jurusan.delete', ['id' => $p->id_jurusan]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')

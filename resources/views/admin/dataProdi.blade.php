@@ -43,7 +43,7 @@
                                             <th>No</th>
                                             <th>Kode Prodi</th>
                                             <th>Prodi</th>
-                                            {{-- <th>Jurusan</th> --}}
+                                            <th>Jurusan</th>
                                             <th>Jenjang</th>
                                             <th>Action</th>
                                         </tr>
@@ -54,18 +54,18 @@
                                                 <td> {{ $loop->iteration }} </td>
                                                 <td> {{ $p->kode_prodi }} </td>
                                                 <td> {{ $p->prodi }} </td>
-                                                {{-- <td> {{ $p->jurusan->jurusan }} </td> --}}
-                                                <td> {{ $p->jenjang }} </td>
+                                                <td> {{ $p->jurusan->jurusan }} </td>
+                                                <td> {{ $p->id_jenjang }} </td>
                                                 <td>
                                                     <a
-                                                        href="{{ route('admin.prodi.edit', ['id' => $p->id]) }}"class="btn btn-primary"><i
+                                                        href="{{ route('admin.prodi.edit', ['id' => $p->id_prodi]) }}"class="btn btn-primary"><i
                                                             class="fas fa-pen"></i> Edit</a>
-                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id }}"
+                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id_prodi }}"
                                                         class="btn btn-danger"><i class="fas fa-trash-alt"></i>
                                                         Hapus</a>
                                                 </td>
                                             </tr>
-                                            <div class="modal fade" id="modal-hapus{{ $p->id }}">
+                                            <div class="modal fade" id="modal-hapus{{ $p->id_prodi }}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -82,7 +82,7 @@
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <form
-                                                                action="{{ route('admin.prodi.delete', ['id' => $p->id]) }}"
+                                                                action="{{ route('admin.prodi.delete', ['id' => $p->id_prodi]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')

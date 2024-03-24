@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Imports\UserImport;
 use App\Models\Dosen;
-use App\Models\Matkul;
-use App\Models\Prodi;
-use App\Models\Tahun;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -24,11 +21,6 @@ class AdminController extends Controller
 
     public function dashboard(Request $request)
     {
-        // $dataProdi = Prodi::get();
-        // $dataDosen = Dosen::get();
-        // $dataMatkul = Matkul::get();
-        // $dataUser = User::get();
-        // $dataDosen = Dosen::paginate(10);  |  , compact('dataDosen', 'dataMatkul', 'dataProdi', 'dataUser')
         return view('admin/dashboard');
     }
 
@@ -42,23 +34,7 @@ class AdminController extends Controller
     public function dataDosen()
     {
         $dosen = Dosen::get();
-        // $dosen = Dosen::paginate(10);
         return view('admin/dataDosen', compact('dosen'));
-    }
-
-    public function dataProdi()
-    {
-        $prodi = Prodi::get();
-
-        return view('admin/dataProdi', compact('prodi'));
-    }
-
-    public function dataMatkul()
-    {
-        $matkul = Matkul::get();
-        $tahun = Tahun::get();
-
-        return view('admin/dataMatkul', compact('matkul', 'tahun'));
     }
 
     public function create()
@@ -142,8 +118,6 @@ class AdminController extends Controller
 
     public function delete(Request $request, $id)
     {
-
-
         $data = User::find($id); //mencari data berdasarkan id
         if ($data) {
             $data->delete();
@@ -151,80 +125,5 @@ class AdminController extends Controller
 
         return redirect()->route('admin.users');
     }
-
-    // Manipulasi data Prodi
-
-    public function createProdi()
-    {
-        return view('admin/createProdi');
-    }
-
-    public function storeProdi(Request $request)
-    {
-        //dd($request->all()); //untuk mengecek request
-        $validator = Validator::make($request->all(), [
-            'kode_prodi' => 'required',
-            'prodi' => 'required',
-            // 'id_jurusan' => 'required',
-            'jenjang' => 'required',
-
-        ]);
-
-        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-        $prodi['kode_prodi'] = $request->kode_prodi;
-        $prodi['prodi'] = $request->prodi;
-        // $prodi['id_jurusan'] = $request->id_jurusan;
-        $prodi['jenjang'] = $request->jenjang;
-
-        Prodi::create($prodi);
-
-        return redirect()->route('admin.prodis');
-        // 'admin.user.create'
-    }
-
-    public function editProdi(Request $request, $id)
-    {
-        $prodi = Prodi::find($id); //mencari data berdasarkan id
-        //dd($data); //untuk mengecek request
-
-        return view('admin/editProdi', compact('prodi'));
-    }
-
-    public function updateProdi(Request $request, $id)
-    {
-        //dd($request->all()); //untuk mengecek request
-
-        $validator = Validator::make($request->all(), [
-            'kode_prodi' => 'required',
-            'prodi' => 'required',
-            // 'id_jurusan' => 'required',
-            'jenjang' => 'required',
-        ]);
-
-        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-        // data baru
-        $prodi['kode_prodi'] = $request->kode_prodi;
-        $prodi['prodi'] = $request->prodi;
-        // $prodi['id_jurusan'] = $request->id_jurusan;
-        $prodi['jenjang'] = $request->jenjang;
-        unset($prodi['updated_at']);
-        Prodi::updateProdi($id, $prodi);
-        // Prodi::whereId($id)->updateProdi($prodi);
-
-        return redirect()->route('admin.prodis');
-    }
-
-    public function deleteProdi(Request $request, $id)
-    {
-
-
-        $prodi = Prodi::find($id); //mencari data berdasarkan id
-        if ($prodi) {
-            $prodi->delete();
-        }
-
-        return redirect()->route('admin.prodis');
-    }
+    // }
 }

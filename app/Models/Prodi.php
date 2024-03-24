@@ -2,32 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Prodi extends Model
 {
-    protected $table = 'prodi';
-    protected $primarykey = 'id';
+    protected $table = 'ref_prodi';
+    protected $primaryKey = 'id_prodi';
     protected $fillable = [
-        'id',
+        'id_prodi',
         'kode_prodi',
         'prodi',
-        // 'id_jurusan',
-        'jenjang',
+        'id_jurusan',
+        'id_jenjang',
 
     ];
 
     public $timestamps = false;
 
-    // Metode kustom untuk memperbarui data prodi
-    public static function updateProdi($id, $prodi)
+    public static function updateProdi($id_prodi, $prodi)
     {
         // Lakukan pembaruan data pada model Prodi
-        return self::whereId($id)->update($prodi);
+        return self::where('id_prodi', $id_prodi)->update($prodi);
     }
-
-    // =============================
 
     public function jurusan()
     {

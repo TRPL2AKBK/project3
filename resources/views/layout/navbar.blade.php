@@ -151,6 +151,13 @@
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" role="button">
+                <i class="fas fa-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            </div>
+        </li>
     </ul>
 </nav>
 <!-- /.navbar -->

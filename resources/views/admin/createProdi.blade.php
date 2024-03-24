@@ -34,52 +34,48 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputName1">Kode Prodi</label>
-                                            <input type="text" class="form-control" id="exampleInputProdi1"
-                                                name="kode_prodi" placeholder="Enter kode prodi">
-                                            @error('kode_prodi')
-                                                <p style="color:red;"><small>{{ $message }}</small></p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Prodi</label>
-                                            <input type="text" class="form-control" id="exampleInputProdi1"
-                                                name="prodi" placeholder="Enter prodi">
-                                            @error('prodi')
-                                                <p style="color:red;"><small>{{ $message }}</small></p>
-                                            @enderror
-                                        </div>
-                                        {{-- <div class="form-group">
-                                            <label for="exampleInputPassword1">ID Jurusan</label>
-                                            <input type="text" class="form-control" id="exampleInputid_jurusan1"
-                                                name="id_jurusan" placeholder="Enter id jurusan">
-                                            @error('id_jurusan')
-                                                <p style="color:red;"><small>{{ $message }}</small></p>
-                                            @enderror
-                                        </div> --}}
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Jenjang</label>
-                                            <input type="text" class="form-control" id="exampleInputJenjang1"
-                                                name="jenjang" placeholder="Password">
-                                            @error('prodi')
-                                                <p style="color:red;"><small>{{ $message }}</small></p>
-                                            @enderror
-
-                                        </div>
-
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                </form>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Kode Prodi</label>
+                                        <input type="text" class="form-control" id="exampleInputProdi1" name="kode_prodi"
+                                            placeholder="Kode prodi">
+                                        @error('kode_prodi')
+                                            <p style="color:red;"><small>{{ $message }}</small></p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Prodi</label>
+                                        <input type="text" class="form-control" id="exampleInputProdi1" name="prodi"
+                                            placeholder="Prodi">
+                                        @error('prodi')
+                                            <p style="color:red;"><small>{{ $message }}</small></p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputJurusan1">ID Jurusan</label>
+                                        <input type="text" class="form-control" id="exampleInputId_jurusan1"
+                                            name="id_jurusan" placeholder="ID jurusan">
+                                        @error('id_jurusan')
+                                            <p style="color:red;"><small>{{ $message }}</small></p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Jenjang</label>
+                                        <input type="text" class="form-control" id="exampleInputJenjang1"
+                                            name="id_jenjang" placeholder="Jenjang">
+                                        @error('jenjang')
+                                            <p style="color:red;"><small>{{ $message }}</small></p>
+                                        @enderror
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
+                            <!--/.col (left) -->
                         </div>
-                        <!--/.col (left) -->
-                    </div>
                 </form>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->

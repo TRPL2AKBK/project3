@@ -2,24 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\Dosen as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Prodi;
-
 
 class Dosen extends Model
 {
-    protected $table = 'dosen';
-    protected $primarykey = 'id';
+    protected $table = 'ref_dosen';
+    protected $primaryKey = 'id_dosen';
     protected $fillable = [
-        'id',
-        'name',
+        'id_dosen',
+        'nama',
         'nidn',
         'nip',
         'gender',
         'id_prodi',
-        'id_bidang',
+        'id_jurusan',
         'email',
         'image',
         'status',
@@ -28,5 +24,10 @@ class Dosen extends Model
     public function prodi()
     {
         return $this->belongsTo('App\Models\Prodi', 'id_prodi');
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo('App\Models\Jurusan', 'id_jurusan');
     }
 }

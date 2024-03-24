@@ -48,13 +48,13 @@ class JurusanController extends Controller
         return redirect()->route('admin.jurusan');
     }
 
-    public function editJurusan(Request $request, $id)
+    public function editJurusan(Request $request, $id_jurusan)
     {
-        $jurusan = Jurusan::find($id);
+        $jurusan = Jurusan::find($id_jurusan);
         return view('admin/editJurusan', compact('jurusan'));
     }
 
-    public function updateJurusan(Request $request, $id)
+    public function updateJurusan(Request $request, $id_jurusan)
     {
         $validator = Validator::make($request->all(), [
             'kode_jurusan' => 'required',
@@ -66,15 +66,15 @@ class JurusanController extends Controller
         // data baru
         $jurusan['kode_jurusan'] = $request->kode_jurusan;
         $jurusan['jurusan'] = $request->jurusan;
-        unset($jurusan['updated_at']);
-        Jurusan::updateJurusan($id, $jurusan);
+        // unset($jurusan['updated_at']);
+        Jurusan::updateJurusan($id_jurusan, $jurusan);
         return redirect()->route('admin.jurusan');
     }
 
-    public function deleteJurusan(Request $request, $id)
+    public function deleteJurusan(Request $request, $id_jurusan)
     {
 
-        $jurusan = Jurusan::find($id);
+        $jurusan = Jurusan::find($id_jurusan);
         if ($jurusan) {
             $jurusan->delete();
         }

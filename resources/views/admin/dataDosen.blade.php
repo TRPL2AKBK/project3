@@ -41,22 +41,28 @@
                                             <th>NIDN</th>
                                             <th>NIP</th>
                                             <th>Gender</th>
+                                            <th>Jurusan</th>
                                             <th>Prodi</th>
                                             {{-- <th>Bidang</th> --}}
-                                            <th>email</th>
+                                            <th>Email</th>
+                                            <th>Image</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($dosen as $d)
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
-                                                <td> {{ $d->name }} </td>
+                                                <td> {{ $d->nama }} </td>
                                                 <td> {{ $d->nidn }} </td>
                                                 <td> {{ $d->nip }} </td>
                                                 <td> {{ $d->gender }} </td>
+                                                <td> {{ $d->jurusan->jurusan }} </td>
                                                 <td> {{ $d->prodi->prodi }} </td>
                                                 {{-- <td> {{ $d->id_bidang }} </td> --}}
                                                 <td> {{ $d->email }} </td>
+                                                <td> {{ $d->image }} </td>
+                                                <td> {{ $d->status }} </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
