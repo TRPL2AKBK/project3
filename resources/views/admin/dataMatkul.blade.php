@@ -36,7 +36,7 @@
                                 <table id='example1' class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th style="width: 1rem">No</th>
                                             <th>Mata Kuliah</th>
                                             <th>Bidang</th>
                                             <th>Dosen Pengampu</th>

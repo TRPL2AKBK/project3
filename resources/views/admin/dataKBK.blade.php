@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Pimpinan Jurusan')
+@section('title', 'KBK')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Pimpinan Jurusan</h1>
+                        <h1 class="m-0">KBK</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Pimpinan Jurusan</li>
+                            <li class="breadcrumb-item active">KBK</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -28,46 +28,39 @@
                         {{-- Table Prodi --}}
                         <div class="card">
                             <div class="card-header mb-3">
-                                <h3 class="card-title mt-2">Pimpinn Jurusan</h3>
+                                <h3 class="card-title mt-2">KBK</h3>
                                 {{-- Tombol Insert --}}
-                                {{-- <div class="card-title" style="float: right"><a href="{{ route('admin.kajur.create') }}"
+                                <div class="card-title" style="float: right"><a href="{{ route('admin.kbk.create') }}"
                                         class="btn btn-primary" style="float: right">
                                         Insert</a>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="card-body table-responsive p-0">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 1rem">No</th>
-                                            <th>Jabatan</th>
-                                            <th>Jurusan</th>
-                                            <th>Nama Dosen</th>
-                                            <th>Periode</th>
-                                            <th>Status</th>
-                                            {{-- <th>Action</th> --}}
+                                            {{-- <th>ID KBK</th> --}}
+                                            <th>Nama KBK</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($kajur as $p)
+                                        @foreach ($kbk as $p)
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
-                                                <td> {{ $p->jabatan->jabatan_pimpinan }} </td>
-                                                <td> {{ $p->jurusan->jurusan }} </td>
-                                                <td> {{ $p->dosen->nama }} </td>
-                                                <td> {{ $p->periode }} </td>
-                                                <td> {{ $p->status }} </td>
-                                                {{-- <td>
+                                                {{-- <td> {{ $p->id_kbk }} </td> --}}
+                                                <td> {{ $p->nama_kbk }} </td>
+                                                <td>
                                                     <a
-                                                        href="{{ route('admin.kajur.edit', ['id' => $p->id_pimpinan_jurusan]) }}"class="btn btn-primary"><i
+                                                        href="{{ route('admin.kbk.edit', ['id' => $p->id_kbk]) }}"class="btn btn-primary"><i
                                                             class="fas fa-pen"></i> Edit</a>
-                                                    <a data-toggle="modal"
-                                                        data-target="#modal-hapus{{ $p->id_pimpinan_jurusan }}"
+                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id_kbk }}"
                                                         class="btn btn-danger"><i class="fas fa-trash-alt"></i>
                                                         Hapus</a>
-                                                </td> --}}
+                                                </td>
                                             </tr>
-                                            <div class="modal fade" id="modal-hapus{{ $p->id_pimpinan_jurusan }}">
+                                            <div class="modal fade" id="modal-hapus{{ $p->id_kbk }}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -78,13 +71,13 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Apakah kamu yakin ingin menghapus data Pimpinan Jurusan
-                                                                <b>{{ $p->jabatan->jabatan_pimpinan }}</b>
+                                                            <p>Apakah kamu yakin ingin menghapus data KBK
+                                                                <b>{{ $p->nama_kbk }}</b>
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <form
-                                                                action="{{ route('admin.kajur.delete', ['id' => $p->id_pimpinan_jurusan]) }}"
+                                                                action="{{ route('admin.kbk.delete', ['id' => $p->id_kbk]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')

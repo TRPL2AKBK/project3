@@ -4,62 +4,72 @@ namespace App\Http\Controllers;
 
 use App\Models\KBK;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class KBKController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $kbk = KBK::get();
+        return view('admin.dataKBK', compact('kbk'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin/createKBK');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama_kbk' => 'required',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $kbk['nama_kbk'] = $request->nama_kbk;
+
+        KBK::create($kbk);
+
+        return redirect()->route('admin.kbk');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(KBK $kBK)
+    public function edit(Request $request, $id_kbk)
     {
-        //
+        $kbk = KBK::find($id_kbk);
+
+        return view('admin/editKBK', compact('kbk'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(KBK $kBK)
+    public function update(Request $request, $id_kbk)
     {
-        //
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'nama_kbk' => 'required',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $kbk['nama_kbk'] = $request->nama_kbk;
+
+        KBK::updateTahun($id_kbk, $kbk);
+
+        return redirect()->route('admin.kbk');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, KBK $kBK)
+    public function destroy(Request $request, $id_kbk)
     {
-        //
-    }
+        $kbk = KBK::find($id_kbk);
+        if ($kbk) {
+            $kbk->delete();
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(KBK $kBK)
-    {
-        //
+        return redirect()->route('admin.kbk');
     }
 }

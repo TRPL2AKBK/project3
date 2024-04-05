@@ -41,7 +41,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th style="width: 1rem">No</th>
                                             <th>Tahun Akademik</th>
                                             <th>Status</th>
                                             <th>Action</th>

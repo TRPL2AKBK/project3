@@ -57,7 +57,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th style="width: 1rem">No</th>
                                             <th>Nama</th>
                                             {{-- <th>User ID</th> --}}
                                             <th>Email</th>

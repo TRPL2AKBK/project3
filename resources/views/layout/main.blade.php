@@ -112,50 +112,59 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.dosens') }}"
-                                    class="nav-link {{ request()->is('admin/dosen*') ? 'active' : '' }} ">
-                                    <i class="nav-icon fas fa-graduation-cap"></i>
+
+                            {{-- SPRINT 1 --}}
+                            <li
+                                class="nav-item {{ request()->is('admin/jurusan*') || request()->is('admin/prodi*') || request()->is('admin/dosen*') || request()->is('admin/tahun*') ? 'menu-open' : '' }}">
+                                <a href="#"
+                                    class="nav-link {{ request()->is('admin/jurusan*') || request()->is('admin/prodi*') || request()->is('admin/dosen*') || request()->is('admin/tahun*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
-                                        Dosen
+                                        Sprint 1
+                                        <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
+                                <ul class="nav nav-treeview" style="background-color: rgb(73, 74, 78)">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.jurusan') }}"
+                                            class="nav-link {{ request()->is('admin/jurusan*') ? 'active' : '' }}">
+                                            <i class="nav-icon fa fa-building"></i>
+                                            <p>
+                                                Jurusan
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.prodis') }}"
+                                            class="nav-link {{ request()->is('admin/prodi*') ? 'active' : '' }}">
+                                            <i class="nav-icon fa fa-building"></i>
+                                            <p>
+                                                Prodi
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.dosens') }}"
+                                            class="nav-link {{ request()->is('admin/dosen*') ? 'active' : '' }} ">
+                                            <i class="nav-icon fas fa-graduation-cap"></i>
+                                            <p>
+                                                Dosen
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.tahun') }}"
+                                            class="nav-link {{ request()->is('admin/tahun*') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-calendar"></i>
+                                            <p>
+                                                Tahun Akademik
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('admin.matkuls') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-book"></i>
-                                    <p>
-                                        Dosen Mata Kuliah
-                                    </p>
-                                </a>
-                            </li> --}}
-                            <li class="nav-item">
-                                <a href="{{ route('admin.jurusan') }}"
-                                    class="nav-link {{ request()->is('admin/jurusan*') ? 'active' : '' }}">
-                                    <i class="nav-icon fa fa-building"></i>
-                                    <p>
-                                        Jurusan
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.prodis') }}"
-                                    class="nav-link {{ request()->is('admin/prodi*') ? 'active' : '' }}">
-                                    <i class="nav-icon fa fa-building"></i>
-                                    <p>
-                                        Prodi
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.tahun') }}"
-                                    class="nav-link {{ request()->is('admin/tahun*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-calendar"></i>
-                                    <p>
-                                        Tahun Akademik
-                                    </p>
-                                </a>
-                            </li>
+                            {{-- /SPRINT 1 --}}
+
                             <li class="nav-item">
                                 <a href="{{ route('admin.kajur') }}"
                                     class="nav-link {{ request()->is('admin/kajur*') ? 'active' : '' }} ">
@@ -198,6 +207,15 @@
                                     <i class="nav-icon fa fa-book-reader"></i>
                                     <p>
                                         Dosen Pengampu
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.kbk') }}"
+                                    class="nav-link {{ request()->is('admin/kbk*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fa fa-th"></i>
+                                    <p>
+                                        KBK
                                     </p>
                                 </a>
                             </li>
@@ -247,13 +265,13 @@
         <!-- Content Wrapper. Contains page content -->
         @yield('content')
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+        {{-- <footer class="main-footer">
             <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
             </div>
-        </footer>
+        </footer> --}}
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -294,9 +312,9 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('lte/dist/js/adminlte.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('lte/dist/js/demo.js') }}"></script>
+    {{-- <script src="{{ asset('lte/dist/js/demo.js') }}"></script> --}}
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('lte/dist/js/pages/dashboard.js') }}"></script>
+    {{-- <script src="{{ asset('lte/dist/js/pages/dashboard.js') }}"></script> --}}
 
     {{-- datatables --}}
     <script src="{{ asset('lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -337,6 +355,7 @@
         });
     </script>
     {{-- /datatables --}}
+
 </body>
 
 </html>

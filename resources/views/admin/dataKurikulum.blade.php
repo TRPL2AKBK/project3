@@ -39,7 +39,7 @@
                                 <table id="example2" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th style="width: 1rem">No</th>
                                             <th>Kode Kurikulum</th>
                                             <th>Nama Kurikulum</th>
                                             <th>Tahun</th>

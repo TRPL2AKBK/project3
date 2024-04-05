@@ -66,7 +66,7 @@ class AdminController extends Controller
         //dd($request->all()); //untuk mengecek request
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'email' => 'required|email|unique:user',
+            'email' => 'required|email',
             'password' => 'required',
 
         ]);
@@ -98,7 +98,7 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:user',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);

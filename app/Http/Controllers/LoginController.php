@@ -17,7 +17,7 @@ class LoginController extends Controller
         // dd($request->all());
 
         $request->validate([
-            'email'     => 'required',
+            'email'     => 'required|email',
             'password'  => 'required',
         ]);
 

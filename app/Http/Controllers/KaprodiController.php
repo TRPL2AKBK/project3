@@ -21,51 +21,28 @@ class KaprodiController extends Controller
         return view('kaprodi\dashboard');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Kaprodi $kaprodi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Kaprodi $kaprodi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Kaprodi $kaprodi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Kaprodi $kaprodi)
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
+    // public function show(Kaprodi $kaprodi)
+    // {
+    //     //
+    // }
+    // public function edit(Kaprodi $kaprodi)
+    // {
+    //     //
+    // }
+    // public function update(Request $request, Kaprodi $kaprodi)
+    // {
+    //     //
+    // }
+    // public function destroy(Kaprodi $kaprodi)
+    // {
+    //     //
+    // }
 }

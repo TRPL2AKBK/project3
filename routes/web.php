@@ -5,6 +5,7 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\DosenPengampuController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KaprodiController;
+use App\Http\Controllers\KBKController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
@@ -50,6 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::get('/kurikulum/data', [KurikulumController::class, 'index'])->name('kurikulum');
    Route::get('/matakuliah/data', [MatakuliahController::class, 'index'])->name('matakuliah');
    Route::get('/pengampu/data', [DosenPengampuController::class, 'index'])->name('pengampu');
+   Route::get('/kbk/data', [KBKController::class, 'index'])->name('kbk');
 
    // Manipulasi Data user 
    Route::get('/user/create', [AdminController::class, 'create'])->name('user.create');
@@ -102,12 +104,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::delete('/kaprodi/delete/{id}', [PimpinanProdiController::class, 'deleteKaprodi'])->name('kaprodi.delete');
 
    // Manipulasi Data Kurikulum
-   Route::get('/kurikulum/create', [KurikulumController::class, 'createKurikulum'])->name('kaprodi.create');
-   Route::post('/kurikulum/store', [KurikulumController::class, 'storeKurikulum'])->name('kurikulum.store');
+   // Route::get('/kurikulum/create', [KurikulumController::class, 'createKurikulum'])->name('kurikulum.create');
+   // Route::post('/kurikulum/store', [KurikulumController::class, 'storeKurikulum'])->name('kurikulum.store');
 
-   Route::get('/kurikulum/edit/{id}', [KurikulumController::class, 'editKurikulum'])->name('kurikulum.edit');
-   Route::put('/kurikulum/update/{id}', [KurikulumController::class, 'updateKurikulum'])->name('kurikulum.update');
-   Route::delete('/kurikulum/delete/{id}', [KurikulumController::class, 'deleteKurikulum'])->name('kurikulum.delete');
+   // Route::get('/kurikulum/edit/{id}', [KurikulumController::class, 'editKurikulum'])->name('kurikulum.edit');
+   // Route::put('/kurikulum/update/{id}', [KurikulumController::class, 'updateKurikulum'])->name('kurikulum.update');
+   // Route::delete('/kurikulum/delete/{id}', [KurikulumController::class, 'deleteKurikulum'])->name('kurikulum.delete');
+
+   // Manipulasi Data KBK
+   Route::get('/kbk/create', [KBKController::class, 'create'])->name('kbk.create');
+   Route::post('/kbk/store', [KBKController::class, 'store'])->name('kbk.store');
+
+   Route::get('/kbk/edit/{id}', [KBKController::class, 'edit'])->name('kbk.edit');
+   Route::put('/kbk/update/{id}', [KBKController::class, 'update'])->name('kbk.update');
+   Route::delete('/kbk/delete/{id}', [KBKController::class, 'destroy'])->name('kbk.delete');
 });
 
 

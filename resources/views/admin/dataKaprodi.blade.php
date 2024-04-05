@@ -39,7 +39,7 @@
                                 <table id="example2" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th style="width: 1rem">No</th>
                                             <th>Jabatan</th>
                                             <th>Prodi</th>
                                             <th>Nama Dosen</th>
