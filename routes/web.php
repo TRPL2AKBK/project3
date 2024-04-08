@@ -1,26 +1,31 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DosenController;
+use App\Http\Controllers\Users\DosenController;
+use App\Http\Controllers\DosenKBKController;
 use App\Http\Controllers\DosenPengampuController;
 use App\Http\Controllers\JurusanController;
-use App\Http\Controllers\KaprodiController;
+use App\Http\Controllers\Users\KaprodiController;
 use App\Http\Controllers\KBKController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MatakuliahController;
-use App\Http\Controllers\PengurusController;
+use App\Http\Controllers\MatakuliahKBKController;
+use App\Http\Controllers\Users\PengurusController;
 use App\Http\Controllers\PimpinanJurusanController;
 use App\Http\Controllers\PimpinanProdiController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TahunController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Users\UserController;
 use App\Models\DosenPengampu;
 use App\Models\Jurusan;
 use App\Models\Matakuliah;
+use App\Models\MatakuliahKBK;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -52,6 +57,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::get('/matakuliah/data', [MatakuliahController::class, 'index'])->name('matakuliah');
    Route::get('/pengampu/data', [DosenPengampuController::class, 'index'])->name('pengampu');
    Route::get('/kbk/data', [KBKController::class, 'index'])->name('kbk');
+   Route::get('/dosenkbk/data', [DosenKBKController::class, 'index'])->name('dosenkbk');
+   Route::get('/matakuliahkbk/data', [MatakuliahKBKController::class, 'index'])->name('matakuliahkbk');
 
    // Manipulasi Data user 
    Route::get('/user/create', [AdminController::class, 'create'])->name('user.create');

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
-use App\Models\User;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class UserController extends Controller
+class DosenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +19,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $data = User::get();
-
-        return view('user/dashboard', compact('data'));
+        return view('dosen\dashboard');
     }
 
     /**
@@ -43,7 +41,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Dosen $dosen)
     {
         //
     }
@@ -51,7 +49,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Dosen $dosen)
     {
         //
     }
@@ -59,7 +57,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Dosen $dosen)
     {
         //
     }
@@ -67,12 +65,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Dosen $dosen)
     {
-        $data = User::find($id); //mencari data berdasarkan id
-        if ($data) {
-            $data->delete();
-        }
-        return redirect()->route('admin.index');
+        //
     }
 }

@@ -219,6 +219,24 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.dosenkbk') }}"
+                                    class="nav-link {{ request()->is('admin/dosenkbk*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fa fa-th"></i>
+                                    <p>
+                                        Dosen KBK
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.matakuliahkbk') }}"
+                                    class="nav-link {{ request()->is('admin/matakuliahkbk*') ? 'active' : '' }} ">
+                                    <i class="nav-icon fa fa-th"></i>
+                                    <p>
+                                        Matakuliah KBK
+                                    </p>
+                                </a>
+                            </li>
                         @elseif (auth()->user()->id_level == 2)
                             <li class="nav-item">
                                 <a href="{{ route('pengurus.dashboard') }}" class="nav-link">
@@ -240,6 +258,15 @@
                         @elseif (auth()->user()->id_level == 4)
                             <li class="nav-item">
                                 <a href="{{ route('dosen.dashboard') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                        @elseif (auth()->user()->id_level == 5)
+                            <li class="nav-item">
+                                <a href="{{ route('user.dashboard') }}" class="nav-link">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Dashboard

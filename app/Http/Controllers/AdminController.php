@@ -65,13 +65,13 @@ class AdminController extends Controller
     {
         //dd($request->all()); //untuk mengecek request
         $validator = Validator::make($request->all(), [
-            'nama' => 'required',
-            'email' => 'required|email',
+            'nama' => 'required|regex:/^[a-zA-Z0-9\s_]+$/',
+            'email' => 'required|email|unique:user',
             'password' => 'required',
 
         ]);
 
-        if ($validator->fails()) return redirect()->back()->withErrors($validator);
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $data['name'] = $request->nama;
         $data['email'] = $request->email;
@@ -97,7 +97,7 @@ class AdminController extends Controller
         //dd($request->all());
 
         $validator = Validator::make($request->all(), [
-            'nama' => 'required',
+            'nama' => 'required|regex:/^[a-zA-Z0-9\s_]+$/',
             'email' => 'required|email|unique:user',
         ]);
 

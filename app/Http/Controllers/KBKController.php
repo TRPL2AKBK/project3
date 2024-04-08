@@ -36,7 +36,7 @@ class KBKController extends Controller
         $kbk['nama_kbk'] = $request->nama_kbk;
 
         KBK::create($kbk);
-
+        // dd($request->all());
         return redirect()->route('admin.kbk');
     }
 
@@ -58,7 +58,7 @@ class KBKController extends Controller
 
         $kbk['nama_kbk'] = $request->nama_kbk;
 
-        KBK::updateTahun($id_kbk, $kbk);
+        KBK::updateKBK($id_kbk, $kbk);
 
         return redirect()->route('admin.kbk');
     }
