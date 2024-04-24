@@ -19,11 +19,11 @@ class PimpinanJurusan extends Model
 
     public $timestamps = false;
 
-    public static function updatePimpinanJurusan($id_pimpinan_jurusan, $PimpinanJurusan)
-    {
-        // Lakukan pembaruan data pada model Jurusan
-        return self::where('id_pimpinan_jurusan', $id_pimpinan_jurusan)->update($PimpinanJurusan);
-    }
+    // public static function updatePimpinanJurusan($id_pimpinan_jurusan, $PimpinanJurusan)
+    // {
+    //     // Lakukan pembaruan data pada model Jurusan
+    //     return self::where('id_pimpinan_jurusan', $id_pimpinan_jurusan)->update($PimpinanJurusan);
+    // }
 
     public function jurusan()
     {

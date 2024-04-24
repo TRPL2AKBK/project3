@@ -19,10 +19,10 @@ class PimpinanProdi extends Model
 
     public $timestamps = false;
 
-    public static function updatePimpinanProdi($id_pimpinan_prodi, $PimpinanProdi)
-    {
-        return self::where('id_pimpinan_prodi', $id_pimpinan_prodi)->update($PimpinanProdi);
-    }
+    // public static function updatePimpinanProdi($id_pimpinan_prodi, $PimpinanProdi)
+    // {
+    //     return self::where('id_pimpinan_prodi', $id_pimpinan_prodi)->update($PimpinanProdi);
+    // }
 
     public function prodi()
     {

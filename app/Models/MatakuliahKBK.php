@@ -7,26 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class MatakuliahKBK extends Model
 {
-    protected $table = 'ref_matakuliah';
-    protected $primaryKey = 'id_matakuliah';
+    protected $table = 'ref_matakuliah_kbk';
+    protected $primaryKey = 'id_matakuliahkbk';
     protected $fillable = [
+        'id_matakuliahkbk',
         'id_matakuliah',
-        'kode_matakuliah',
-        'nama_matakuliah',
-        'TP',
-        'sks',
-        'jam',
-        'sks_teori',
-        'sks_praktek',
-        'jam_teori',
-        'jam_praktek',
-        'semester',
-        'id_kurikulum',
+        'id_kbk',
     ];
 
-    public function kurikulum()
+    public $timestamps = false;
+
+    public static function updateMatakuliahKBK($id_matakuliahkbk, $matakuliahkbk)
     {
-        // minta data dari tabel kurikulum foreign key id_kurikulum
-        return $this->belongsTo('App\Models\Kurikulum', 'id_kurikulum');
+        // Lakukan pembaruan data pada model Jurusan
+        return self::where('id_matakuliahkbk', $id_matakuliahkbk)->update($matakuliahkbk);
+    }
+
+    public function matakuliah()
+    {
+        return $this->belongsTo('App\Models\Matakuliah', 'id_matakuliah');
+    }
+
+    public function kbk()
+    {
+        return $this->belongsTo('App\Models\KBK', 'id_kbk');
     }
 }

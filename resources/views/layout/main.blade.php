@@ -194,7 +194,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.matakuliah') }}"
-                                    class="nav-link {{ request()->is('admin/matakuliah*') ? 'active' : '' }} ">
+                                    class="nav-link {{ request()->is('admin/matakuliah/*') ? 'active' : '' }} ">
                                     <i class="nav-icon fa fa-book"></i>
                                     <p>
                                         Matakuliah
@@ -230,7 +230,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.matakuliahkbk') }}"
-                                    class="nav-link {{ request()->is('admin/matakuliahkbk*') ? 'active' : '' }} ">
+                                    class="nav-link {{ request()->is('admin/matakuliahkbk/*') ? 'active' : '' }} ">
                                     <i class="nav-icon fa fa-th"></i>
                                     <p>
                                         Matakuliah KBK

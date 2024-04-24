@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::get('/dosenkbk/data', [DosenKBKController::class, 'index'])->name('dosenkbk');
    Route::get('/matakuliahkbk/data', [MatakuliahKBKController::class, 'index'])->name('matakuliahkbk');
 
-   // Manipulasi Data user 
+   // CRUD Data user 
    Route::get('/user/create', [AdminController::class, 'create'])->name('user.create');
    Route::post('/user/store', [AdminController::class, 'store'])->name('user.store');
    Route::post('/user/insert', [AdminController::class, 'importExcel'])->name('user.import');
@@ -70,7 +70,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::put('/user/update/{id}', [AdminController::class, 'update'])->name('user.update');
    Route::delete('/user/delete/{id}', [AdminController::class, 'delete'])->name('user.delete');
 
-   // Manipulasi Data Prodi
+   // CRUD Data Prodi
    Route::get('/prodi/create', [ProdiController::class, 'createProdi'])->name('prodi.create');
    Route::post('/store/prodi', [ProdiController::class, 'storeProdi'])->name('prodi.store');
 
@@ -78,7 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::put('/prodi/update/{id}', [ProdiController::class, 'updateProdi'])->name('prodi.update');
    Route::delete('/prodi/delete/{id}', [ProdiController::class, 'deleteProdi'])->name('prodi.delete');
 
-   // Manipulasi Data Jurusan
+   // CRUD Data Jurusan
    Route::get('/jurusan/create', [JurusanController::class, 'createJurusan'])->name('jurusan.create');
    Route::post('/jurusan/store', [JurusanController::class, 'storeJurusan'])->name('jurusan.store');
 
@@ -86,7 +86,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::put('/jurusan/update/{id}', [JurusanController::class, 'updateJurusan'])->name('jurusan.update');
    Route::delete('/jurusan/delete/{id}', [JurusanController::class, 'deleteJurusan'])->name('jurusan.delete');
 
-   // Manipulasi Data Tahun Akademik
+   // CRUD Data Tahun Akademik
    Route::get('/tahun/create', [TahunController::class, 'createTahun'])->name('tahun.create');
    Route::post('/tahun/store', [TahunController::class, 'storeTahun'])->name('tahun.store');
 
@@ -94,7 +94,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::put('/tahun/update/{id}', [TahunController::class, 'updateTahun'])->name('tahun.update');
    Route::delete('/tahun/delete/{id}', [TahunController::class, 'deleteTahun'])->name('tahun.delete');
 
-   // Manipulasi Data Pimpinan Jurusan
+   // CRUD Data Pimpinan Jurusan
    Route::get('/kajur/create', [PimpinanJurusanController::class, 'createKajur'])->name('kajur.create');
    Route::post('/kajur/store', [PimpinanJurusanController::class, 'storeKajur'])->name('kajur.store');
 
@@ -102,7 +102,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::put('/kajur/update/{id}', [PimpinanJurusanController::class, 'updateKajur'])->name('kajur.update');
    Route::delete('/kajur/delete/{id}', [PimpinanJurusanController::class, 'deleteKajur'])->name('kajur.delete');
 
-   // Manipulasi Data Pimpinan Prodi
+   // CRUD Data Pimpinan Prodi
    Route::get('/kaprodi/create', [PimpinanProdiController::class, 'createKaprodi'])->name('kaprodi.create');
    Route::post('/kaprodi/store', [PimpinanProdiController::class, 'storeKaprodi'])->name('kaprodi.store');
 
@@ -110,7 +110,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::put('/kaprodi/update/{id}', [PimpinanProdiController::class, 'updateKaprodi'])->name('kaprodi.update');
    Route::delete('/kaprodi/delete/{id}', [PimpinanProdiController::class, 'deleteKaprodi'])->name('kaprodi.delete');
 
-   // Manipulasi Data Kurikulum
+   // CRUD Data Kurikulum
    // Route::get('/kurikulum/create', [KurikulumController::class, 'createKurikulum'])->name('kurikulum.create');
    // Route::post('/kurikulum/store', [KurikulumController::class, 'storeKurikulum'])->name('kurikulum.store');
 
@@ -118,13 +118,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    // Route::put('/kurikulum/update/{id}', [KurikulumController::class, 'updateKurikulum'])->name('kurikulum.update');
    // Route::delete('/kurikulum/delete/{id}', [KurikulumController::class, 'deleteKurikulum'])->name('kurikulum.delete');
 
-   // Manipulasi Data KBK
+   // CRUD Data KBK
    Route::get('/kbk/create', [KBKController::class, 'create'])->name('kbk.create');
    Route::post('/kbk/store', [KBKController::class, 'store'])->name('kbk.store');
 
    Route::get('/kbk/edit/{id}', [KBKController::class, 'edit'])->name('kbk.edit');
    Route::put('/kbk/update/{id}', [KBKController::class, 'update'])->name('kbk.update');
    Route::delete('/kbk/delete/{id}', [KBKController::class, 'destroy'])->name('kbk.delete');
+
+   // CRUD Data Matakuliah KBK
+   Route::get('/matakuliahkbk/create', [MatakuliahKBKController::class, 'create'])->name('matakuliahkbk.create');
+   Route::post('/matakuliahkbk/store', [MatakuliahKBKController::class, 'store'])->name('matakuliahkbk.store');
+
+   Route::get('/matakuliahkbk/edit/{id}', [MatakuliahKBKController::class, 'edit'])->name('matakuliahkbk.edit');
+   Route::put('/matakuliahkbk/update/{id}', [MatakuliahKBKController::class, 'update'])->name('matakuliahkbk.update');
+   Route::delete('/matakuliahkbk/delete/{id}', [MatakuliahKBKController::class, 'destroy'])->name('matakuliahkbk.delete');
 });
 
 

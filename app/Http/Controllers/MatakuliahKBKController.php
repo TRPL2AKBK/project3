@@ -4,62 +4,78 @@ namespace App\Http\Controllers;
 
 use App\Models\MatakuliahKBK;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controller;
 
 class MatakuliahKBKController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index(Request $request)
+    {
+        $matakuliahkbk = MatakuliahKBK::get();
+        // dd($matakuliahkbk);
+        return view('admin.dataMatakuliahKBK', compact('matakuliahkbk'));
+    }
+
     public function create()
     {
-        //
+        return view('admin/createMatakuliahKBK');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id_matakuliah' => 'required',
+            'id_kbk' => 'required',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $matakuliahkbk['id_matakuliah'] = $request->id_matakuliah;
+        $matakuliahkbk['id_kbk'] = $request->id_kbk;
+
+        MatakuliahKBK::create($matakuliahkbk);
+        // dd($request->all());
+        return redirect()->route('admin.matakuliahkbk');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(MatakuliahKBK $matakuliahKBK)
+    public function edit(Request $request, $id_matakuliahkbk)
     {
-        //
+        $matakuliahkbk = MatakuliahKBK::find($id_matakuliahkbk);
+        // dd($matakuliahkbk);
+        return view('admin/editMatakuliahKBK', compact('matakuliahkbk'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(MatakuliahKBK $matakuliahKBK)
+    public function update(Request $request, $id_matakuliah)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id_kbk' => 'required',
+            'id_matakuliah' => 'required',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $matakuliahkbk['id_matakuliah'] = $request->id_matakuliah;
+        $matakuliahkbk['id_kbk'] = $request->id_kbk;
+
+        MatakuliahKBK::updateMatakuliahKBK($id_matakuliah, $matakuliahkbk);
+        // dd($request->all());
+
+        return redirect()->route('admin.matakuliahkbk');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, MatakuliahKBK $matakuliahKBK)
+    public function destroy(Request $request, $id_matakuliah)
     {
-        //
-    }
+        $id_matakuliah = MatakuliahKBK::find($id_matakuliah);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(MatakuliahKBK $matakuliahKBK)
-    {
-        //
+        if ($id_matakuliah) {
+            $id_matakuliah->delete();
+        }
+
+        return redirect()->route('admin.matakuliahkbk');
     }
 }
