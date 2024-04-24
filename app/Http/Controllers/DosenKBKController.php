@@ -2,64 +2,80 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\DosenKBK;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DosenKBKController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index(Request $request)
+    {
+        $dosenkbk = DosenKBK::get();
+        // dd($dosenkbk);
+        return view('admin.datadosenKBK', compact('dosenkbk'));
+    }
+
     public function create()
     {
-        //
+        return view('admin/createDosenKBK');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id_dosen' => 'required',
+            'id_kbk' => 'required',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $dosenkbk['id_dosen'] = $request->id_dosen;
+        $dosenkbk['id_kbk'] = $request->id_kbk;
+
+        dosenKBK::create($dosenkbk);
+        // dd($request->all());
+        return redirect()->route('admin.dosenkbk');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(DosenKBK $dosenKBK)
+    public function edit(Request $request, $id_dosenkbk)
     {
-        //
+        $dosenkbk = DosenKBK::find($id_dosenkbk);
+        // dd($dosenkbk);
+        return view('admin/editDosenKBK', compact('dosenkbk'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DosenKBK $dosenKBK)
+    public function update(Request $request, $id_dosen)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id_kbk' => 'required',
+            'id_dosen' => 'required',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $dosenkbk['id_dosen'] = $request->id_dosen;
+        $dosenkbk['id_kbk'] = $request->id_kbk;
+
+        dosenKBK::updatedosenKBK($id_dosen, $dosenkbk);
+        // dd($request->all());
+
+        return redirect()->route('admin.dosenkbk');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, DosenKBK $dosenKBK)
+    public function destroy(Request $request, $id_dosen)
     {
-        //
-    }
+        $id_dosen = DosenKBK::find($id_dosen);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(DosenKBK $dosenKBK)
-    {
-        //
+        if ($id_dosen) {
+            $id_dosen->delete();
+        }
+
+        return redirect()->route('admin.dosenkbk');
     }
 }

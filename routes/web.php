@@ -110,14 +110,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::put('/kaprodi/update/{id}', [PimpinanProdiController::class, 'updateKaprodi'])->name('kaprodi.update');
    Route::delete('/kaprodi/delete/{id}', [PimpinanProdiController::class, 'deleteKaprodi'])->name('kaprodi.delete');
 
-   // CRUD Data Kurikulum
-   // Route::get('/kurikulum/create', [KurikulumController::class, 'createKurikulum'])->name('kurikulum.create');
-   // Route::post('/kurikulum/store', [KurikulumController::class, 'storeKurikulum'])->name('kurikulum.store');
-
-   // Route::get('/kurikulum/edit/{id}', [KurikulumController::class, 'editKurikulum'])->name('kurikulum.edit');
-   // Route::put('/kurikulum/update/{id}', [KurikulumController::class, 'updateKurikulum'])->name('kurikulum.update');
-   // Route::delete('/kurikulum/delete/{id}', [KurikulumController::class, 'deleteKurikulum'])->name('kurikulum.delete');
-
    // CRUD Data KBK
    Route::get('/kbk/create', [KBKController::class, 'create'])->name('kbk.create');
    Route::post('/kbk/store', [KBKController::class, 'store'])->name('kbk.store');
@@ -133,6 +125,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::get('/matakuliahkbk/edit/{id}', [MatakuliahKBKController::class, 'edit'])->name('matakuliahkbk.edit');
    Route::put('/matakuliahkbk/update/{id}', [MatakuliahKBKController::class, 'update'])->name('matakuliahkbk.update');
    Route::delete('/matakuliahkbk/delete/{id}', [MatakuliahKBKController::class, 'destroy'])->name('matakuliahkbk.delete');
+
+   // CRUD Data Dosen KBK
+   Route::get('/dosenkbk/create', [DosenKBKController::class, 'create'])->name('dosenkbk.create');
+   Route::post('/dosenkbk/store', [DosenKBKController::class, 'store'])->name('dosenkbk.store');
+
+   Route::get('/dosenkbk/edit/{id}', [DosenKBKController::class, 'edit'])->name('dosenkbk.edit');
+   Route::put('/dosenkbk/update/{id}', [DosenKBKController::class, 'update'])->name('dosenkbk.update');
+   Route::delete('/dosenkbk/delete/{id}', [DosenKBKController::class, 'destroy'])->name('dosenkbk.delete');
 });
 
 
