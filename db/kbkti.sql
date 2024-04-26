@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Mar 2024 pada 09.08
+-- Waktu pembuatan: 26 Apr 2024 pada 17.51
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -103,30 +103,32 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (63, '2024_03_21_174432_add_foreign_keys_to_soal_table', 0),
 (64, '2024_03_21_174432_add_foreign_keys_to_user_table', 0),
 (65, '2024_03_21_174432_add_foreign_keys_to_verifikasi_rps_table', 0),
-(66, '2024_03_21_174432_add_foreign_keys_to_verifikasi_soal_table', 0);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ref_bidang_keahlian`
---
-
-CREATE TABLE `ref_bidang_keahlian` (
-  `id` int(20) NOT NULL,
-  `bidang_keahlian` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `ref_bidang_keahlian`
---
-
-INSERT INTO `ref_bidang_keahlian` (`id`, `bidang_keahlian`) VALUES
-(0, ' '),
-(1, 'SOFTAM'),
-(2, 'CAIT'),
-(3, 'Programming'),
-(4, 'NCS'),
-(5, 'Multimedia');
+(66, '2024_03_21_174432_add_foreign_keys_to_verifikasi_soal_table', 0),
+(67, '2024_03_24_081032_create_ref_bidang_keahlian_table', 0),
+(68, '2024_03_24_081032_create_ref_dosen_table', 0),
+(69, '2024_03_24_081032_create_ref_dosen_matakuliah_table', 0),
+(70, '2024_03_24_081032_create_ref_jabatan_pimpinan_table', 0),
+(71, '2024_03_24_081032_create_ref_jurusan_table', 0),
+(72, '2024_03_24_081032_create_ref_kelas_table', 0),
+(73, '2024_03_24_081032_create_ref_kurikulum_table', 0),
+(74, '2024_03_24_081032_create_ref_level_table', 0),
+(75, '2024_03_24_081032_create_ref_matakuliah_table', 0),
+(76, '2024_03_24_081032_create_ref_pengurus_kbk_table', 0),
+(77, '2024_03_24_081032_create_ref_pimpinan_jurusan_table', 0),
+(78, '2024_03_24_081032_create_ref_pimpinan_prodi_table', 0),
+(79, '2024_03_24_081032_create_ref_prodi_table', 0),
+(80, '2024_03_24_081032_create_ref_rps_table', 0),
+(81, '2024_03_24_081032_create_ref_smt_thn_akd_table', 0),
+(82, '2024_03_24_081032_create_ref_soal_table', 0),
+(83, '2024_03_24_081032_create_user_table', 0),
+(84, '2024_03_24_081032_create_verifikasi_rps_table', 0),
+(85, '2024_03_24_081032_create_verifikasi_soal_table', 0),
+(86, '2024_03_24_081035_add_foreign_keys_to_ref_pengurus_kbk_table', 0),
+(87, '2024_03_24_081035_add_foreign_keys_to_ref_rps_table', 0),
+(88, '2024_03_24_081035_add_foreign_keys_to_ref_soal_table', 0),
+(89, '2024_03_24_081035_add_foreign_keys_to_user_table', 0),
+(90, '2024_03_24_081035_add_foreign_keys_to_verifikasi_rps_table', 0),
+(91, '2024_03_24_081035_add_foreign_keys_to_verifikasi_soal_table', 0);
 
 -- --------------------------------------------------------
 
@@ -199,6 +201,30 @@ INSERT INTO `ref_dosen` (`id_dosen`, `nama`, `nidn`, `nip`, `gender`, `id_jurusa
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `ref_dosen_kbk`
+--
+
+CREATE TABLE `ref_dosen_kbk` (
+  `id_dosenkbk` int(11) NOT NULL,
+  `id_dosen` int(11) NOT NULL,
+  `id_kbk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ref_dosen_kbk`
+--
+
+INSERT INTO `ref_dosen_kbk` (`id_dosenkbk`, `id_dosen`, `id_kbk`) VALUES
+(1, 132, 5),
+(2, 160, 3),
+(3, 14, 1),
+(4, 40, 2),
+(5, 311, 4),
+(6, 357, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `ref_dosen_matakuliah`
 --
 
@@ -215,8 +241,8 @@ CREATE TABLE `ref_dosen_matakuliah` (
 --
 
 INSERT INTO `ref_dosen_matakuliah` (`id_dosen_matakuliah`, `id_dosen`, `id_matakuliah`, `id_kelas`, `id_smt_thn_akd`) VALUES
-(1, 220, 1, 1, 3),
-(2, 66, 1, 2, 3);
+(1, 220, 13, 1, 3),
+(2, 66, 14, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -264,6 +290,28 @@ INSERT INTO `ref_jurusan` (`id_jurusan`, `kode_jurusan`, `jurusan`) VALUES
 (5, 'ME', 'Teknik Mesin'),
 (6, 'SP', 'Teknik Sipil'),
 (7, 'TI', 'Teknologi Informasi');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `ref_kbk`
+--
+
+CREATE TABLE `ref_kbk` (
+  `id_kbk` int(20) NOT NULL,
+  `nama_kbk` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ref_kbk`
+--
+
+INSERT INTO `ref_kbk` (`id_kbk`, `nama_kbk`) VALUES
+(1, 'SOFTAM'),
+(2, 'CAIT'),
+(3, 'Programming'),
+(4, 'NCS'),
+(5, 'Multimedia');
 
 -- --------------------------------------------------------
 
@@ -361,7 +409,27 @@ CREATE TABLE `ref_matakuliah` (
 --
 
 INSERT INTO `ref_matakuliah` (`id_matakuliah`, `kode_matakuliah`, `nama_matakuliah`, `TP`, `sks`, `jam`, `sks_teori`, `sks_praktek`, `jam_teori`, `jam_praktek`, `semester`, `id_kurikulum`) VALUES
-(13, 'RPL3205', 'Pengantar Rekayasa Perangkat Lunak', 'T', 2, 2, 2, 0, 2, 0, 2, 5);
+(13, 'RPL3205', 'Pengantar Rekayasa Perangkat Lunak', 'T', 2, 2, 2, 0, 2, 0, 2, 5),
+(14, 'RPL3203', 'Basis Data', 'P', 2, 2, 3, 2, 2, 2, 3, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `ref_matakuliah_kbk`
+--
+
+CREATE TABLE `ref_matakuliah_kbk` (
+  `id_matakuliahkbk` int(11) NOT NULL,
+  `id_matakuliah` int(11) NOT NULL,
+  `id_kbk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ref_matakuliah_kbk`
+--
+
+INSERT INTO `ref_matakuliah_kbk` (`id_matakuliahkbk`, `id_matakuliah`, `id_kbk`) VALUES
+(15, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -457,7 +525,7 @@ INSERT INTO `ref_prodi` (`id_prodi`, `kode_prodi`, `prodi`, `id_jurusan`, `id_je
 --
 
 CREATE TABLE `ref_rps` (
-  `id` int(20) NOT NULL,
+  `id_rps` int(20) NOT NULL,
   `id_matkul` int(20) NOT NULL,
   `dokumen` varchar(255) NOT NULL,
   `keterangan` varchar(50) DEFAULT NULL
@@ -573,17 +641,19 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `ref_bidang_keahlian`
---
-ALTER TABLE `ref_bidang_keahlian`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeks untuk tabel `ref_dosen`
 --
 ALTER TABLE `ref_dosen`
   ADD PRIMARY KEY (`id_dosen`),
   ADD UNIQUE KEY `nidn` (`nidn`);
+
+--
+-- Indeks untuk tabel `ref_dosen_kbk`
+--
+ALTER TABLE `ref_dosen_kbk`
+  ADD PRIMARY KEY (`id_dosenkbk`),
+  ADD KEY `fk_dosen_id` (`id_dosen`),
+  ADD KEY `fk_kbk` (`id_kbk`);
 
 --
 -- Indeks untuk tabel `ref_dosen_matakuliah`
@@ -602,6 +672,12 @@ ALTER TABLE `ref_jabatan_pimpinan`
 --
 ALTER TABLE `ref_jurusan`
   ADD PRIMARY KEY (`id_jurusan`);
+
+--
+-- Indeks untuk tabel `ref_kbk`
+--
+ALTER TABLE `ref_kbk`
+  ADD PRIMARY KEY (`id_kbk`);
 
 --
 -- Indeks untuk tabel `ref_kelas`
@@ -626,6 +702,14 @@ ALTER TABLE `ref_level`
 --
 ALTER TABLE `ref_matakuliah`
   ADD PRIMARY KEY (`id_matakuliah`);
+
+--
+-- Indeks untuk tabel `ref_matakuliah_kbk`
+--
+ALTER TABLE `ref_matakuliah_kbk`
+  ADD PRIMARY KEY (`id_matakuliahkbk`),
+  ADD KEY `fk_matakuliah_kbk` (`id_matakuliah`),
+  ADD KEY `fk_id_kbk` (`id_kbk`);
 
 --
 -- Indeks untuk tabel `ref_pengurus_kbk`
@@ -658,7 +742,7 @@ ALTER TABLE `ref_prodi`
 -- Indeks untuk tabel `ref_rps`
 --
 ALTER TABLE `ref_rps`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_rps`),
   ADD KEY `fk_rps_matkul` (`id_matkul`);
 
 --
@@ -708,19 +792,19 @@ ALTER TABLE `verifikasi_soal`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
-
---
--- AUTO_INCREMENT untuk tabel `ref_bidang_keahlian`
---
-ALTER TABLE `ref_bidang_keahlian`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_dosen`
 --
 ALTER TABLE `ref_dosen`
   MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=365;
+
+--
+-- AUTO_INCREMENT untuk tabel `ref_dosen_kbk`
+--
+ALTER TABLE `ref_dosen_kbk`
+  MODIFY `id_dosenkbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_dosen_matakuliah`
@@ -733,6 +817,12 @@ ALTER TABLE `ref_dosen_matakuliah`
 --
 ALTER TABLE `ref_jurusan`
   MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT untuk tabel `ref_kbk`
+--
+ALTER TABLE `ref_kbk`
+  MODIFY `id_kbk` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_kelas`
@@ -756,7 +846,13 @@ ALTER TABLE `ref_level`
 -- AUTO_INCREMENT untuk tabel `ref_matakuliah`
 --
 ALTER TABLE `ref_matakuliah`
-  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT untuk tabel `ref_matakuliah_kbk`
+--
+ALTER TABLE `ref_matakuliah_kbk`
+  MODIFY `id_matakuliahkbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_pengurus_kbk`
@@ -786,7 +882,7 @@ ALTER TABLE `ref_prodi`
 -- AUTO_INCREMENT untuk tabel `ref_rps`
 --
 ALTER TABLE `ref_rps`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rps` int(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_smt_thn_akd`
@@ -804,7 +900,7 @@ ALTER TABLE `ref_soal`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT untuk tabel `verifikasi_rps`
@@ -823,10 +919,24 @@ ALTER TABLE `verifikasi_soal`
 --
 
 --
+-- Ketidakleluasaan untuk tabel `ref_dosen_kbk`
+--
+ALTER TABLE `ref_dosen_kbk`
+  ADD CONSTRAINT `fk_dosen_id` FOREIGN KEY (`id_dosen`) REFERENCES `ref_dosen` (`id_dosen`),
+  ADD CONSTRAINT `fk_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `ref_kbk` (`id_kbk`);
+
+--
+-- Ketidakleluasaan untuk tabel `ref_matakuliah_kbk`
+--
+ALTER TABLE `ref_matakuliah_kbk`
+  ADD CONSTRAINT `fk_id_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `ref_kbk` (`id_kbk`),
+  ADD CONSTRAINT `fk_matakuliah_kbk` FOREIGN KEY (`id_matakuliah`) REFERENCES `ref_matakuliah` (`id_matakuliah`);
+
+--
 -- Ketidakleluasaan untuk tabel `ref_pengurus_kbk`
 --
 ALTER TABLE `ref_pengurus_kbk`
-  ADD CONSTRAINT `fk_pengurus_bidang` FOREIGN KEY (`id_bidang`) REFERENCES `ref_bidang_keahlian` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pengurus_bidang` FOREIGN KEY (`id_bidang`) REFERENCES `ref_kbk` (`id_kbk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `ref_rps`
@@ -851,7 +961,7 @@ ALTER TABLE `user`
 --
 ALTER TABLE `verifikasi_rps`
   ADD CONSTRAINT `fk_vrps_pengurus` FOREIGN KEY (`id_pengurus`) REFERENCES `ref_pengurus_kbk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vrps_rps` FOREIGN KEY (`id_rps`) REFERENCES `ref_rps` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vrps_rps` FOREIGN KEY (`id_rps`) REFERENCES `ref_rps` (`id_rps`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_vrps_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_ajaran` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

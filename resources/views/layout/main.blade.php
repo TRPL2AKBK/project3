@@ -115,9 +115,11 @@
 
                             {{-- SPRINT 1 --}}
                             <li
-                                class="nav-item {{ request()->is('admin/jurusan*') || request()->is('admin/prodi*') || request()->is('admin/dosen*') || request()->is('admin/tahun*') ? 'menu-open' : '' }}">
+                                class="nav-item {{ request()->is('admin/jurusan*') || request()->is('admin/prodi*') || request()->is('admin/dosen/*') ? 'menu-open' : '' }}">
+                                {{-- || request()->is('admin/tahun*') --}}
                                 <a href="#"
-                                    class="nav-link {{ request()->is('admin/jurusan*') || request()->is('admin/prodi*') || request()->is('admin/dosen*') || request()->is('admin/tahun*') ? 'active' : '' }}">
+                                    class="nav-link {{ request()->is('admin/jurusan*') || request()->is('admin/prodi*') || request()->is('admin/dosen/*') ? 'active' : '' }}">
+                                    {{-- || request()->is('admin/tahun*') --}}
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Sprint 1
@@ -145,22 +147,14 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('admin.dosens') }}"
-                                            class="nav-link {{ request()->is('admin/dosen*') ? 'active' : '' }} ">
+                                            class="nav-link {{ request()->is('admin/dosen/*') ? 'active' : '' }} ">
                                             <i class="nav-icon fas fa-graduation-cap"></i>
                                             <p>
                                                 Dosen
                                             </p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('admin.tahun') }}"
-                                            class="nav-link {{ request()->is('admin/tahun*') ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-calendar"></i>
-                                            <p>
-                                                Tahun Akademik
-                                            </p>
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </li>
                             {{-- /SPRINT 1 --}}
@@ -180,6 +174,15 @@
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>
                                         Pimpinan Prodi
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.tahun') }}"
+                                    class="nav-link {{ request()->is('admin/tahun*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-calendar"></i>
+                                    <p>
+                                        Tahun Akademik
                                     </p>
                                 </a>
                             </li>
