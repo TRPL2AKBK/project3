@@ -31,12 +31,14 @@ class MatakuliahKBKController extends Controller
         $validator = Validator::make($request->all(), [
             'id_matakuliah' => 'required',
             'id_kbk' => 'required',
+            'id_kurikulum' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $matakuliahkbk['id_matakuliah'] = $request->id_matakuliah;
         $matakuliahkbk['id_kbk'] = $request->id_kbk;
+        $matakuliahkbk['id_kurikulum'] = $request->id_kurikulum;
 
         MatakuliahKBK::create($matakuliahkbk);
         // dd($request->all());
@@ -55,12 +57,14 @@ class MatakuliahKBKController extends Controller
         $validator = Validator::make($request->all(), [
             'id_kbk' => 'required',
             'id_matakuliah' => 'required',
+            'id_kurikulum' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $matakuliahkbk['id_matakuliah'] = $request->id_matakuliah;
         $matakuliahkbk['id_kbk'] = $request->id_kbk;
+        $matakuliahkbk['id_kurikulum'] = $request->id_kurikulum;
 
         MatakuliahKBK::updateMatakuliahKBK($id_matakuliah, $matakuliahkbk);
         // dd($request->all());

@@ -31,12 +31,14 @@ class DosenKBKController extends Controller
         $validator = Validator::make($request->all(), [
             'id_dosen' => 'required',
             'id_kbk' => 'required',
+            'id_jabatan_kbk' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $dosenkbk['id_dosen'] = $request->id_dosen;
         $dosenkbk['id_kbk'] = $request->id_kbk;
+        $dosenkbk['id_jabatan_kbk'] = $request->id_jabatan_kbk;
 
         dosenKBK::create($dosenkbk);
         // dd($request->all());
@@ -55,12 +57,14 @@ class DosenKBKController extends Controller
         $validator = Validator::make($request->all(), [
             'id_kbk' => 'required',
             'id_dosen' => 'required',
+            'id_jabatan_kbk' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $dosenkbk['id_dosen'] = $request->id_dosen;
         $dosenkbk['id_kbk'] = $request->id_kbk;
+        $dosenkbk['id_jabatan_kbk'] = $request->id_jabatan_kbk;
 
         dosenKBK::updatedosenKBK($id_dosen, $dosenkbk);
         // dd($request->all());

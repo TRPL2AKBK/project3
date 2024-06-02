@@ -46,9 +46,17 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputNameKBK1">ID KBK</label>
-                                            <input type="number" class="form-control" id="exampleInputKBK1" name="id_kbk"
+                                            <input type="number" class="form-control" id="exampleInputKBK2" name="id_kbk"
                                                 placeholder="Enter id kbk">
                                             @error('id_kbk')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputNameKBK1">ID Kurikulum</label>
+                                            <input type="number" class="form-control" id="exampleInputKBK3"
+                                                name="id_kurikulum" placeholder="Enter id kurikulum">
+                                            @error('id_kurikulum')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>

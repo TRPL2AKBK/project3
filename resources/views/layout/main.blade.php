@@ -277,14 +277,24 @@
                                 </a>
                             </li>
                         @endif
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link">
                                 <i class="nav-icon fas fa-arrow-circle-left "></i>
                                 <p>
                                     Logout
                                 </p>
                             </a>
+                        </li> --}}
+
+                        <li class="nav-item">
+                            <form action="/logout" method="post" style="color: darkslategray">
+                                @csrf
+                                <button class="nav-link" type="submit">
+                                    Logout
+                                </button>
+                            </form>
                         </li>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

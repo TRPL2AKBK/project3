@@ -54,6 +54,15 @@
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">ID Jabatan KBK</label>
+                                            <input type="number" class="form-control" id="exampleInputid_kbk"
+                                                name="id_jabatan_kbk" value="{{ $dosenkbk->id_jabatan_kbk }}"
+                                                placeholder="Enter id jabatan kbk">
+                                            @error('id_jabatan_kbk')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">

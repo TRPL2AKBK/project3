@@ -44,6 +44,7 @@
                                             {{-- <th>ID Matakuliah</th> --}}
                                             <th>Matakuliah</th>
                                             <th>KBK</th>
+                                            <th>Kurikulum</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -54,6 +55,7 @@
                                                 {{-- <td> {{ $p->id_matakuliahkbk }} </td> --}}
                                                 <td> {{ $p->matakuliah->nama_matakuliah }} </td>
                                                 <td> {{ $p->kbk->nama_kbk }} </td>
+                                                <td> {{ $p->kurikulum->nama_kurikulum }} </td>
                                                 <td>
                                                     <a
                                                         href="{{ route('admin.matakuliahkbk.edit', ['id' => $p->id_matakuliahkbk]) }}"class="btn btn-primary"><i

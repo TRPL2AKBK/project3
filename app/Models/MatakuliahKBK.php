@@ -13,6 +13,7 @@ class MatakuliahKBK extends Model
         'id_matakuliahkbk',
         'id_matakuliah',
         'id_kbk',
+        'id_kurikulum',
     ];
 
     public $timestamps = false;
@@ -31,5 +32,10 @@ class MatakuliahKBK extends Model
     public function kbk()
     {
         return $this->belongsTo('App\Models\KBK', 'id_kbk');
+    }
+
+    public function kurikulum()
+    {
+        return $this->belongsTo('App\Models\Kurikulum', 'id_kurikulum');
     }
 }

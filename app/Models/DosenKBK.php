@@ -13,6 +13,7 @@ class DosenKBK extends Model
         'id_dosenkbk',
         'id_dosen',
         'id_kbk',
+        'id_jabatan_kbk',
     ];
 
     public $timestamps = false;
@@ -31,5 +32,10 @@ class DosenKBK extends Model
     public function kbk()
     {
         return $this->belongsTo('App\Models\KBK', 'id_kbk');
+    }
+
+    public function jabatankbk()
+    {
+        return $this->belongsTo('App\Models\JabatanKBK', 'id_jabatan_kbk');
     }
 }

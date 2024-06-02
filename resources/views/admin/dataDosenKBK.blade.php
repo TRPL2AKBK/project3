@@ -43,6 +43,7 @@
                                             {{-- <th>ID dosen</th> --}}
                                             <th>Dosen</th>
                                             <th>KBK</th>
+                                            <th>Jabatan</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -53,6 +54,7 @@
                                                 {{-- <td> {{ $p->id_dosenkbk }} </td> --}}
                                                 <td> {{ $p->dosen->nama }} </td>
                                                 <td> {{ $p->kbk->nama_kbk }} </td>
+                                                <td> {{ $p->jabatankbk->nama_jabatan_kbk }} </td>
                                                 <td>
                                                     <a
                                                         href="{{ route('admin.dosenkbk.edit', ['id' => $p->id_dosenkbk]) }}"class="btn btn-primary"><i
