@@ -1,4 +1,4 @@
-sebelum menjalankan import dulu database, database ada di folder db
+sebelum menjalankan peoject import dulu database, database ada di folder db
 login :                      password : 
 admin@gmail.com      |       admin
 kbk@gmail.com        |       kbk
