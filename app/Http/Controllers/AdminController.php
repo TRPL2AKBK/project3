@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\UserImport;
 use App\Models\Dosen;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,7 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
     }
+
 
     public function dashboard(Request $request)
     {
@@ -67,7 +69,8 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required|regex:/^[a-zA-Z0-9\s_]+$/',
             'email' => 'required|email|unique:user',
-            'password' => 'required',
+            'nidn' => 'required|exists:ref_dosen,nidn',
+            'password' => 'required|min:8',
 
         ]);
 
@@ -75,38 +78,42 @@ class AdminController extends Controller
 
         $data['name'] = $request->nama;
         $data['email'] = $request->email;
+        $data['nidn'] = $request->nidn;
         $data['password'] = Hash::make($request->password);
-        $data['id_level'] = $request->id_level;
-
+        $data['id_level'] = $request->id_level ?? 5;;
+        $data['created_at'] = Carbon::now();
+        $data['updated_at'] = Carbon::now();
+        // dd($data);
         User::create($data);
 
-        return redirect()->route('admin.users');
-        // 'admin.user.create'
+        return redirect()->route('admin.users')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit(Request $request, $id)
     {
-        $data = User::find($id); //mencari data berdasarkan id
-        //dd($data); //untuk mengecek request
+        $data = User::find($id);
 
         return view('admin/edit', compact('data'));
     }
 
     public function update(Request $request, $id)
     {
-        //dd($request->all());
-
         $validator = Validator::make($request->all(), [
             'nama' => 'required|regex:/^[a-zA-Z0-9\s_]+$/',
-            'email' => 'required|email|unique:user',
+            'nidn' => 'required|exists:ref_dosen,nidn',
+            'email' => 'required|email|unique:user,email,' . $id,
+            'password' => 'sometimes|nullable|min:8',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $data['id_level'] = $request->id_level;
         $data['name'] = $request->nama;
-        $data['email'] = $request->email;
-
+        $data['nidn'] = $request->nidn;
+        $data['updated_at'] = Carbon::now();
+        if ($request->email) {
+            $data['email'] = $request->email;
+        }
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
         }
@@ -118,7 +125,7 @@ class AdminController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $data = User::find($id); //mencari data berdasarkan id
+        $data = User::find($id);
         if ($data) {
             $data->delete();
         }

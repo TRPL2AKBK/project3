@@ -45,6 +45,24 @@
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Kode KBK</label>
+                                            <input type="text" class="form-control" id="exampleInputkode_kbk"
+                                                name="kode_kbk" value="{{ $kbk->kode_kbk }}" placeholder="Enter kode kbk">
+                                            @error('kode_kbk')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputketua1">ID dosen KBK</label>
+                                            <input type="text" class="form-control" id="exampleInputketua" name="ketua"
+                                                value="{{ $kbk->ketua_kbk }}" placeholder="Enter id dosen kbk">
+                                            @error('ketua')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">

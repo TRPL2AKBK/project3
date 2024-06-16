@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->increments('id');
             $table->string('name', 100);
-            $table->string('email')->unique('email');
+            $table->string('email')->unique();
             $table->string('password');
-            $table->integer('id_level')->default(5)->index('id_level');
-            $table->timestamp('updated_at')->nullable();
-            $table->timestamp('create_at')->nullable();
+            $table->integer('id_level')->default(5)->index();
+            $table->timestamps(); // This will create created_at and updated_at columns
         });
     }
 
@@ -33,4 +32,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('user');
     }
-};
+}

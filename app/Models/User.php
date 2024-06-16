@@ -8,18 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 
 
 class User extends Authenticatable
 {
-    // use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     public $timestamps = false;
     protected $table = 'user';
     protected $primaryKey = 'id';
@@ -27,8 +23,12 @@ class User extends Authenticatable
         'id',
         'name',
         'email',
+        'nidn',
         'password',
         'id_level',
+        'image',
+        'updated_at',
+        'created_at',
     ];
 
     protected $hidden = [
@@ -42,5 +42,10 @@ class User extends Authenticatable
     public function level()
     {
         return $this->belongsTo('App\Models\Level', 'id_level');
+    }
+
+    public function dosen()
+    {
+        return $this->belongsTo('App\Models\Dosen', 'nidn', 'nidn');
     }
 }

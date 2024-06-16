@@ -37,10 +37,10 @@
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="exampleInputNameKBK1">ID Dosen</label>
-                                            <input type="number" class="form-control" id="exampleInputKBK1" name="id_dosen"
-                                                placeholder="Enter id dosen">
-                                            @error('id_dosen')
+                                            <label for="exampleInputNameKBK1">NIDN</label>
+                                            <input type="text" class="form-control" id="exampleInputKBK1" name="nidn"
+                                                placeholder="Enter nidn">
+                                            @error('nidn')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>

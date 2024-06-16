@@ -124,7 +124,7 @@
             Pelajari Lebih Lanjut
         </div>
         <a href="{{ route('login') }}" class="login-button">Sign In</a>
-        <a href="#" class="register-button">Sign Up</a>
+        {{-- <a href="#" class="register-button">Sign Up</a> --}}
         <img src="img/logo1.png" class="img" alt="">
     </div>
 

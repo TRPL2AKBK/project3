@@ -11,22 +11,22 @@ class DosenKBK extends Model
     protected $primaryKey = 'id_dosenkbk';
     protected $fillable = [
         'id_dosenkbk',
-        'id_dosen',
+        'nidn',
         'id_kbk',
         'id_jabatan_kbk',
     ];
 
     public $timestamps = false;
 
-    public static function updatedosenKBK($id_dosenkbk, $dosenkbk)
+    public static function updatedosenKBK($nidn, $dosenkbk)
     {
         // Lakukan pembaruan data pada model Jurusan
-        return self::where('id_dosenkbk', $id_dosenkbk)->update($dosenkbk);
+        return self::where('id_dosenkbk', $nidn)->update($dosenkbk);
     }
 
     public function dosen()
     {
-        return $this->belongsTo('App\Models\Dosen', 'id_dosen');
+        return $this->belongsTo('App\Models\Dosen', 'nidn', 'nidn');
     }
 
     public function kbk()

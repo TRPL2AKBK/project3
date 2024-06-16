@@ -3,7 +3,9 @@
 namespace App\Imports;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -18,8 +20,10 @@ class UserImport implements ToCollection, WithHeadingRow
             User::create([
                 'name'      => $row['name'],
                 'email'     => $row['email'],
-                'password'  => $row['password'],
-                'id_level'  => $row['id_level'],
+                'nidn'  => $row['nidn'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'password' => Hash::make('12345678'),
             ]);
         }
     }

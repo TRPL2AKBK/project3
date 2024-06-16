@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Mail\ResetPasswordMail;
+use App\Models\PasswordResetToken;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -12,10 +20,106 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login_proses(Request $request)
+    public function forgot_password()
+    {
+        return view('auth.forgot-password');
+    }
+
+    public function forgot_password_proses(Request $request)
     {
         // dd($request->all());
+        $customMessage = [
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email' => 'Email tidak valid',
+            'email.exists' => 'Email tidak terdaftar',
+        ];
 
+        $request->validate([
+            'email'     => 'required|email|exists:user,email',
+        ], $customMessage);
+
+        $token = Str::random(60);
+
+        PasswordResetToken::updateOrCreate(
+            [
+                'email' => $request->email,
+            ],
+            [
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => now(),
+            ]
+        );
+
+        // Log::info('Sending reset password email to: ' . $request->email);
+        // Log::info('Reset password token: ' . $token);
+
+        Mail::to($request->email)->send(new ResetPasswordMail($token));
+
+        return redirect()->route('forgot-password')->with('success', 'Check your email for a password reset link.');
+    }
+
+    public function validasi_forgot_password(Request $request, $token)
+    {
+        $tokenData = PasswordResetToken::where('token', $token)->get();
+
+        $passwordResetToken = $tokenData->first();
+
+        if ($passwordResetToken) {
+            $email = $passwordResetToken->email;
+            Log::info('Email found: ' . $email);
+
+            return view('auth.validasi-token', compact('token', 'email'));
+        } else {
+            Log::info('Email not found for token: ' . $token);
+            return redirect()->route('login')->with('failed', 'Token tidak valid');
+        }
+    }
+
+    public function validasi_forgot_password_proses(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        Log::info('Received token: ' . $request->token);
+        Log::info('Received email: ' . $request->email);
+
+        $token = PasswordResetToken::where('token', $request->token)
+            ->where('email', $request->email)
+            ->first();
+
+        if (!$token) {
+            Log::info('Token not found or does not match email');
+            return redirect()->route('login')->with('failed', 'Token tidak valid dengan');
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            Log::info('User not found');
+            return redirect()->route('login')->with('failed', 'Email tidak terdaftar');
+        }
+
+        Log::info('Resetting password for user: ' . $user->email);
+
+        $user->password = Hash::make($request->password);
+        if ($user->save()) {
+            Log::info('Password reset for user: ' . $user->email);
+        } else {
+            Log::error('Failed to reset password for user: ' . $user->email);
+            return redirect()->route('login')->with('failed', 'Gagal mereset password');
+        }
+
+        $token->delete();
+
+        return redirect()->route('login')->with('success', 'Password berhasil direset');
+    }
+
+    public function login_proses(Request $request)
+    {
         $request->validate([
             'email'     => 'required|email',
             'password'  => 'required',
@@ -24,34 +128,20 @@ class LoginController extends Controller
         $data = [
             'email'     => $request->email,
             'password'  => $request->password,
-            // 'id_role'   => $request->id_role, // Menambahkan id_role ke array data
         ];
 
         if (Auth::attempt($data)) {
-            // Otentikasi berhasil, dapatkan id_role pengguna yang terotentikasi
-            //$id_level = Auth::user()->id_level;
-            // Berdasarkan nilai id_role, arahkan pengguna ke rute yang sesuai
             switch (Auth::user()->id_level) {
-                case 1: //Admin
-                    // Jika id_role adalah 1, arahkan ke halaman dashboard admin
+                case 1:
                     return redirect()->route('admin.dashboard');
-                    break;
-                case 2: //KBK
-                    // Jika id_role adalah 2, arahkan ke halaman dashboard user biasa
+                case 2:
                     return redirect()->route('pengurus.dashboard');
-                    break;
-                case 3: //Kaprodi
-                    // Jika id_role adalah 1, arahkan ke halaman dashboard admin
+                case 3:
                     return redirect()->route('kaprodi.dashboard');
-                    break;
-                case 4: //Dosen
-                    // Jika id_role adalah 2, arahkan ke halaman dashboard user biasa
+                case 4:
                     return redirect()->route('dosen.dashboard');
-                    break;
-                case 5: //User
-                    // Jika id_role adalah 1, arahkan ke halaman dashboard admin
+                case 5:
                     return redirect()->route('user.dashboard');
-                    break;
                 default:
                     // Jika id_role tidak sesuai dengan yang diharapkan, arahkan ke halaman tertentu
                     return redirect()->route('login')->with('failed', 'Anda tidak memiliki akses yang sesuai');
@@ -60,18 +150,6 @@ class LoginController extends Controller
             // Otentikasi gagal, arahkan pengguna kembali ke halaman login dengan pesan kesalahan
             return redirect()->back()->withInput()->with('failed', 'Email atau Password Salah');
         }
-
-        // $data = [
-        //     'email'     => $request->email,
-        //     'password'  => $request->password,
-
-        // ];
-
-        // if (Auth::attempt($data)) {
-        //     return redirect()->route('home');
-        // } else {
-        //     return redirect()->route('login')->with('failed', 'Email atau Password Salah');
-        // }
     }
 
     public function logout()

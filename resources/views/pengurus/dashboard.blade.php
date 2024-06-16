@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <h1 class="m-4">Ini Dashboard Pengurus KBK</h1>
+                        <h1 class="m-4">Ini Dashboard Ketua KBK</h1>
                     </div>
                     <!-- /.col -->
                 </div>

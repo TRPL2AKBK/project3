@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-dark navbar-light fixed-top">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -113,17 +113,41 @@
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
                 role="button">
                 <i class="fas fa-th-large"></i>
             </a>
-        </li>
+        </li> --}}
+
+
         <li class="nav-item dropdown">
-            <a class="nav-link" href="#" role="button">
-                <i class="fas fa-user"></i>
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="fas fa-cog"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                {{-- <a href="#" class="dropdown-item"></a> --}}
+                {{-- <div class="dropdown-divider"></div>
+                < href="#" class="dropdown-item"> --}}
+
+                <p class="dropdown-header  bg-dark">Setting</p>
+                <div class="dropdown-divider"></div>
+
+                <a href="{{ route('profile.edit', ['id' => Auth::user()->id]) }}"
+                    class="dropdown-item dropdown-footer">Profile</a>
+                <div class="dropdown-divider"></div>
+
+                <form id="logoutForm" action="/logout" method="post" style="color: darkslategray">
+                    @csrf
+                    <a id="logoutButton" class="dropdown-item dropdown-footer" type="button" data-toggle="modal"
+                        data-target="#logoutModal">
+                        Logout
+                    </a>
+                </form>
+
+
+
+
             </div>
         </li>
     </ul>

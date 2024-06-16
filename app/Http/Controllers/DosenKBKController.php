@@ -29,14 +29,14 @@ class DosenKBKController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_dosen' => 'required',
+            'nidn' => 'required',
             'id_kbk' => 'required',
             'id_jabatan_kbk' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        $dosenkbk['id_dosen'] = $request->id_dosen;
+        $dosenkbk['nidn'] = $request->nidn;
         $dosenkbk['id_kbk'] = $request->id_kbk;
         $dosenkbk['id_jabatan_kbk'] = $request->id_jabatan_kbk;
 
@@ -52,32 +52,32 @@ class DosenKBKController extends Controller
         return view('admin/editDosenKBK', compact('dosenkbk'));
     }
 
-    public function update(Request $request, $id_dosen)
+    public function update(Request $request, $nidn)
     {
         $validator = Validator::make($request->all(), [
             'id_kbk' => 'required',
-            'id_dosen' => 'required',
+            'nidn' => 'required',
             'id_jabatan_kbk' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        $dosenkbk['id_dosen'] = $request->id_dosen;
+        $dosenkbk['nidn'] = $request->nidn;
         $dosenkbk['id_kbk'] = $request->id_kbk;
         $dosenkbk['id_jabatan_kbk'] = $request->id_jabatan_kbk;
 
-        dosenKBK::updatedosenKBK($id_dosen, $dosenkbk);
+        dosenKBK::updatedosenKBK($nidn, $dosenkbk);
         // dd($request->all());
 
         return redirect()->route('admin.dosenkbk');
     }
 
-    public function destroy(Request $request, $id_dosen)
+    public function destroy(Request $request, $nidn)
     {
-        $id_dosen = DosenKBK::find($id_dosen);
+        $nidn = DosenKBK::find($nidn);
 
-        if ($id_dosen) {
-            $id_dosen->delete();
+        if ($nidn) {
+            $nidn->delete();
         }
 
         return redirect()->route('admin.dosenkbk');

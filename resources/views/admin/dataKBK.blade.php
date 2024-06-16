@@ -35,13 +35,15 @@
                                         Insert</a>
                                 </div>
                             </div>
-                            <div class="card-body table-responsive p-0">
+                            <div class="card-body table-responsive">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 1rem">No</th>
                                             {{-- <th>ID KBK</th> --}}
                                             <th>Nama KBK</th>
+                                            <th>Kode KBK</th>
+                                            <th>Ketua</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -49,8 +51,9 @@
                                         @foreach ($kbk as $p)
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
-                                                {{-- <td> {{ $p->id_kbk }} </td> --}}
                                                 <td> {{ $p->nama_kbk }} </td>
+                                                <td> {{ $p->kode_kbk }} </td>
+                                                <td> {{ $p->ketua->dosen->nama }} </td>
                                                 <td>
                                                     <a
                                                         href="{{ route('admin.kbk.edit', ['id' => $p->id_kbk]) }}"class="btn btn-primary"><i

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Apr 2024 pada 17.51
--- Versi server: 10.4.28-MariaDB
--- Versi PHP: 8.2.4
+-- Waktu pembuatan: 16 Jun 2024 pada 19.10
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `kbkti`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `change_logs`
+--
+
+CREATE TABLE `change_logs` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `changes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`changes`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `change_logs`
+--
+
+INSERT INTO `change_logs` (`id`, `user_id`, `changes`, `created_at`, `updated_at`) VALUES
+(5, 1, '{\"name\":{\"old_value\":\"admin\",\"new_value\":\"admink\"},\"email\":{\"old_value\":\"admin@gmail.com\",\"new_value\":\"admink@gmail.com\"}}', '2024-06-12 09:48:08', '2024-06-12 09:48:08'),
+(6, 4, '{\"name\":{\"old_value\":\"dosenn\",\"new_value\":\"dosen\"}}', '2024-06-12 13:59:21', '2024-06-12 13:59:21'),
+(7, 1, '{\"name\":{\"old_value\":\"admink\",\"new_value\":\"admin\"},\"email\":{\"old_value\":\"admink@gmail.com\",\"new_value\":\"admin@gmail.com\"}}', '2024-06-12 14:00:57', '2024-06-12 14:00:57'),
+(9, 1, '{\"image\":{\"old_value\":\"Image\\/lS0CqBuNRAPW78jVn8Fq0kGWCITie0Yd5vXa6YPn.webp\",\"new_value\":\"Image\\/GQ0TZpo6SAoG09CzA8d9chsO46FLPUadvcMC9SrT.png\"}}', '2024-06-12 21:45:44', '2024-06-12 21:45:44'),
+(10, 1, '{\"image\":{\"old_value\":\"Image\\/GQ0TZpo6SAoG09CzA8d9chsO46FLPUadvcMC9SrT.png\",\"new_value\":\"Image\\/qwVlwbJaIuM1zIp5VvZHj3AwxxYhpaQRvbyYohiV.png\"}}', '2024-06-14 08:17:58', '2024-06-14 08:17:58');
 
 -- --------------------------------------------------------
 
@@ -128,7 +153,100 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (88, '2024_03_24_081035_add_foreign_keys_to_ref_soal_table', 0),
 (89, '2024_03_24_081035_add_foreign_keys_to_user_table', 0),
 (90, '2024_03_24_081035_add_foreign_keys_to_verifikasi_rps_table', 0),
-(91, '2024_03_24_081035_add_foreign_keys_to_verifikasi_soal_table', 0);
+(91, '2024_03_24_081035_add_foreign_keys_to_verifikasi_soal_table', 0),
+(98, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(99, '2024_06_08_161301_create_permission_tables', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 1),
+(2, 'App\\Models\\User', 1),
+(3, 'App\\Models\\User', 1),
+(4, 'App\\Models\\User', 1),
+(5, 'App\\Models\\User', 1),
+(6, 'App\\Models\\User', 1),
+(7, 'App\\Models\\User', 1),
+(8, 'App\\Models\\User', 1),
+(9, 'App\\Models\\User', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
+('spongebob.jomblo@gmail.com', 'BQIXZYGUraXdsF9j7Ae0FL2B7xAh15z4Qo4uwMeINyyUBvmUYBHeBf3rYhRj', '2024-06-09 12:06:36');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -206,21 +324,24 @@ INSERT INTO `ref_dosen` (`id_dosen`, `nama`, `nidn`, `nip`, `gender`, `id_jurusa
 
 CREATE TABLE `ref_dosen_kbk` (
   `id_dosenkbk` int(11) NOT NULL,
-  `id_dosen` int(11) NOT NULL,
-  `id_kbk` int(11) NOT NULL
+  `nidn` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `id_kbk` int(11) NOT NULL,
+  `id_jabatan_kbk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `ref_dosen_kbk`
 --
 
-INSERT INTO `ref_dosen_kbk` (`id_dosenkbk`, `id_dosen`, `id_kbk`) VALUES
-(1, 132, 5),
-(2, 160, 3),
-(3, 14, 1),
-(4, 40, 2),
-(5, 311, 4),
-(6, 357, 5);
+INSERT INTO `ref_dosen_kbk` (`id_dosenkbk`, `nidn`, `id_kbk`, `id_jabatan_kbk`) VALUES
+(1, '0019038103', 5, 1),
+(2, '0025088802', 3, 1),
+(3, '0009058601', 1, 1),
+(4, '0218068801', 2, 1),
+(5, '0008069103', 4, 1),
+(6, '0015048105', 5, 3),
+(7, '0021078601', 3, 3),
+(8, '0022017806', 4, 3);
 
 -- --------------------------------------------------------
 
@@ -243,6 +364,26 @@ CREATE TABLE `ref_dosen_matakuliah` (
 INSERT INTO `ref_dosen_matakuliah` (`id_dosen_matakuliah`, `id_dosen`, `id_matakuliah`, `id_kelas`, `id_smt_thn_akd`) VALUES
 (1, 220, 13, 1, 3),
 (2, 66, 14, 2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `ref_jabatan_kbk`
+--
+
+CREATE TABLE `ref_jabatan_kbk` (
+  `id_jabatan_kbk` int(11) NOT NULL,
+  `nama_jabatan_kbk` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ref_jabatan_kbk`
+--
+
+INSERT INTO `ref_jabatan_kbk` (`id_jabatan_kbk`, `nama_jabatan_kbk`) VALUES
+(1, 'ketua'),
+(2, 'sekretaris'),
+(3, 'anggota');
 
 -- --------------------------------------------------------
 
@@ -283,7 +424,7 @@ CREATE TABLE `ref_jurusan` (
 --
 
 INSERT INTO `ref_jurusan` (`id_jurusan`, `kode_jurusan`, `jurusan`) VALUES
-(1, 'AN', 'Administrasi Niaga'),
+(1, 'AM', 'Administrasi Niaga'),
 (2, 'AK', 'Akuntansi'),
 (3, 'BI', 'Bahasa Inggris'),
 (4, 'EE', 'Teknik Elektro'),
@@ -298,20 +439,24 @@ INSERT INTO `ref_jurusan` (`id_jurusan`, `kode_jurusan`, `jurusan`) VALUES
 --
 
 CREATE TABLE `ref_kbk` (
-  `id_kbk` int(20) NOT NULL,
-  `nama_kbk` varchar(50) NOT NULL
+  `id_kbk` int(11) NOT NULL,
+  `kode_kbk` varchar(50) NOT NULL,
+  `nama_kbk` varchar(50) NOT NULL,
+  `ketua_kbk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `ref_kbk`
 --
 
-INSERT INTO `ref_kbk` (`id_kbk`, `nama_kbk`) VALUES
-(1, 'SOFTAM'),
-(2, 'CAIT'),
-(3, 'Programming'),
-(4, 'NCS'),
-(5, 'Multimedia');
+INSERT INTO `ref_kbk` (`id_kbk`, `kode_kbk`, `nama_kbk`, `ketua_kbk`) VALUES
+(1, 'SOFTAM', 'fghj', 1),
+(2, 'CAIT', '', 2),
+(3, 'Programming', '', 3),
+(4, 'NCS', '', 4),
+(5, 'Multimediaa', '', 5),
+(19, 'Baru', '', 6),
+(20, 'fghjkl', '7fgucx', 6);
 
 -- --------------------------------------------------------
 
@@ -368,7 +513,7 @@ INSERT INTO `ref_kurikulum` (`id_kurikulum`, `kode_kurikulum`, `nama_kurikulum`,
 --
 
 CREATE TABLE `ref_level` (
-  `id` int(20) NOT NULL,
+  `id` int(11) NOT NULL,
   `level` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -382,6 +527,29 @@ INSERT INTO `ref_level` (`id`, `level`) VALUES
 (3, 'kaprodi'),
 (4, 'dosen'),
 (5, 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `ref_mahasiswa`
+--
+
+CREATE TABLE `ref_mahasiswa` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `nobp` varchar(10) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `telp` varchar(15) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `prodi_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ref_mahasiswa`
+--
+
+INSERT INTO `ref_mahasiswa` (`id`, `user_id`, `nobp`, `nama`, `telp`, `alamat`, `prodi_id`) VALUES
+(1, 2424343, '2211083042', 'Muhammad Amir Shafwan', '08123456789', 'padang', 20);
 
 -- --------------------------------------------------------
 
@@ -410,7 +578,8 @@ CREATE TABLE `ref_matakuliah` (
 
 INSERT INTO `ref_matakuliah` (`id_matakuliah`, `kode_matakuliah`, `nama_matakuliah`, `TP`, `sks`, `jam`, `sks_teori`, `sks_praktek`, `jam_teori`, `jam_praktek`, `semester`, `id_kurikulum`) VALUES
 (13, 'RPL3205', 'Pengantar Rekayasa Perangkat Lunak', 'T', 2, 2, 2, 0, 2, 0, 2, 5),
-(14, 'RPL3203', 'Basis Data', 'P', 2, 2, 3, 2, 2, 2, 3, 5);
+(14, 'RPL3203', 'Basis Data', 'P', 2, 2, 3, 2, 2, 2, 3, 5),
+(15, 'RPL3204', 'Kecerdasan buatan', 'P', 2, 2, 3, 2, 2, 2, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -421,29 +590,18 @@ INSERT INTO `ref_matakuliah` (`id_matakuliah`, `kode_matakuliah`, `nama_matakuli
 CREATE TABLE `ref_matakuliah_kbk` (
   `id_matakuliahkbk` int(11) NOT NULL,
   `id_matakuliah` int(11) NOT NULL,
-  `id_kbk` int(11) NOT NULL
+  `id_kbk` int(11) NOT NULL,
+  `id_kurikulum` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `ref_matakuliah_kbk`
 --
 
-INSERT INTO `ref_matakuliah_kbk` (`id_matakuliahkbk`, `id_matakuliah`, `id_kbk`) VALUES
-(15, 13, 1);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ref_pengurus_kbk`
---
-
-CREATE TABLE `ref_pengurus_kbk` (
-  `id` int(20) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `jabatan` varchar(30) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `id_bidang` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `ref_matakuliah_kbk` (`id_matakuliahkbk`, `id_matakuliah`, `id_kbk`, `id_kurikulum`) VALUES
+(15, 13, 1, 2),
+(16, 15, 5, 3),
+(17, 14, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -521,15 +679,44 @@ INSERT INTO `ref_prodi` (`id_prodi`, `kode_prodi`, `prodi`, `id_jurusan`, `id_je
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `ref_proposal_ta`
+--
+
+CREATE TABLE `ref_proposal_ta` (
+  `id_proposal_ta` int(11) NOT NULL,
+  `nobp` int(11) UNSIGNED NOT NULL,
+  `dokumen` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ref_proposal_ta`
+--
+
+INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nobp`, `dokumen`) VALUES
+(4, 2211083042, 'proposal.pdf');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `ref_rps`
 --
 
 CREATE TABLE `ref_rps` (
-  `id_rps` int(20) NOT NULL,
-  `id_matkul` int(20) NOT NULL,
-  `dokumen` varchar(255) NOT NULL,
-  `keterangan` varchar(50) DEFAULT NULL
+  `id_rps` int(11) NOT NULL,
+  `id_matakuliah_kbk` int(11) NOT NULL,
+  `versi_rps` varchar(20) NOT NULL,
+  `dokumen` varchar(100) NOT NULL,
+  `id_dosen_pengembang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ref_rps`
+--
+
+INSERT INTO `ref_rps` (`id_rps`, `id_matakuliah_kbk`, `versi_rps`, `dokumen`, `id_dosen_pengembang`) VALUES
+(42, 15, '1', 'RPS/TfVecLXJAKhs85609mWzlBhrG2H1tN9BKyD9jfQH.pdf', 6),
+(43, 15, '12', 'RPS/I2UFm49R4BAZG7CJJv7WeI2hHT9WuEZOzokjbzy6.pdf', 4),
+(45, 16, '2', 'RPS/UlC96zN1dbFUQDi0xOhqFmJniV7iXSPsFauxZDl3.pdf', 4);
 
 -- --------------------------------------------------------
 
@@ -550,7 +737,7 @@ CREATE TABLE `ref_smt_thn_akd` (
 INSERT INTO `ref_smt_thn_akd` (`id_smt_thn_akd`, `smt_thn_akd`, `status`) VALUES
 (1, '2022/2023-Genap', '0'),
 (2, '2023/2024-Ganjil', '0'),
-(3, '2023/2024-Genap', '1');
+(3, '2023/2024-Genap', '0');
 
 -- --------------------------------------------------------
 
@@ -559,11 +746,60 @@ INSERT INTO `ref_smt_thn_akd` (`id_smt_thn_akd`, `smt_thn_akd`, `status`) VALUES
 --
 
 CREATE TABLE `ref_soal` (
-  `id` int(20) NOT NULL,
-  `id_matkul` int(20) NOT NULL,
-  `dokumen` varchar(255) NOT NULL,
-  `keterangan` varchar(50) DEFAULT NULL
+  `id_soal` int(11) NOT NULL,
+  `id_matakuliah_kbk` int(11) NOT NULL,
+  `dosen_pengampu` varchar(50) NOT NULL,
+  `dokumen` varchar(100) NOT NULL,
+  `id_tahun_akademik` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `ref_soal`
+--
+
+INSERT INTO `ref_soal` (`id_soal`, `id_matakuliah_kbk`, `dosen_pengampu`, `dokumen`, `id_tahun_akademik`) VALUES
+(7, 15, '6', 'SOAL/r2ZlodvJ9kqjhpS0RIOFk3hm7Sra1QjtPacNDcaj.pdf', 2),
+(8, 15, '4', 'SOAL/chnyv10iFar5U16mR4ORYVNejaOInKVdlCo8qQeS.xlsx', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'super admin', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40'),
+(2, 'user', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40'),
+(3, 'admin', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40'),
+(4, 'dosen pengampu', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40'),
+(5, 'pengurus kbk', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40'),
+(6, 'dosen kbk', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40'),
+(7, 'pimpinan prodi', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40'),
+(8, 'pimpinan jurusan', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40'),
+(9, 'pengguna umum', 'web', '2024-06-12 07:12:40', '2024-06-12 07:12:40');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `role_has_permissions`
+--
+
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -572,31 +808,27 @@ CREATE TABLE `ref_soal` (
 --
 
 CREATE TABLE `user` (
-  `id` int(20) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
+  `nidn` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `id_level` int(20) NOT NULL DEFAULT 5,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `create_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `password` varchar(255) NOT NULL DEFAULT '12345678',
+  `id_level` int(11) NOT NULL DEFAULT 5,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `password`, `id_level`, `updated_at`, `create_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$12$aid1ewNU.l4q7U88I4wxTesGf5BuLNucSKBwDtbmlPepAmdH1MR.K', 1, NULL, NULL),
-(2, 'kbk', 'kbk@gmail.com', '$2y$12$G5ERF.vNHHsWAO70pmp1b.gS38/AID1u11ivMaHPuud0pdhthes/K', 2, NULL, NULL),
-(3, 'kaprodi', 'kaprodi@gmail.com', '$2y$12$mjpUPkfBZ7.3iHe7mi0A9O65ZmfpwOoGwi3QuvOkb2lPyHTHL3h2O', 3, NULL, NULL),
-(4, 'dosen', 'dosen@gmail.com', '$2y$12$eaLIdhLSw2j52CXVKepH9.OQFKV08FVdsIwACozppdZgRvKyn6SBq', 4, NULL, NULL),
-(5, 'user', 'user@gmail.com', '$2y$12$695K53NiupeEZTVJxe/.3.EmQkfJIlcSWPI/C4sR0sfS/iAIpay0O', 5, NULL, NULL),
-(11, 'Muhammad Amir Shafwan', 'muhammadamirshafwan69@gmail.com', '$2y$12$w6raCItMaCMiXVKWFhNO2utI5nhmEWnAVPam03hZNiNAVEMyjGyw6', 1, NULL, NULL),
-(60, 'Muhammad Amir Shafwan', 'admin4@gmail.com', '$2y$12$heHmLWAVbIoXdaEtYf2ky.koUuL/gqQmpT1Z4fLQRtE1vvF.AmhTi', 1, NULL, NULL),
-(62, 'amirr', 'mir@gmail.com', '$2y$12$XDLb0NdpgTbKJB7xRHN/1eCTxAH0RBTPx9n3aLDvqiR.meACNSRAG', 5, NULL, NULL),
-(63, 'ami', 'aamir@gmail.com', '$2y$12$/7L4euwT6k4K65eOt565Eev/up3sW/AVHaOYRBWmwVtZ0eWJoAFr2', 4, NULL, NULL),
-(65, 'Muhammad Amir Shafwan', 'muhammadamirshafwan9@gmail.com', '$2y$12$hT/66QwEjlZDaoAHatAWpOD9IJzuYjGUEDFQS6OCmjbo.uhleL6j2', 1, NULL, NULL),
-(66, 'Muhammad Amir Shafwan', 'aamir888@gmail.com', '$2y$12$wqayXyXVFDxmfwXv2KSH/OuJSWckF/nv2.oNsyHNxYZE/9Ux2gPPW', 1, NULL, NULL);
+INSERT INTO `user` (`id`, `nidn`, `name`, `email`, `password`, `id_level`, `image`, `created_at`, `updated_at`) VALUES
+(1, '0019038103', 'admin', 'admin@gmail.com', '$2y$12$qxGy4KGlitBr1xE5CABEQOiMlT54hEEshiCpE8avgk1UUBlmvm.Fm', 1, NULL, '2024-06-16 10:07:12', '2024-06-16 10:07:12'),
+(2, '0025088802', 'ketua kbk', 'kbk@gmail.com', '$2y$12$uzPXJn.N/x4UJbnWXjMfFeGlUMvRFpEPBFyWsqOSs/psXdTT0DAGG', 2, NULL, '2024-06-16 10:07:12', '2024-06-16 10:07:12'),
+(3, '0009058601', 'kaprodi', 'kaprodi@gmail.com', '$2y$12$QFKtFRXx7S.yH0PM1hu6X.Bafe2ROgOr1MZh/ooHPg/vUp1ye0DI6', 3, NULL, '2024-06-16 10:07:12', '2024-06-16 10:07:12'),
+(4, '0218068801', 'dosen', 'dosen@gmail.com', '$2y$12$oF65QStsu1O5vOidHxQcU.72KxjZK02raedGmkJ5Wc7I.nfqO1Z5e', 4, NULL, '2024-06-16 10:07:13', '2024-06-16 10:07:13'),
+(5, '0008069103', 'user', 'user@gmail.com', '$2y$12$59czMgwY2AxjMIfXfKkP0.6ATI9fTqQ4qxgXn5BuquZug2QYwEFGq', 5, NULL, '2024-06-16 10:07:13', '2024-06-16 10:07:13');
 
 -- --------------------------------------------------------
 
@@ -605,14 +837,26 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`, `id_level`, `updated_at`,
 --
 
 CREATE TABLE `verifikasi_rps` (
-  `id` int(20) NOT NULL,
-  `tanggal` date NOT NULL,
-  `keterangan` varchar(30) NOT NULL,
-  `dokumen` varchar(100) NOT NULL,
-  `id_pengurus` int(20) NOT NULL,
-  `id_rps` int(20) NOT NULL,
-  `id_tahun` int(20) NOT NULL
+  `id_verif_rps` int(11) NOT NULL,
+  `id_rps` int(11) DEFAULT NULL,
+  `verifikator1` varchar(11) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `verifikator2` varchar(11) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `status1` varchar(10) DEFAULT NULL,
+  `status2` varchar(10) DEFAULT NULL,
+  `komentar1` varchar(100) DEFAULT NULL,
+  `komentar2` varchar(100) DEFAULT NULL,
+  `tanggal1` date DEFAULT NULL,
+  `tanggal2` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `verifikasi_rps`
+--
+
+INSERT INTO `verifikasi_rps` (`id_verif_rps`, `id_rps`, `verifikator1`, `verifikator2`, `status1`, `status2`, `komentar1`, `komentar2`, `tanggal1`, `tanggal2`) VALUES
+(20, 42, NULL, '2', NULL, 'terima', NULL, NULL, NULL, '2024-06-12'),
+(21, 43, NULL, '1', NULL, 'terima', NULL, NULL, NULL, '2024-06-13'),
+(23, 45, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -621,24 +865,76 @@ CREATE TABLE `verifikasi_rps` (
 --
 
 CREATE TABLE `verifikasi_soal` (
-  `id` int(20) NOT NULL,
-  `tanggal` date NOT NULL,
-  `keterangan` varchar(30) NOT NULL,
-  `dokumen` varchar(100) NOT NULL,
-  `id_pengurus` int(20) NOT NULL,
-  `id_soal` int(20) NOT NULL,
-  `id_tahun` int(20) NOT NULL
+  `id_verif_soal` int(11) NOT NULL,
+  `id_soal` int(11) NOT NULL,
+  `verifikator1` varchar(11) DEFAULT NULL,
+  `verifikator2` varchar(11) DEFAULT NULL,
+  `status1` varchar(10) DEFAULT NULL,
+  `status2` varchar(10) DEFAULT NULL,
+  `komentar1` varchar(100) DEFAULT NULL,
+  `komentar2` varchar(100) DEFAULT NULL,
+  `tanggal1` date DEFAULT NULL,
+  `tanggal2` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `verifikasi_soal`
+--
+
+INSERT INTO `verifikasi_soal` (`id_verif_soal`, `id_soal`, `verifikator1`, `verifikator2`, `status1`, `status2`, `komentar1`, `komentar2`, `tanggal1`, `tanggal2`) VALUES
+(6, 7, '3', '2', 'terima', 'terima', 'gg', 'anjay', '2024-06-06', '2024-06-06'),
+(7, 8, NULL, '2', NULL, 'tolak', NULL, 'ok', NULL, '2024-06-12');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indeks untuk tabel `change_logs`
+--
+ALTER TABLE `change_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indeks untuk tabel `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indeks untuk tabel `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indeks untuk tabel `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indeks untuk tabel `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
 -- Indeks untuk tabel `ref_dosen`
@@ -652,14 +948,21 @@ ALTER TABLE `ref_dosen`
 --
 ALTER TABLE `ref_dosen_kbk`
   ADD PRIMARY KEY (`id_dosenkbk`),
-  ADD KEY `fk_dosen_id` (`id_dosen`),
-  ADD KEY `fk_kbk` (`id_kbk`);
+  ADD KEY `fk_jabatan_kbk` (`id_jabatan_kbk`),
+  ADD KEY `fk_kbk` (`id_kbk`),
+  ADD KEY `fk_dosenkbk_nidn` (`nidn`);
 
 --
 -- Indeks untuk tabel `ref_dosen_matakuliah`
 --
 ALTER TABLE `ref_dosen_matakuliah`
   ADD PRIMARY KEY (`id_dosen_matakuliah`);
+
+--
+-- Indeks untuk tabel `ref_jabatan_kbk`
+--
+ALTER TABLE `ref_jabatan_kbk`
+  ADD PRIMARY KEY (`id_jabatan_kbk`);
 
 --
 -- Indeks untuk tabel `ref_jabatan_pimpinan`
@@ -677,7 +980,8 @@ ALTER TABLE `ref_jurusan`
 -- Indeks untuk tabel `ref_kbk`
 --
 ALTER TABLE `ref_kbk`
-  ADD PRIMARY KEY (`id_kbk`);
+  ADD PRIMARY KEY (`id_kbk`),
+  ADD KEY `fk_kbk_ketua` (`ketua_kbk`);
 
 --
 -- Indeks untuk tabel `ref_kelas`
@@ -698,6 +1002,15 @@ ALTER TABLE `ref_level`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `ref_mahasiswa`
+--
+ALTER TABLE `ref_mahasiswa`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nobp` (`nobp`),
+  ADD UNIQUE KEY `user_id` (`user_id`),
+  ADD KEY `fk_mahasiswa_prodi` (`prodi_id`);
+
+--
 -- Indeks untuk tabel `ref_matakuliah`
 --
 ALTER TABLE `ref_matakuliah`
@@ -709,14 +1022,8 @@ ALTER TABLE `ref_matakuliah`
 ALTER TABLE `ref_matakuliah_kbk`
   ADD PRIMARY KEY (`id_matakuliahkbk`),
   ADD KEY `fk_matakuliah_kbk` (`id_matakuliah`),
-  ADD KEY `fk_id_kbk` (`id_kbk`);
-
---
--- Indeks untuk tabel `ref_pengurus_kbk`
---
-ALTER TABLE `ref_pengurus_kbk`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_pengurus_bidang` (`id_bidang`);
+  ADD KEY `fk_id_kbk` (`id_kbk`),
+  ADD KEY `fk_kurikulum_kbk` (`id_kurikulum`);
 
 --
 -- Indeks untuk tabel `ref_pimpinan_jurusan`
@@ -739,11 +1046,19 @@ ALTER TABLE `ref_prodi`
   ADD KEY `jenjang_fk` (`id_jenjang`);
 
 --
+-- Indeks untuk tabel `ref_proposal_ta`
+--
+ALTER TABLE `ref_proposal_ta`
+  ADD PRIMARY KEY (`id_proposal_ta`),
+  ADD UNIQUE KEY `nobp` (`nobp`);
+
+--
 -- Indeks untuk tabel `ref_rps`
 --
 ALTER TABLE `ref_rps`
   ADD PRIMARY KEY (`id_rps`),
-  ADD KEY `fk_rps_matkul` (`id_matkul`);
+  ADD KEY `fk_rps_matakuliah` (`id_matakuliah_kbk`) USING BTREE,
+  ADD KEY `fk_pengembng_rps` (`id_dosen_pengembang`);
 
 --
 -- Indeks untuk tabel `ref_smt_thn_akd`
@@ -755,50 +1070,79 @@ ALTER TABLE `ref_smt_thn_akd`
 -- Indeks untuk tabel `ref_soal`
 --
 ALTER TABLE `ref_soal`
+  ADD PRIMARY KEY (`id_soal`),
+  ADD KEY `fk_soal_matakuliah` (`id_matakuliah_kbk`) USING BTREE,
+  ADD KEY `fk_soal_tahun` (`id_tahun_akademik`);
+
+--
+-- Indeks untuk tabel `roles`
+--
+ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_soal_matkul` (`id_matkul`);
+  ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indeks untuk tabel `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `id_level` (`id_level`) USING BTREE;
+  ADD KEY `user_nidn_index` (`nidn`),
+  ADD KEY `user_id_level_index` (`id_level`);
 
 --
 -- Indeks untuk tabel `verifikasi_rps`
 --
 ALTER TABLE `verifikasi_rps`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_vrps_tahun` (`id_tahun`),
-  ADD KEY `fk_vrps_rps` (`id_rps`),
-  ADD KEY `fk_vrps_pengurus` (`id_pengurus`);
+  ADD PRIMARY KEY (`id_verif_rps`),
+  ADD KEY `fk_verif_rps` (`id_rps`);
 
 --
 -- Indeks untuk tabel `verifikasi_soal`
 --
 ALTER TABLE `verifikasi_soal`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_vsoal_tahun` (`id_tahun`),
-  ADD KEY `fk_vsoal_soal` (`id_soal`),
-  ADD KEY `fk_vsoal_pengurus` (`id_pengurus`);
+  ADD PRIMARY KEY (`id_verif_soal`),
+  ADD KEY `fk_verif_soal` (`id_soal`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `change_logs`
+--
+ALTER TABLE `change_logs`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+
+--
+-- AUTO_INCREMENT untuk tabel `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_dosen`
 --
 ALTER TABLE `ref_dosen`
-  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=365;
+  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=366;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_dosen_kbk`
@@ -813,6 +1157,12 @@ ALTER TABLE `ref_dosen_matakuliah`
   MODIFY `id_dosen_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT untuk tabel `ref_jabatan_kbk`
+--
+ALTER TABLE `ref_jabatan_kbk`
+  MODIFY `id_jabatan_kbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT untuk tabel `ref_jurusan`
 --
 ALTER TABLE `ref_jurusan`
@@ -822,7 +1172,7 @@ ALTER TABLE `ref_jurusan`
 -- AUTO_INCREMENT untuk tabel `ref_kbk`
 --
 ALTER TABLE `ref_kbk`
-  MODIFY `id_kbk` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_kbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_kelas`
@@ -840,25 +1190,25 @@ ALTER TABLE `ref_kurikulum`
 -- AUTO_INCREMENT untuk tabel `ref_level`
 --
 ALTER TABLE `ref_level`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `ref_mahasiswa`
+--
+ALTER TABLE `ref_mahasiswa`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_matakuliah`
 --
 ALTER TABLE `ref_matakuliah`
-  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_matakuliah_kbk`
 --
 ALTER TABLE `ref_matakuliah_kbk`
-  MODIFY `id_matakuliahkbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT untuk tabel `ref_pengurus_kbk`
---
-ALTER TABLE `ref_pengurus_kbk`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_matakuliahkbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_pimpinan_jurusan`
@@ -879,10 +1229,16 @@ ALTER TABLE `ref_prodi`
   MODIFY `id_prodi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
+-- AUTO_INCREMENT untuk tabel `ref_proposal_ta`
+--
+ALTER TABLE `ref_proposal_ta`
+  MODIFY `id_proposal_ta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `ref_rps`
 --
 ALTER TABLE `ref_rps`
-  MODIFY `id_rps` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT untuk tabel `ref_smt_thn_akd`
@@ -894,83 +1250,107 @@ ALTER TABLE `ref_smt_thn_akd`
 -- AUTO_INCREMENT untuk tabel `ref_soal`
 --
 ALTER TABLE `ref_soal`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1053;
 
 --
 -- AUTO_INCREMENT untuk tabel `verifikasi_rps`
 --
 ALTER TABLE `verifikasi_rps`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_verif_rps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `verifikasi_soal`
 --
 ALTER TABLE `verifikasi_soal`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_verif_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
+-- Ketidakleluasaan untuk tabel `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
 -- Ketidakleluasaan untuk tabel `ref_dosen_kbk`
 --
 ALTER TABLE `ref_dosen_kbk`
-  ADD CONSTRAINT `fk_dosen_id` FOREIGN KEY (`id_dosen`) REFERENCES `ref_dosen` (`id_dosen`),
-  ADD CONSTRAINT `fk_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `ref_kbk` (`id_kbk`);
+  ADD CONSTRAINT `fk_dosenkbk_nidn` FOREIGN KEY (`nidn`) REFERENCES `ref_dosen` (`nidn`),
+  ADD CONSTRAINT `fk_jabatan_kbk` FOREIGN KEY (`id_jabatan_kbk`) REFERENCES `ref_jabatan_kbk` (`id_jabatan_kbk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `ref_kbk` (`id_kbk`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `ref_kbk`
+--
+ALTER TABLE `ref_kbk`
+  ADD CONSTRAINT `fk_kbk_ketua` FOREIGN KEY (`ketua_kbk`) REFERENCES `ref_dosen_kbk` (`id_dosenkbk`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `ref_mahasiswa`
+--
+ALTER TABLE `ref_mahasiswa`
+  ADD CONSTRAINT `fk_mahasiswa_prodi` FOREIGN KEY (`prodi_id`) REFERENCES `ref_prodi` (`id_prodi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `ref_matakuliah_kbk`
 --
 ALTER TABLE `ref_matakuliah_kbk`
   ADD CONSTRAINT `fk_id_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `ref_kbk` (`id_kbk`),
+  ADD CONSTRAINT `fk_kurikulum_kbk` FOREIGN KEY (`id_kurikulum`) REFERENCES `ref_kurikulum` (`id_kurikulum`),
   ADD CONSTRAINT `fk_matakuliah_kbk` FOREIGN KEY (`id_matakuliah`) REFERENCES `ref_matakuliah` (`id_matakuliah`);
-
---
--- Ketidakleluasaan untuk tabel `ref_pengurus_kbk`
---
-ALTER TABLE `ref_pengurus_kbk`
-  ADD CONSTRAINT `fk_pengurus_bidang` FOREIGN KEY (`id_bidang`) REFERENCES `ref_kbk` (`id_kbk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `ref_rps`
 --
 ALTER TABLE `ref_rps`
-  ADD CONSTRAINT `fk_rps_matkul` FOREIGN KEY (`id_matkul`) REFERENCES `matkul` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_rps_matakuliah` FOREIGN KEY (`id_matakuliah_kbk`) REFERENCES `ref_matakuliah_kbk` (`id_matakuliahkbk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `ref_soal`
 --
 ALTER TABLE `ref_soal`
-  ADD CONSTRAINT `fk_soal_matkul` FOREIGN KEY (`id_matkul`) REFERENCES `matkul` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_soal_matakuliah` FOREIGN KEY (`id_matakuliah_kbk`) REFERENCES `ref_matakuliah_kbk` (`id_matakuliahkbk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_soal_tahun` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `ref_smt_thn_akd` (`id_smt_thn_akd`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `user`
+-- Ketidakleluasaan untuk tabel `role_has_permissions`
 --
-ALTER TABLE `user`
-  ADD CONSTRAINT `fk_user_level` FOREIGN KEY (`id_level`) REFERENCES `ref_level` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `role_has_permissions`
+  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `verifikasi_rps`
 --
 ALTER TABLE `verifikasi_rps`
-  ADD CONSTRAINT `fk_vrps_pengurus` FOREIGN KEY (`id_pengurus`) REFERENCES `ref_pengurus_kbk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vrps_rps` FOREIGN KEY (`id_rps`) REFERENCES `ref_rps` (`id_rps`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vrps_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_ajaran` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_verif_rps` FOREIGN KEY (`id_rps`) REFERENCES `ref_rps` (`id_rps`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `verifikasi_soal`
 --
 ALTER TABLE `verifikasi_soal`
-  ADD CONSTRAINT `fk_vsoal_pengurus` FOREIGN KEY (`id_pengurus`) REFERENCES `ref_pengurus_kbk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vsoal_soal` FOREIGN KEY (`id_soal`) REFERENCES `ref_soal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vsoal_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_ajaran` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_verif_soal` FOREIGN KEY (`id_soal`) REFERENCES `ref_soal` (`id_soal`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

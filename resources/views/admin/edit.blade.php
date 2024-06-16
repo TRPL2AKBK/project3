@@ -55,6 +55,14 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
+                                            <label for="exampleInputnidn1">NIDN</label>
+                                            <input type="nidn" class="form-control" id="exampleInputnidn1" name="nidn"
+                                                placeholder="Enter nidn" value="{{ $data->nidn }}">
+                                            @error('nidn')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
                                             <label for="exampleInputPassword1">Password</label>
                                             <input type="password" class="form-control" id="exampleInputPassword1"
                                                 name="password" placeholder="New Password">

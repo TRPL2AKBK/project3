@@ -29,11 +29,15 @@ class KBKController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_kbk' => 'required',
+            'kode_kbk' => 'required',
+            'ketua' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $kbk['nama_kbk'] = $request->nama_kbk;
+        $kbk['kode_kbk'] = $request->kode_kbk;
+        $kbk['ketua_kbk'] = $request->ketua;
 
         KBK::create($kbk);
         // dd($request->all());
@@ -52,11 +56,15 @@ class KBKController extends Controller
         // dd($request->all());
         $validator = Validator::make($request->all(), [
             'nama_kbk' => 'required',
+            'kode_kbk' => 'required',
+            'ketua' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $kbk['nama_kbk'] = $request->nama_kbk;
+        $kbk['kode_kbk'] = $request->kode_kbk;
+        $kbk['ketua_kbk'] = $request->ketua;
 
         KBK::updateKBK($id_kbk, $kbk);
 

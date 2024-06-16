@@ -11,7 +11,9 @@ class KBK extends Model
     protected $primaryKey = 'id_kbk';
     protected $fillable = [
         'id_kbk',
+        'kode_kbk',
         'nama_kbk',
+        'ketua_kbk'
     ];
 
     public $timestamps = false;
@@ -19,5 +21,14 @@ class KBK extends Model
     {
         // Lakukan pembaruan data pada model Jurusan
         return self::where('id_kbk', $id_kbk)->update($kbk);
+    }
+
+    // public function ketua()
+    // {
+    //     return $this->belongsTo('App\Models\DosenKBK', 'ketua_kbk', 'id_dosenkbk');
+    // }
+    public function ketua()
+    {
+        return $this->belongsTo('App\Models\DosenKBK', 'ketua_kbk', 'id_dosenkbk')->with('dosen');
     }
 }

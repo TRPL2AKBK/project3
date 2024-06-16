@@ -21,6 +21,8 @@ class Dosen extends Model
         'status',
     ];
 
+
+
     public function prodi()
     {
         return $this->belongsTo('App\Models\Prodi', 'id_prodi');
@@ -29,5 +31,10 @@ class Dosen extends Model
     public function jurusan()
     {
         return $this->belongsTo('App\Models\Jurusan', 'id_jurusan');
+    }
+
+    public function dosen()
+    {
+        return $this->belongsTo('App\Models\Dosen', 'nidn', 'nidn');
     }
 }

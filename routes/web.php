@@ -1,28 +1,36 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Users\DosenController;
+use App\Http\Controllers\ChangeLogController;
 use App\Http\Controllers\DosenKBKController;
 use App\Http\Controllers\DosenPengampuController;
 use App\Http\Controllers\JurusanController;
-use App\Http\Controllers\Users\KaprodiController;
 use App\Http\Controllers\KBKController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\MatakuliahKBKController;
-use App\Http\Controllers\Users\PengurusController;
 use App\Http\Controllers\PimpinanJurusanController;
 use App\Http\Controllers\PimpinanProdiController;
 use App\Http\Controllers\ProdiController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProposalTaController;
+use App\Http\Controllers\RPSController;
+use App\Http\Controllers\SoalController;
 use App\Http\Controllers\TahunController;
+use App\Http\Controllers\Users\DosenController;
+use App\Http\Controllers\Users\KaprodiController;
+use App\Http\Controllers\Users\PengurusController;
 use App\Http\Controllers\Users\UserController;
+use App\Http\Controllers\VerifikasiRPSController;
+use App\Http\Controllers\VerifikasiSoalController;
 use App\Models\DosenPengampu;
 use App\Models\Jurusan;
 use App\Models\Matakuliah;
 use App\Models\MatakuliahKBK;
+use App\Models\ProposalTa;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,15 +40,28 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [LandingController::class, 'index'])->name('login');
 
-Route::resource('register', RegisterController::class);
+
+
+Route::get('/change-log', [ChangeLogController::class, 'index'])->name('change-log.index');
+
+
+Route::get('/', [LandingController::class, 'index']);
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
+
+Route::get('/forgot-password', [LoginController::class, 'forgot_password'])->name('forgot-password');
+Route::post('/forgot-password-proses', [LoginController::class, 'forgot_password_proses'])->name('forgot-password-proses');
+
+Route::get('/validasi-forgot-password/{token}', [LoginController::class, 'validasi_forgot_password'])->name('validasi-forgot-password');
+Route::post('/validasi-forgot-password-proses', [LoginController::class, 'validasi_forgot_password_proses'])->name('validasi-forgot-password-proses');
+
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['role:admin'], 'as' => 'admin.'], function () {
+   // Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function () {
 
    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
@@ -59,6 +80,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::get('/kbk/data', [KBKController::class, 'index'])->name('kbk');
    Route::get('/dosenkbk/data', [DosenKBKController::class, 'index'])->name('dosenkbk');
    Route::get('/matakuliahkbk/data', [MatakuliahKBKController::class, 'index'])->name('matakuliahkbk');
+   Route::get('/mahasiswa/data', [MahasiswaController::class, 'index'])->name('mahasiswa');
+   Route::get('/proposalta/data', [ProposalTaController::class, 'index'])->name('proposalta');
 
    // CRUD Data user 
    Route::get('/user/create', [AdminController::class, 'create'])->name('user.create');
@@ -135,6 +158,47 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
    Route::delete('/dosenkbk/delete/{id}', [DosenKBKController::class, 'destroy'])->name('dosenkbk.delete');
 });
 
+Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
+
+
+Route::group(['prefix' => 'verifikasi', 'middleware' => 'verifikasi', 'as' => 'verifikasi.'], function () {
+
+   // CRUD Data RPS
+   Route::get('/rps/data', [RPSController::class, 'index'])->name('rps');
+
+   Route::get('/rps/create', [RPSController::class, 'create'])->name('rps.create');
+   Route::post('/rps/store', [RPSController::class, 'store'])->name('rps.store');
+
+   Route::get('/rps/edit/{id}', [RPSController::class, 'edit'])->name('rps.edit');
+   Route::put('/rps/update/{id}', [RPSController::class, 'update'])->name('rps.update');
+   Route::delete('/rps/delete/{id}', [RPSController::class, 'destroy'])->name('rps.delete');
+
+   // CRUD Verif RPS
+   Route::get('/verifrps/data', [VerifikasiRPSController::class, 'index'])->name('verifrps');
+
+   Route::get('/verifrps/edit/{id}', [VerifikasiRPSController::class, 'edit'])->name('verifrps.edit');
+   Route::put('/verifrps/update/{id}', [VerifikasiRPSController::class, 'update'])->name('verifrps.update');
+   Route::delete('/verifrps/delete/{id}', [VerifikasiRPSController::class, 'destroy'])->name('verifrps.delete');
+
+   // CRUD Data Soal
+   Route::get('/soal/data', [SoalController::class, 'index'])->name('soal');
+
+   Route::get('/soal/create', [SoalController::class, 'create'])->name('soal.create');
+   Route::post('/soal/store', [SoalController::class, 'store'])->name('soal.store');
+
+   Route::get('/soal/edit/{id}', [SoalController::class, 'edit'])->name('soal.edit');
+   Route::put('/soal/update/{id}', [SoalController::class, 'update'])->name('soal.update');
+   Route::delete('/soal/delete/{id}', [SoalController::class, 'destroy'])->name('soal.delete');
+
+   // CRUD Verif Soal
+   Route::get('/verifsoal/data', [VerifikasiSoalController::class, 'index'])->name('verifsoal');
+
+   Route::get('/verifsoal/edit/{id}', [VerifikasiSoalController::class, 'edit'])->name('verifsoal.edit');
+   Route::put('/verifsoal/update/{id}', [VerifikasiSoalController::class, 'update'])->name('verifsoal.update');
+   Route::delete('/verifsoal/delete/{id}', [VerifikasiSoalController::class, 'destroy'])->name('verifsoal.delete');
+});
 
 Route::group(['prefix' => 'dosen', 'middleware' => 'dosen', 'as' => 'dosen.'], function () {
    // Rute untuk dashboard dosen
@@ -155,5 +219,4 @@ Route::group(['prefix' => 'kaprodi', 'middleware' => 'kaprodi', 'as' => 'kaprodi
 Route::group(['prefix' => 'user', 'middleware' => 'user', 'as' => 'user.'], function () {
    // Rute untuk dashboard dosen
    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
-   Route::get('/', [UserController::class, 'index'])->name('dashboard');
 });

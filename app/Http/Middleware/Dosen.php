@@ -16,9 +16,10 @@ class Dosen
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->user()->id_level == 4) {
-
             return $next($request);
         }
+        abort(403, 'Role tidak sesuai');
+
         return redirect()->back();
     }
 }

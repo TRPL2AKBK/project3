@@ -69,5 +69,7 @@ class Kernel extends HttpKernel
         'kaprodi' => \App\Http\Middleware\Kaprodi::class,
         'dosen' => \App\Http\Middleware\Dosen::class,
         'user' => \App\Http\Middleware\User::class,
+        'verifikasi' => \App\Http\Middleware\Verifikasi::class,
+        'role' => \App\Http\Middleware\Role::class,
     ];
 }
