@@ -10,10 +10,10 @@
                         <h1 class="m-0">Jurusan</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Data Jurusan</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -30,9 +30,15 @@
                             <div class="card-header mb-3">
                                 <h3 class="card-title mt-2">Data Jurusan</h3>
                                 {{-- Tombol Insert --}}
-                                <div class="card-title" style="float: right"><a href="{{ route('admin.jurusan.create') }}"
-                                        class="btn btn-primary" style="float: right">
-                                        Insert</a>
+                                <div>
+                                    <div class="card-title" style="float: right; ">
+                                        <a href="{{ route('admin.jurusan.create') }}" class="btn btn-primary">Tambah</a>
+                                    </div>
+                                    <div class="card-title" style="float: right; margin-right: 10px;">
+                                        <a href="{{ route('admin.jurusan.api') }}" class="btn btn-primary">
+                                            Perbarui Data </a>
+                                    </div>
+                                    <div style="clear: both;"></div> <!-- Menambahkan clear untuk membersihkan float -->
                                 </div>
                             </div>
                             <div class="card-body table-responsive">

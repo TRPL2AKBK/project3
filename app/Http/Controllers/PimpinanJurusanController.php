@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PimpinanJurusan;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class PimpinanJurusanController extends Controller
@@ -21,57 +22,46 @@ class PimpinanJurusanController extends Controller
         return view('admin/dataKajur', compact('kajur'));
     }
 
-    //     public function createKajur()
-    //     {
-    //         return view('admin/createJurusan');
-    //     }
+    public function fetchAndSaveData()
+    {
+        // URL atau path ke data JSON Anda
+        $url = 'https://umkm-pnp.com/heni/index.php?folder=jurusan&file=pimpinan';
+        // Mengambil data JSON
+        $response = Http::get($url);
+        $data = $response->json();
 
-    //     public function storeKajur(Request $request)
-    //     {
-    //         $validator = Validator::make($request->all(), [
-    //             'kode_jurusan' => 'required',
-    //             'jurusan' => 'required',
+        // Memeriksa apakah pengambilan data sukses
+        if ($data['success'] == 1) {
+            $addedCount = 0; // Penghitung data baru yang ditambahkan
+            $updatedCount = 0; // Penghitung data yang diperbarui
 
-    //         ]);
+            foreach ($data['list'] as $pimpinanData) {
+                // Menyimpan atau memperbarui data ke database
+                $pimpinanJurusan = PimpinanJurusan::updateOrCreate(
+                    ['jabatan_pimpinan' => $pimpinanData['jabatan_pimpinan']], // Kondisi untuk mencari data yang sudah ada
+                    [
+                        'nama' => $pimpinanData['nama'],
+                        'periode' => $pimpinanData['periode'],
+                        'status' => $pimpinanData['status'],
+                    ]
+                );
 
-    //         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+                // Memeriksa apakah data baru ditambahkan atau diperbarui
+                if ($pimpinanJurusan->wasRecentlyCreated) {
+                    $addedCount++;
+                } elseif ($pimpinanJurusan->wasChanged()) {
+                    $updatedCount++;
+                }
+            }
 
-    //         $jurusan['kode_jurusan'] = $request->kode_jurusan;
-    //         $jurusan['jurusan'] = $request->jurusan;
-
-    //         PimpinanJurusan::create($jurusan);
-    //         return redirect()->route('admin.jurusan');
-    //     }
-
-    //     public function editKajur(Request $request, $id_jurusan)
-    //     {
-    //         $jurusan = PimpinanJurusan::find($id_jurusan);
-    //         return view('admin/editJurusan', compact('jurusan'));
-    //     }
-
-    //     public function updateKajur(Request $request, $id_jurusan)
-    //     {
-    //         $validator = Validator::make($request->all(), [
-    //             'kode_jurusan' => 'required',
-    //             'jurusan' => 'required',
-    //         ]);
-
-    //         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-    //         $jurusan['kode_jurusan'] = $request->kode_jurusan;
-    //         $jurusan['jurusan'] = $request->jurusan;
-    //         PimpinanJurusan::updateJurusan($id_jurusan, $jurusan);
-    //         return redirect()->route('admin.jurusan');
-    //     }
-
-    //     public function deleteKajur(Request $request, $id_jurusan)
-    //     {
-
-    //         $jurusan = PimpinanJurusan::find($id_jurusan);
-    //         if ($jurusan) {
-    //             $jurusan->delete();
-    //         }
-
-    //         return redirect()->route('admin.jurusan');
-    //     }
+            // Menampilkan pesan berdasarkan jumlah data yang ditambahkan atau diperbarui
+            if ($addedCount > 0 || $updatedCount > 0) {
+                return redirect()->route('admin.kajur')->with('success', "$addedCount data baru ditambahkan, $updatedCount data diperbarui.");
+            } else {
+                return redirect()->route('admin.kajur')->with('success', 'Tidak ada data baru yang ditambahkan atau diperbarui.');
+            }
+        } else {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+    }
 }

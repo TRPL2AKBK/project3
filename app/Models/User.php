@@ -3,11 +3,13 @@
 namespace App\Models;
 
 
+use App\Models\DosenPengampu;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
 
 
@@ -25,7 +27,6 @@ class User extends Authenticatable
         'email',
         'nidn',
         'password',
-        'id_level',
         'image',
         'updated_at',
         'created_at',
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function dosen()
     {
         return $this->belongsTo('App\Models\Dosen', 'nidn', 'nidn');
+    }
+
+    public function pengampu()
+    {
+        return $this->belongsTo(DosenPengampu::class, 'nidn', 'nidn');
     }
 }

@@ -10,16 +10,14 @@ class Mahasiswa extends Model
     protected $table = 'ref_mahasiswa';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id ',
-        'nobp',
+        'nim',
         'nama',
-        'telp',
-        'alamat',
-        'prodi_id ',
+        'kode_jurusan',
+        'jurusan',
+        'kode_prodi',
+        'prodi',
+        'gender',
     ];
 
-    public function prodi()
-    {
-        return $this->belongsTo('App\Models\Prodi', 'prodi_id', 'id_prodi');
-    }
+    public $timestamps = false;
 }

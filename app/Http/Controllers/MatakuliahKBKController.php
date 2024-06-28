@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KBK;
+use App\Models\Kurikulum;
+use App\Models\Matakuliah;
 use App\Models\MatakuliahKBK;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,13 +20,16 @@ class MatakuliahKBKController extends Controller
     public function index(Request $request)
     {
         $matakuliahkbk = MatakuliahKBK::get();
-        // dd($matakuliahkbk);
         return view('admin.dataMatakuliahKBK', compact('matakuliahkbk'));
     }
 
     public function create()
     {
-        return view('admin/createMatakuliahKBK');
+        $matakuliah = Matakuliah::get();
+        $kbk = KBK::get();
+        $kurikulum = Kurikulum::get();
+        // dd($matakuliah);
+        return view('admin/createMatakuliahKBK', compact('matakuliah', 'kbk', 'kurikulum'));
     }
 
     public function store(Request $request)
@@ -41,21 +47,23 @@ class MatakuliahKBKController extends Controller
         $matakuliahkbk['id_kurikulum'] = $request->id_kurikulum;
 
         MatakuliahKBK::create($matakuliahkbk);
-        // dd($request->all());
         return redirect()->route('admin.matakuliahkbk');
     }
 
     public function edit(Request $request, $id_matakuliahkbk)
     {
         $matakuliahkbk = MatakuliahKBK::find($id_matakuliahkbk);
-        // dd($matakuliahkbk);
-        return view('admin/editMatakuliahKBK', compact('matakuliahkbk'));
+        $matakuliah = Matakuliah::get();
+        $kbk = KBK::get();
+        $kurikulum = Kurikulum::get();
+        return view('admin/editMatakuliahKBK', compact('matakuliahkbk', 'matakuliah', 'kbk', 'kurikulum'));
     }
 
     public function update(Request $request, $id_matakuliah)
     {
         $validator = Validator::make($request->all(), [
             'id_kbk' => 'required',
+            // 'semester' => 'required',
             'id_matakuliah' => 'required',
             'id_kurikulum' => 'required',
         ]);

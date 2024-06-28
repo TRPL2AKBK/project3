@@ -10,10 +10,10 @@
                         <h1 class="m-0">Verifikasi Soal</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Verifikasi Soal</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -34,71 +34,79 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            {{-- @if (auth()->user()->id_level == 1) --}}
                                             <th style="width: 1rem">No</th>
                                             <th>Matakuliah</th>
                                             <th>Dosen Pengampu</th>
                                             <th>Dokumen</th>
-                                            <th>Verifikator 1</th>
-                                            <th>Verifikator 2</th>
+                                            <th>Evaluasi</th>
+                                            {{-- @elseif(auth()->user()->id_level == 2 || auth()->user()->id_level == 3) --}}
                                             <th>Aksi</th>
+                                            {{-- @endif --}}
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($verifData as $p)
                                             <tr>
+                                                {{-- @if (auth()->user()->id_level == 1) --}}
                                                 <td> {{ $loop->iteration }} </td>
                                                 <td>{{ $p->soal->matakuliah->nama_matakuliah }}</td>
-                                                <td>{{ $p->soal->pengampu->nama }}</td>
+                                                <td>{{ $p->soal->pengembang->dosen->nama }}</td>
                                                 <td> <a href={{ asset('storage/' . $p->soal->dokumen) }} target="_blank"
                                                         class="btn btn-primary">view</a> </td>
                                                 <td>
-                                                    @if (!$p->status1)
+                                                    @if (!$p->evaluasi)
                                                         <span>{{ 'Belum diverifikasi' }}</span> <br>
                                                     @else
-                                                        Nama : {{ $p->verif1->dosen->nama ?? 'Belum diverifikasi' }} <br>
-                                                        @if ($p->status1 == 'terima')
-                                                            Status : <span style="color:green;">{{ $p->status1 }}</span>
-                                                            <br>
-                                                        @elseif($p->status1 == 'tolak')
-                                                            Status : <span style="color:red;">{{ $p->status1 }}</span>
-                                                            <br>
-                                                        @elseif($p->status1 == 'revisi')
-                                                            Status : <span style="color:orange;">{{ $p->status1 }}</span>
-                                                            <br>
-                                                        @else
-                                                            <span>Status : </span> <br>
-                                                        @endif
-                                                        Komentar : {{ $p->komentar1 }} <br>
-                                                        Tanggal : {{ $p->tanggal1 }}
+                                                        {{ $p->evaluasi }} <br>
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    @if (!$p->status2)
-                                                        <span>{{ 'Belum diverifikasi' }}</span> <br>
-                                                    @else
-                                                        Nama : {{ $p->verif2->dosen->nama ?? 'Belum diverifikasi' }} <br>
-                                                        @if ($p->status2 == 'terima')
-                                                            Status : <span style="color:green;">{{ $p->status2 }}</span>
-                                                            <br>
-                                                        @elseif($p->status2 == 'tolak')
-                                                            Status : <span style="color:red;">{{ $p->status2 }}</span>
-                                                            <br>
-                                                        @elseif($p->status2 == 'revisi')
-                                                            Status : <span
-                                                                style="color:orange;">{{ $p->status2 }}</span><br>
-                                                        @else
-                                                            <span>Status : </span> <br>
-                                                        @endif
-                                                        Komentar : {{ $p->komentar2 }} <br>
-                                                        Tanggal : {{ $p->tanggal2 }}
-                                                    @endif
-                                                </td>
+
+                                                {{-- @elseif(auth()->user()->id_level == 2 || auth()->user()->id_level == 3) --}}
                                                 <td>
                                                     <a
                                                         href="{{ route('verifikasi.verifsoal.edit', ['id' => $p->id_verif_soal]) }}"class="btn btn-primary">
-                                                        Verifikasi</a>
+                                                        <i class="fas fa-pen"></i>
+                                                    </a>
+                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id_verif_soal }}"
+                                                        class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+                                                    </a>
                                                 </td>
+                                                {{-- @endif --}}
                                             </tr>
+                                            <div class="modal fade" id="modal-hapus{{ $p->id_verif_soal }}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Konfirmasi Hapus Data</h4>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah kamu yakin ingin menghapus data Verifikasi
+                                                                <b>{{ $p->soal->matakuliah->nama_matakuliah }}</b>
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <form
+                                                                action="{{ route('verifikasi.verifsoal.delete', ['id' => $p->id_verif_soal]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Ya,
+                                                                    Hapus</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
+                                            <!-- /.modal -->
                                         @endforeach
                                     </tbody>
                                 </table>

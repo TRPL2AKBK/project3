@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+
 class LoginController extends Controller
 {
     public function index()
@@ -131,20 +132,25 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($data)) {
-            switch (Auth::user()->id_level) {
-                case 1:
-                    return redirect()->route('admin.dashboard');
-                case 2:
-                    return redirect()->route('pengurus.dashboard');
-                case 3:
-                    return redirect()->route('kaprodi.dashboard');
-                case 4:
-                    return redirect()->route('dosen.dashboard');
-                case 5:
-                    return redirect()->route('user.dashboard');
-                default:
-                    // Jika id_role tidak sesuai dengan yang diharapkan, arahkan ke halaman tertentu
-                    return redirect()->route('login')->with('failed', 'Anda tidak memiliki akses yang sesuai');
+            $user = Auth::user();
+
+            if ($user->hasRole('admin')) {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->hasRole('pengurus_kbk')) {
+                return redirect()->route('pengurus.dashboard');
+            } elseif ($user->hasRole('pimpinan_prodi')) {
+                return redirect()->route('kaprodi.dashboard');
+            } elseif ($user->hasRole('pimpinan_jurusan')) {
+                return redirect()->route('kajur.dashboard');
+            } elseif ($user->hasRole('dosen_pengampu')) {
+                return redirect()->route('dosen.dashboard');
+            } elseif ($user->hasRole('user')) {
+                return redirect()->route('user.dashboard');
+            } elseif ($user->hasRole('super_admin')) {
+                return redirect()->route('users');
+            } else {
+                // Jika role tidak sesuai dengan yang diharapkan, arahkan ke halaman tertentu
+                return redirect()->route('login')->with('failed', 'Anda tidak memiliki akses yang sesuai');
             }
         } else {
             // Otentikasi gagal, arahkan pengguna kembali ke halaman login dengan pesan kesalahan

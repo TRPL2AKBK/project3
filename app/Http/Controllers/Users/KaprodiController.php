@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Models\Kaprodi;
+use App\Models\RPS;
+use App\Models\Soal;
+use App\Models\VerifikasiRPS;
+use App\Models\VerifikasiSoal;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -19,7 +23,11 @@ class KaprodiController extends Controller
 
     public function index()
     {
-        return view('kaprodi\dashboard');
+        $dataRps = RPS::get();
+        $dataSoal = Soal::get();
+        $verifSoal = VerifikasiSoal::whereNotNull('evaluasi')->get();
+        $verifRps = VerifikasiRPS::whereNotNull('evaluasi')->get();
+        return view('kaprodi\dashboard', compact('dataRps', 'dataSoal', 'verifSoal', 'verifRps'));
     }
 
     // public function create()

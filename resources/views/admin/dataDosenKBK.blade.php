@@ -10,10 +10,10 @@
                         <h1 class="m-0">Dosen KBK</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Dosen KBK</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -53,7 +53,7 @@
                                                 <td> {{ $loop->iteration }} </td>
                                                 {{-- <td> {{ $p->id_dosenkbk }} </td> --}}
                                                 <td> {{ $p->dosen->nama }} </td>
-                                                <td> {{ $p->kbk->nama_kbk }} </td>
+                                                <td> {{ $p->kbk->kode_kbk }} </td>
                                                 <td> {{ $p->jabatankbk->nama_jabatan_kbk }} </td>
                                                 <td>
                                                     <a

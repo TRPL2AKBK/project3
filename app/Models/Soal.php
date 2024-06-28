@@ -11,9 +11,10 @@ class Soal extends Model
     protected $primaryKey = 'id_soal';
     protected $fillable = [
         'id_soal',
-        'id_matakuliah_kbk',
+        'id_matakuliah',
         'dosen_pengampu',
         'dokumen',
+        'evaluasi',
         'id_tahun_akademik',
     ];
 
@@ -44,27 +45,43 @@ class Soal extends Model
         return $this->belongsTo('App\Models\VerifikasiSoal', 'id_soal', 'id_soal')->with('verif2')->withDefault();
     }
 
-    public function pengampu()
+    public function dosenpengampu()
     {
-        return $this->hasOneThrough(
-            Dosen::class,
-            DosenKBK::class,
-            'id_dosenkbk',
-            'nidn',
-            'dosen_pengampu',
-            'nidn'
-        );
+        return $this->belongsTo('App\Models\DosenPengampu', 'id_matakuliah', 'id_matakuliah')->with('matakuliah')->withDefault();
+    }
+
+    public function pengembang()
+    {
+        return $this->belongsTo('App\Models\User', 'dosen_pengampu', 'id')->with('dosen')->withDefault();
     }
 
     public function matakuliah()
     {
-        return $this->hasOneThrough(
-            Matakuliah::class, // Model tujuan akhir
-            MatakuliahKBK::class, // Model perantara
-            'id_matakuliahkbk', // Foreign key di tabel perantara (DosenKBK) yang menghubungkan ke primary key di tabel tujuan akhir (Dosen)
-            'id_matakuliah', // Foreign key di tabel tujuan akhir (Dosen) yang menghubungkan ke primary key di tabel perantara (DosenKBK)
-            'id_matakuliah_kbk', // Local key di tabel ini (RPS) yang menghubungkan ke foreign key di tabel perantara (DosenKBK)
-            'id_matakuliah' // Local key di tabel perantara (DosenKBK) yang menghubungkan ke primary key di tabel tujuan akhir (Dosen)
-        );
+        return $this->belongsTo(MataKuliah::class, 'id_matakuliah', 'id_matakuliah');
+        // Sesuaikan 'foreign_key' dan 'other_key' dengan kolom yang sesuai di tabel Anda
     }
+
+    // public function pengampu()
+    // {
+    //     return $this->hasOneThrough(
+    //         Dosen::class,
+    //         DosenKBK::class,
+    //         'id_dosenkbk',
+    //         'nidn',
+    //         'dosen_pengampu',
+    //         'nidn'
+    //     );
+    // }
+
+    // public function matakuliah()
+    // {
+    //     return $this->hasOneThrough(
+    //         Matakuliah::class, // Model tujuan akhir
+    //         MatakuliahKBK::class, // Model perantara
+    //         'id_matakuliahkbk', // Foreign key di tabel perantara (DosenKBK) yang menghubungkan ke primary key di tabel tujuan akhir (Dosen)
+    //         'id_matakuliah', // Foreign key di tabel tujuan akhir (Dosen) yang menghubungkan ke primary key di tabel perantara (DosenKBK)
+    //         'id_matakuliah_kbk', // Local key di tabel ini (RPS) yang menghubungkan ke foreign key di tabel perantara (DosenKBK)
+    //         'id_matakuliah' // Local key di tabel perantara (DosenKBK) yang menghubungkan ke primary key di tabel tujuan akhir (Dosen)
+    //     );
+    // }
 }

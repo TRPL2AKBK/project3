@@ -11,7 +11,7 @@ class DosenPengampu extends Model
     protected $primaryKey = 'id_dosen_matakuliah';
     protected $fillable = [
         'id_dosen_matakuliah',
-        'id_dosen',
+        'nidn',
         'id_matakuliah',
         'id_kelas',
         'id_smt_thn_akd',
@@ -21,7 +21,7 @@ class DosenPengampu extends Model
 
     public function dosen()
     {
-        return $this->belongsTo('App\Models\Dosen', 'id_dosen');
+        return $this->belongsTo(Dosen::class, 'nidn', 'nidn'); // Menggunakan nidn sebagai foreign key
     }
 
     public function matakuliah()

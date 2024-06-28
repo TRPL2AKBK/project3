@@ -99,7 +99,7 @@
     }
 
     .button:hover {
-        background-color: #8f9294;
+        background-color: #4285b3;
     }
 
     @media (max-width: 768px) {

@@ -24,9 +24,12 @@ class Matakuliah extends Model
         'id_kurikulum',
     ];
 
+    public $timestamps = false;
+
+
     public function kurikulum()
     {
         // minta data dari tabel kurikulum foreign key id_kurikulum
-        return $this->belongsTo('App\Models\Kurikulum', 'id_kurikulum');
+        return $this->belongsTo('App\Models\Kurikulum', 'id_kurikulum')->with('prodi');
     }
 }

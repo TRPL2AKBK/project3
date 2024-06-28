@@ -10,10 +10,10 @@
                         <h1 class="m-0">Kurikulum</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Kurikulum</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -34,71 +34,40 @@
                                         class="btn btn-primary" style="float: right">
                                         Insert</a>
                                 </div> --}}
+                                <div class="card-title" style="float: right; margin-right: 10px;">
+                                    <a href="{{ route('admin.kurikulum.api') }}" class="btn btn-primary">
+                                        Perbarui Data
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-body table-responsive">
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 1rem">No</th>
-                                            <th>Kode Kurikulum</th>
+                                            {{-- <th>Kode Kurikulum</th> --}}
                                             <th>Nama Kurikulum</th>
-                                            <th>Tahun</th>
+                                            {{-- <th>Tahun</th> --}}
                                             <th>Prodi</th>
-                                            <th>Status</th>
-                                            {{-- <th>Action</th> --}}
+                                            {{-- <th>Status</th> --}}
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($kurikulum as $p)
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
-                                                <td> {{ $p->kode_kurikulum }} </td>
+                                                {{-- <td> {{ $p->kode_kurikulum }} </td> --}}
                                                 <td> {{ $p->nama_kurikulum }} </td>
-                                                <td> {{ $p->tahun }} </td>
+                                                {{-- <td> {{ $p->tahun }} </td> --}}
                                                 <td> {{ $p->prodi->prodi }} </td>
-                                                <td> {{ $p->status }} </td>
-                                                {{-- <td>
-                                                    <a
-                                                        href="{{ route('admin.kajur.edit', ['id' => $p->id_kurikulum]) }}"class="btn btn-primary"><i
-                                                            class="fas fa-pen"></i> Edit</a>
-                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id_kurikulum }}"
-                                                        class="btn btn-danger"><i class="fas fa-trash-alt"></i>
-                                                        Hapus</a>
-                                                </td> --}}
+                                                {{-- <td> {{ $p->status }} </td> --}}
+                                                <td>
+                                                    <button class="btn btn-info" data-toggle="modal"
+                                                        data-target="#detailModal"
+                                                        data-id="{{ $p->id_kurikulum }}">Detail</button>
+                                                </td>
                                             </tr>
-                                            {{-- <div class="modal fade" id="modal-hapus{{ $p->id_kurikulum }}">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Konfirmasi Hapus Data</h4>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Apakah kamu yakin ingin menghapus data Pimpinan Jurusan
-                                                                <b>{{ $p->nama_kurikulum }}</b>
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <form
-                                                                action="{{ route('admin.kajur.delete', ['id' => $p->id_kurikulum]) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Ya,
-                                                                    Hapus</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.modal-content -->
-                                                </div>
-                                                <!-- /.modal-dialog -->
-                                            </div> --}}
-                                            <!-- /.modal -->
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -113,5 +82,36 @@
             <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
+
+        <!-- Detail Modal -->
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="detailModalLabel">Detail Kurikulum</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Kode Kurikulum:</strong> {{ $p->kode_kurikulum }}</p>
+                        <p><strong>Nama Kurikulum:</strong> {{ $p->nama_kurikulum }}</p>
+                        <p><strong>Tahun:</strong> {{ $p->tahun }}</p>
+                        <p><strong>Prodi:</strong> {{ $p->prodi->prodi }}</p>
+                        @if ($p->status == 1)
+                            <p><strong>Status:</strong> Aktif</p>
+                        @else
+                            <p><strong>Status:</strong> Tidak aktif</p>
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 @endsection

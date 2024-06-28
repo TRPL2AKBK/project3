@@ -8,15 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class ProposalTa extends Model
 {
     protected $table = 'ref_proposal_ta';
-    protected $primaryKey = 'id_proposal_ta ';
+    protected $primaryKey = 'id_proposal_ta';
     protected $fillable = [
-        'nobp  ',
-        'dokumen',
+        'id_proposal_ta',
+        'nim',
+        'nama',
+        'judul',
+        'pembimbing_satu_nama',
+        'pembimbing_satu_nidn',
+        'pembimbing_dua_nama',
+        'pembimbing_dua_nidn',
 
     ];
 
-    public function mahasiswa()
-    {
-        return $this->belongsTo('App\Models\Mahasiswa', 'nobp', 'nobp');
-    }
+    public $timestamps = false;
 }

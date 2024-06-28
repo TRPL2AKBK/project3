@@ -10,9 +10,9 @@ class PimpinanJurusan extends Model
     protected $primaryKey = 'id_pimpinan_jurusan';
     protected $fillable = [
         'id_pimpinan_jurusan',
-        'id_jabatan_pimpinan',
+        'jabatan_pimpinan',
+        'nama',
         'id_jurusan',
-        'id_dosen',
         'periode',
         'status',
     ];
@@ -30,13 +30,8 @@ class PimpinanJurusan extends Model
         return $this->belongsTo('App\Models\Jurusan', 'id_jurusan');
     }
 
-    public function dosen()
-    {
-        return $this->belongsTo('App\Models\Dosen', 'id_dosen');
-    }
-
     public function jabatan()
     {
-        return $this->belongsTo('App\Models\JabatanPimpinan', 'id_jabatan_pimpinan');
+        return $this->belongsTo('App\Models\JabatanPimpinan', 'jabatan_pimpinan', 'jabatan_pimpinan');
     }
 }

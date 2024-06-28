@@ -14,27 +14,18 @@ class Dosen extends Model
         'nidn',
         'nip',
         'gender',
-        'id_prodi',
-        'id_jurusan',
+        'kode_jurusan',
+        'jurusan',
+        'kode_prodi',
+        'prodi',
         'email',
-        'image',
-        'status',
     ];
 
+    public $timestamps = false;
 
 
-    public function prodi()
+    public function dosenPengampus()
     {
-        return $this->belongsTo('App\Models\Prodi', 'id_prodi');
-    }
-
-    public function jurusan()
-    {
-        return $this->belongsTo('App\Models\Jurusan', 'id_jurusan');
-    }
-
-    public function dosen()
-    {
-        return $this->belongsTo('App\Models\Dosen', 'nidn', 'nidn');
+        return $this->hasMany(DosenPengampu::class, 'nidn', 'nidn'); // Menggunakan nidn sebagai foreign key
     }
 }

@@ -7,13 +7,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Data Soal</h1>
+                        <h1 class="m-0">Soal UAS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Data Soal</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -29,10 +29,12 @@
                         <div class="card">
                             <div class="card-header mb-3">
                                 <h3 class="card-title mt-2">Data Soal</h3>
-                                <div class="card-title" style="float: right"><a href="{{ route('verifikasi.soal.create') }}"
-                                        class="btn btn-primary" style="float: right">
-                                        Upload Soal</a>
-                                </div>
+                                @can('crud soal')
+                                    <div class="card-title" style="float: right"><a href="{{ route('verifikasi.soal.create') }}"
+                                            class="btn btn-primary" style="float: right">
+                                            Upload Soal</a>
+                                    </div>
+                                @endcan
                             </div>
                             <div class="card-body ">
                                 <table id="example1" class="table table-bordered table-striped">
@@ -43,9 +45,10 @@
                                             <th>Dokumen</th>
                                             <th>Dosen Pengampu</th>
                                             <th>Tahun Akademik</th>
-                                            <th>Verifikator 1</th>
-                                            <th>Verifikator 2</th>
-                                            <th>Aksi</th>
+                                            <th>Evaluasi</th>
+                                            @can('crud soal')
+                                                <th>Aksi</th>
+                                            @endcan
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,66 +59,25 @@
                                                 <td> <a href={{ asset('storage/' . $p->dokumen) }} target="_blank"
                                                         class="btn btn-primary">view</a>
                                                 </td>
-                                                <td> {{ $p->pengampu->nama }} </td>
+                                                <td> {{ $p->pengembang->dosen->nama }} </td>
                                                 <td> {{ $p->tahun->smt_thn_akd }} </td>
                                                 <td>
-
-                                                    @if (!$p->verifsoal->status1)
+                                                    @if (!$p->evaluasi)
                                                         <span>{{ 'Belum diverifikasi' }}</span> <br>
                                                     @else
-                                                        Nama : {{ $p->verifsoal1->verif1->dosen->nama ?? '' }}
-                                                        <br>
-                                                        @if ($p->verifsoal->status1 == 'terima')
-                                                            Status : <span
-                                                                style="color:green;">{{ $p->verifsoal->status1 }}</span>
-                                                            <br>
-                                                        @elseif($p->verifsoal->status1 == 'tolak')
-                                                            Status : <span
-                                                                style="color:red;">{{ $p->verifsoal->status1 }}</span> <br>
-                                                        @elseif($p->verifsoal->status1 == 'revisi')
-                                                            Status : <span
-                                                                style="color:orange;">{{ $p->verifsoal->status1 }}</span>
-                                                            <br>
-                                                        @else
-                                                            <span>Status : </span> <br>
-                                                        @endif
-                                                        Komentar : {{ $p->verifsoal->komentar1 }} <br>
-                                                        Tanggal : {{ $p->verifsoal->tanggal1 }}
+                                                        {{ $p->evaluasi }} <br>
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    @if (!$p->verifsoal2->status2)
-                                                        <span>{{ 'Belum diverifikasi' }}</span> <br>
-                                                    @else
-                                                        Nama
-                                                        :{{ $p->verifsoal2->verif2->dosen->nama ?? 'Belum diverifikasi' }}
-                                                        <br>
-                                                        @if ($p->verifsoal->status2 == 'terima')
-                                                            Status : <span
-                                                                style="color:green;">{{ $p->verifsoal->status2 }}</span>
-                                                            <br>
-                                                        @elseif($p->verifsoal->status2 == 'tolak')
-                                                            Status : <span
-                                                                style="color:red;">{{ $p->verifsoal->status2 }}</span> <br>
-                                                        @elseif($p->verifsoal->status2 == 'revisi')
-                                                            Status : <span
-                                                                style="color:orange;">{{ $p->verifsoal->status2 }}</span>
-                                                            <br>
-                                                        @else
-                                                            <span>Status : </span> <br>
-                                                        @endif
-                                                        Komentar : {{ $p->verifsoal->komentar2 }} <br>
-                                                        Tanggal : {{ $p->verifsoal->tanggal2 }}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <a
-                                                        href="{{ route('verifikasi.soal.edit', ['id' => $p->id_soal]) }}"class="btn btn-primary"><i
-                                                            class="fas fa-pen"></i> Edit</a>
-                                                    <a data-toggle="modal" data-target="#modal-hapus{{ $p->id_soal }}"
-                                                        class="btn btn-danger"><i class="fas fa-trash-alt"></i>
-                                                        Hapus</a>
-                                                </td>
+                                                @can('crud soal')
+                                                    <td>
+                                                        <a
+                                                            href="{{ route('verifikasi.soal.edit', ['id' => $p->id_soal]) }}"class="btn btn-primary"><i
+                                                                class="fas fa-pen"></i> Edit</a>
+                                                        <a data-toggle="modal" data-target="#modal-hapus{{ $p->id_soal }}"
+                                                            class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+                                                            Hapus</a>
+                                                    </td>
+                                                @endcan
                                             </tr>
                                             <div class="modal fade" id="modal-hapus{{ $p->id_soal }}">
                                                 <div class="modal-dialog">

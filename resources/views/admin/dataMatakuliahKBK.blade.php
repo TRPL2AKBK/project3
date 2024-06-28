@@ -10,10 +10,10 @@
                         <h1 class="m-0">Matakuliah KBK</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Matakuliah KBK</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -44,6 +44,8 @@
                                             {{-- <th>ID Matakuliah</th> --}}
                                             <th>Matakuliah</th>
                                             <th>KBK</th>
+                                            <th>Kode Prodi</th>
+                                            <th>Semester</th>
                                             <th>Kurikulum</th>
                                             <th>Action</th>
                                         </tr>
@@ -52,9 +54,10 @@
                                         @foreach ($matakuliahkbk as $p)
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
-                                                {{-- <td> {{ $p->id_matakuliahkbk }} </td> --}}
                                                 <td> {{ $p->matakuliah->nama_matakuliah }} </td>
                                                 <td> {{ $p->kbk->nama_kbk }} </td>
+                                                <td> {{ $p->kurikulum->prodi->kode_prodi }} </td>
+                                                <td> {{ $p->matakuliah->semester }} </td>
                                                 <td> {{ $p->kurikulum->nama_kurikulum }} </td>
                                                 <td>
                                                     <a
@@ -77,8 +80,8 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Apakah kamu yakin ingin menghapus data KBK
-                                                                <b>{{ $p->nama_kbk }}</b>
+                                                            <p>Apakah kamu yakin ingin menghapus data Matakuliah KBK
+                                                                <b>{{ $p->kode_kbk }}</b>
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">

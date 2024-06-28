@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RPS;
+use App\Models\Soal;
 use App\Models\User;
 use App\Models\VerifikasiRPS;
 use Illuminate\Http\Request;
@@ -21,7 +22,8 @@ class VerifikasiRPSController extends Controller
 
     public function index()
     {
-        $verifData = VerifikasiRPS::with('rps.matakuliah')->orderByDesc('id_verif_rps')->get();
+
+        $verifData = VerifikasiRPS::with('rps.pengembang')->orderByDesc('id_verif_rps')->get();
 
         foreach ($verifData as $verifikasi) {
             $rps = $verifikasi->rps;
@@ -55,35 +57,51 @@ class VerifikasiRPSController extends Controller
 
     public function update(Request $request, $id_verif_rps)
     {
+        // Validasi input
         $validator = Validator::make($request->all(), [
-            'status' => 'required',
+            'evaluasi' => 'required',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
-        if (auth()->user()->id_level == 2 || auth()->user()->id_level == 1) {
-            $verifData['verifikator2'] = Auth::id();
-            $verifData['status2'] = $request->status;
-            $verifData['komentar2'] = $request->komentar ?? null; // Menambahkan komentar jika ada
-            $verifData['tanggal2'] = now();
-        } elseif (auth()->user()->id_level == 3) {
-            $verifData['verifikator1'] = Auth::id();
-            $verifData['status1'] = $request->status;
-            $verifData['komentar1'] = $request->komentar ?? null; // Menambahkan komentar jika ada
-            $verifData['tanggal1'] = now();
-        } else {
-            return redirect()->back()->withErrors('Verifikasi hanya boleh dilakukan Kaprodi dan Ketua KBK');
+        // Temukan data VerifikasiRPS berdasarkan id_verif_rps
+        $verifData = VerifikasiRPS::find($id_verif_rps);
+
+        // Jika data VerifikasiRPS tidak ditemukan, kembalikan respon error
+        if (!$verifData) {
+            return redirect()->route('verifikasi.verifrps')->with('error', 'Data VerifikasiRPS tidak ditemukan');
         }
 
-        VerifikasiRPS::updateVerifikasiRPS($id_verif_rps, $verifData);
+        // Periksa apakah id_rps ada di dalam VerifikasiRPS
+        $id_rps = $verifData->id_rps;
 
-        return redirect()->route('verifikasi.verifrps');
+        if ($id_rps) {
+            // Data untuk update VerifikasiRPS
+            $verifData->evaluasi = $request->evaluasi;
+            $verifData->tanggal = now();
+
+            // Data untuk update RPS
+            $rpsData = [
+                'evaluasi' => $request->evaluasi,
+            ];
+
+            // Lakukan update pada VerifikasiRPS dan RPS
+            RPS::updateRPS($id_rps, $rpsData);
+            $verifData->save();
+
+            return redirect()->route('verifikasi.verifrps')->with('success', 'Data berhasil diperbarui');
+        }
+
+        return redirect()->route('verifikasi.verifrps')->with('error', 'id_rps tidak ditemukan di VerifikasiRPS');
     }
 
-    public function destroy(VerifikasiRPS $verifikasiRPS)
+    public function destroy($id_verif_rps)
     {
-        //
+        $verifData = VerifikasiRPS::find($id_verif_rps);
+
+        $verifData->delete();
+        return redirect()->route('verifikasi.verifrps')->with('success', 'Data berhasil dihapus');
     }
 }

@@ -10,10 +10,10 @@
                         <h1 class="m-0">Dashboard</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -28,14 +28,13 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>150</h3>
-
-                                <p>Lorem ipsum</p>
+                                <h3>{{ $kbk->count() }}</h3>
+                                <p>Jumlah KBK</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="fa fa-file"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i
+                            <a href="{{ route('verifikasi.rps') }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -44,14 +43,13 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                <p>Lorem ipsum</p>
+                                <h3>{{ $dosenkbk->count() }}</h3>
+                                <p>Jumlah Dosen KBK</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i class="fas fa-file"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i
+                            <a href="{{ route('verifikasi.soal') }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -60,9 +58,8 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>44</h3>
-
-                                <p>Lorem ipsum</p>
+                                <h3>{{ $matakuliahkbk->count() }}</h3>
+                                <p>Jumlah Matakuliah KBK</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>

@@ -10,10 +10,10 @@
                         <h1 class="m-0">Verifikasi RPS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Verifikasi RPS</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -57,21 +57,11 @@
                                             </div>
                                         @endif
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="exampleInputStatus">Status</label>
-                                        <select class="form-control" id="exampleInputStatus" name="status" required>
-                                            <option value="terima" {{ $verifData->status == 'Terima' ? 'selected' : '' }}>
-                                                Terima</option>
-                                            <option value="tolak" {{ $verifData->status == 'Tolak' ? 'selected' : '' }}>
-                                                Tolak</option>
-                                            <option value="revisi" {{ $verifData->status == 'Revisi' ? 'selected' : '' }}>
-                                                Revisi</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputKomentar1">Komentar (Optional)</label>
-                                        <input type="text" class="form-control" id="exampleInputkomentar" name="komentar"
-                                            value="{{ $verifData->komentar }}">
+                                        <label for="exampleInputKomentar1">Evaluasi</label>
+                                        <input type="text" class="form-control" id="exampleInputkomentar" name="evaluasi"
+                                            value="{{ $verifData->evaluasi }}" required>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

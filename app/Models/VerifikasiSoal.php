@@ -12,14 +12,8 @@ class VerifikasiSoal extends Model
     protected $fillable = [
         'id_verif_soal',
         'id_soal',
-        'verifikator1',
-        'verifikator2',
-        'status1',
-        'status2',
-        'komentar1',
-        'komentar2',
-        'tanggal1',
-        'tanggal2',
+        'evaluasi',
+        'tanggal'
     ];
 
     public $timestamps = false;

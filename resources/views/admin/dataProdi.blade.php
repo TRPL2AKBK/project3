@@ -10,10 +10,10 @@
                         <h1 class="m-0">Prodi</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Data Prodi</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -32,7 +32,11 @@
                                 {{-- Tombol Insert --}}
                                 <div class="card-title" style="float: right"><a href="{{ route('admin.prodi.create') }}"
                                         class="btn btn-primary" style="float: right">
-                                        Insert</a>
+                                        Tambah</a>
+                                </div>
+                                <div class="card-title" style="float: right; margin-right: 10px;">
+                                    <a href="{{ route('admin.prodi.api') }}" class="btn btn-primary">
+                                        Perbarui Data </a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive ">

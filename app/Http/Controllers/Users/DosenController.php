@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Users;
 
 use App\Models\Dosen;
+use App\Models\DosenPengampu;
+use App\Models\RPS;
+use App\Models\Soal;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class DosenController extends Controller
 {
@@ -17,56 +22,61 @@ class DosenController extends Controller
         $this->middleware('auth');
     }
 
+    public function fetchAndSaveData()
+    {
+        // URL atau path ke data JSON Anda
+        $url = 'https://umkm-pnp.com/heni/index.php?folder=dosen&file=index';
+        // Mengambil data JSON
+        $response = Http::get($url);
+        $data = $response->json();
+
+        // Memeriksa apakah pengambilan data sukses
+        if ($data['success'] == 1) {
+            $addedCount = 0; // Penghitung data baru yang ditambahkan
+            $updatedCount = 0; // Penghitung data yang diperbarui
+
+            foreach ($data['list'] as $dosenData) {
+                // Menyimpan atau memperbarui data ke database
+                $dosen = Dosen::updateOrCreate(
+                    ['nidn' => $dosenData['nidn']], // Kondisi untuk mencari data yang sudah ada
+                    [
+                        'nama' => $dosenData['nama'],
+                        'nip' => $dosenData['nip'],
+                        'gender' => $dosenData['gender'],
+                        'kode_jurusan' => $dosenData['kode_jurusan'],
+                        'jurusan' => $dosenData['jurusan'],
+                        'kode_prodi' => $dosenData['kode_prodi'],
+                        'prodi' => $dosenData['prodi'],
+                        'email' => $dosenData['email']
+                    ]
+                );
+
+                // Memeriksa apakah data baru ditambahkan atau diperbarui
+                if ($dosen->wasRecentlyCreated) {
+                    $addedCount++;
+                } elseif ($dosen->wasChanged()) {
+                    $updatedCount++;
+                }
+            }
+
+            // Menampilkan pesan berdasarkan jumlah data yang ditambahkan atau diperbarui
+            if ($addedCount > 0 || $updatedCount > 0) {
+                return redirect()->route('admin.dosens')->with('success', "$addedCount data baru ditambahkan, $updatedCount data diperbarui.");
+            } else {
+                return redirect()->route('admin.dosens')->with('success', 'Tidak ada data baru yang ditambahkan atau diperbarui.');
+            }
+        } else {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+    }
+
+
     public function index()
     {
-        return view('dosen\dashboard');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Dosen $dosen)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Dosen $dosen)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Dosen $dosen)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Dosen $dosen)
-    {
-        //
+        $user = Auth::user();
+        $dataSoal = Soal::where('dosen_pengampu', $user->id)->orderByDesc('id_soal')->get();
+        $dataRps = RPS::where('id_dosen_pengembang', $user->id)->orderByDesc('id_rps')->get();
+        $matakuliah = DosenPengampu::where('nidn', $user->nidn)->get();
+        return view('dosen\dashboard', compact('dataRps', 'dataSoal', 'matakuliah'));
     }
 }

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Models\Pengurus;
+use App\Models\RPS;
+use App\Models\Soal;
+use App\Models\VerifikasiRPS;
+use App\Models\VerifikasiSoal;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -20,7 +24,12 @@ class PengurusController extends Controller
 
     public function index()
     {
-        return view('pengurus\dashboard');
+        $dataRps = RPS::get();
+        $dataSoal = Soal::get();
+        $verifSoal = VerifikasiSoal::whereNotNull('evaluasi')->get();
+        $verifRps = VerifikasiRPS::whereNotNull('evaluasi')->get();
+        // dd($dosenkbk);
+        return view('pengurus\dashboard', compact('dataRps', 'dataSoal', 'verifSoal', 'verifRps'));
     }
 
     // public function create()

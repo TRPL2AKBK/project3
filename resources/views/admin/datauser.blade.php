@@ -10,10 +10,10 @@
                         <h1 class="m-0">User</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item active"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active"><a href="#">Data User</a></li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -34,16 +34,16 @@
                                 <div class="card-tittle float-right">
                                     <div class="">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-info">Tambah</button>
+                                            <button type="button" class="btn btn-primary">Tambah</button>
                                             <button type="button"
-                                                class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon"
+                                                class="btn btn-primary dropdown-toggle dropdown-hover dropdown-icon"
                                                 data-toggle="dropdown">
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" href="{{ route('admin.user.create') }}">Insert 1
+                                                <a class="dropdown-item" href="{{ route('user.create') }}">Insert 1
                                                     Data</a>
-                                                <a class="dropdown-item" href="{{ route('admin.user.importfile') }}">Insert
+                                                <a class="dropdown-item" href="{{ route('user.importfile') }}">Insert
                                                     From
                                                     File</a>
                                             </div>
@@ -59,9 +59,8 @@
                                         <tr>
                                             <th style="width: 1rem">No</th>
                                             <th>Nama</th>
-                                            {{-- <th>User ID</th> --}}
                                             <th>Email</th>
-                                            <th>Role</th>
+                                            <th>Roles</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -70,15 +69,18 @@
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
                                                 <td> {{ $d->name }} </td>
-                                                {{-- <td> {{ $d->id }} </td> --}}
                                                 <td> {{ $d->email }} </td>
-                                                <td> {{ $d->level->level }} </td>
                                                 <td>
+                                                    @foreach ($d->roles as $role)
+                                                        <span class="badge badge-info">{{ $role->name }}</span>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+
                                                     <a
-                                                        href="{{ route('admin.user.edit', ['id' => $d->id]) }}"class="btn btn-primary"><i
-                                                            class="fas fa-pen"></i> Edit</a>
+                                                        href="{{ route('user.edit', ['id' => $d->id]) }}"class="btn btn-warning">Edit</a>
                                                     <a data-toggle="modal" data-target="#modal-hapus{{ $d->id }}"
-                                                        class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
+                                                        class="btn btn-danger"> Hapus</a>
                                                 </td>
                                             </tr>
                                             <div class="modal fade" id="modal-hapus{{ $d->id }}">
@@ -97,8 +99,7 @@
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
-                                                            <form
-                                                                action="{{ route('admin.user.delete', ['id' => $d->id]) }}"
+                                                            <form action="{{ route('user.delete', ['id' => $d->id]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')

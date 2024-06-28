@@ -10,10 +10,10 @@
                         <h1 class="m-0">RPS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Update RPS</li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -39,11 +39,28 @@
                                 <!-- form start -->
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputName1">ID Matakuliah</label>
-                                        <input type="number" class="form-control" id="exampleInputid_matakuliah"
-                                            name="id_matakuliah_kbk" value="{{ $rpsData->id_matakuliah_kbk }}"
-                                            placeholder="Enter id matakuliah">
-                                        @error('id_matakuliah_kbk ')
+                                        @php
+                                            $hasMatakuliah = false;
+                                        @endphp
+                                        <label for="exampleInputMatakuliah1">Matakuliah</label>
+                                        <select class="form-control" id="exampleInputMatakuliah1" name="id_matakuliah">
+                                            <option value="" disabled selected>Select Matakuliah</option>
+                                            @foreach ($matakuliah as $mk)
+                                                @if ($mk->nidn == Auth::user()->nidn)
+                                                    <option value="{{ $mk->id_matakuliah }}"
+                                                        {{ $mk->id_matakuliah == $rpsData->id_matakuliah ? 'selected' : '' }}>
+
+                                                        {{ $mk->matakuliah->nama_matakuliah }}</option>
+                                                    @php
+                                                        $hasMatakuliah = true;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+                                            @if (!$hasMatakuliah)
+                                                <option value="" disabled>Tidak ada mata kuliah yang diampu</option>
+                                            @endif
+                                        </select>
+                                        @error('id_matakuliah')
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
                                     </div>

@@ -8,6 +8,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Validator;
+
 
 class UserImport implements ToCollection, WithHeadingRow
 {
@@ -16,9 +18,22 @@ class UserImport implements ToCollection, WithHeadingRow
      */
     public function collection(Collection $rows)
     {
+        $errors = [];
+
         foreach ($rows as $row) {
+
+            $validator = Validator::make($row->toArray(), [
+                'email' => 'required|email|unique:user,email',
+            ]);
+
+            if ($validator->fails()) {
+                $errors[] = "Email {$row['email']} tidak valid atau sudah digunakan.";
+
+                continue;
+            }
+
             User::create([
-                'name'      => $row['name'],
+                'name'      => $row['nama'],
                 'email'     => $row['email'],
                 'nidn'  => $row['nidn'],
                 'created_at' => Carbon::now(),

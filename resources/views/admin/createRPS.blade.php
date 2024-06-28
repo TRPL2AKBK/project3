@@ -10,10 +10,10 @@
                         <h1 class="m-0">Data RPS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        {{-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Data RPS </li>
-                        </ol>
+                        </ol> --}}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -29,27 +29,30 @@
                             <div class="card-header">
                                 <h3 class="card-title">Upload RPS</h3>
                             </div>
-
                             <form action="{{ route('verifikasi.rps.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        {{-- <label for="exampleInputMatakuliah1">ID Matakuliah</label>
-                                        <input type="number" class="form-control" id="exampleInputMatakuliah1"
-                                            name="id_matakuliah_kbk" value="{{ old('id_matakuliah_kbk') }}"
-                                            placeholder="Enter id matakuliah">
-                                        @error('id_matakuliah_kbk')
-                                            <p style="color:red;"><small>{{ $message }}</small></p>
-                                        @enderror --}}
+                                        @php
+                                            $hasMatakuliah = false;
+                                        @endphp
                                         <label for="exampleInputMatakuliah1">Matakuliah</label>
-                                        <select class="form-control" id="exampleInputMatakuliah1" name="id_matakuliah_kbk">
+                                        <select class="form-control" id="exampleInputMatakuliah1" name="id_matakuliah">
                                             <option value="" disabled selected>Select Matakuliah</option>
                                             @foreach ($matakuliah as $mk)
-                                                <option value="{{ $mk->id_matakuliahkbk }}">
-                                                    {{ $mk->matakuliah->nama_matakuliah }}</option>
+                                                @if ($mk->nidn == Auth::user()->nidn)
+                                                    <option value="{{ $mk->id_matakuliah }}">
+                                                        {{ $mk->matakuliah->nama_matakuliah }}</option>
+                                                    @php
+                                                        $hasMatakuliah = true;
+                                                    @endphp
+                                                @endif
                                             @endforeach
+                                            @if (!$hasMatakuliah)
+                                                <option value="" disabled>Tidak ada mata kuliah yang diampu</option>
+                                            @endif
                                         </select>
-                                        @error('id_matakuliah_kbk')
+                                        @error('id_matakuliah')
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
                                     </div>

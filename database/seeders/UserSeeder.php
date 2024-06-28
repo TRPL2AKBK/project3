@@ -48,6 +48,16 @@ class UserSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
+                'nidn' => '0009058601',
+                'name' => 'kajur',
+                'email' => 'kajur@gmail.com',
+                'password' => Hash::make('kajur'),
+                'id_level' => 3,
+                'image' => NULL,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
                 'nidn' => '0218068801',
                 'name' => 'dosen',
                 'email' => 'dosen@gmail.com',

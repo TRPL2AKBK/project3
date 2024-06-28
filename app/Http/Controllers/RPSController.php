@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DosenPengampu;
 use App\Models\MatakuliahKBK;
 use App\Models\RPS;
 use App\Models\VerifikasiRPS;
@@ -25,7 +26,7 @@ class RPSController extends Controller
 
     public function index()
     {
-        if (auth()->user()->id_level == 1) {
+        if (auth()->user()->id_level == 1 || auth()->user()->id_level == 2 || auth()->user()->id_level == 3) {
             $rpsData = RPS::orderByDesc('id_rps')->get();
             return view('admin/dataRPS', compact('rpsData'));
         } else {
@@ -37,8 +38,7 @@ class RPSController extends Controller
 
     public function create()
     {
-        $matakuliah = MatakuliahKBK::get();
-        // dd($matakuliah);
+        $matakuliah = DosenPengampu::get();
         return view('admin/createRPS', compact('matakuliah'));
     }
 
@@ -47,9 +47,9 @@ class RPSController extends Controller
     {
         // dd($request);
         $validator = Validator::make($request->all(), [
-            'id_matakuliah_kbk' => 'required',
+            'id_matakuliah' => 'required',
             'versi_rps' => 'required',
-            'dokumen' => 'required|file|max:25000',
+            'dokumen' => 'required|file|mimes:pdf|max:25000',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -58,7 +58,7 @@ class RPSController extends Controller
 
         try {
             $rpsData = [
-                'id_matakuliah_kbk' => $request->id_matakuliah_kbk,
+                'id_matakuliah' => $request->id_matakuliah,
                 'versi_rps' => $request->versi_rps,
                 'dokumen' => $request->dokumen->store('RPS'),
                 'id_dosen_pengembang' => Auth::id(),
@@ -85,7 +85,8 @@ class RPSController extends Controller
     public function edit(Request $request, $id_rps)
     {
         $rpsData = RPS::find($id_rps);
-        return view('admin/editRPS', compact('rpsData'));
+        $matakuliah = DosenPengampu::get();
+        return view('admin/editRPS', compact('rpsData', 'matakuliah'));
     }
 
     public function update(Request $request, $id_rps)
@@ -93,14 +94,14 @@ class RPSController extends Controller
         // dd($request);
 
         $validator = Validator::make($request->all(), [
-            'id_matakuliah_kbk' => 'required',
+            'id_matakuliah' => 'required',
             'versi_rps' => 'required',
-            'dokumen' => 'file|max:25000',
+            'dokumen' => 'file|mimes:pdf|max:25000',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        $rpsData['id_matakuliah_kbk'] = $request->id_matakuliah_kbk;
+        $rpsData['id_matakuliah'] = $request->id_matakuliah;
         $rpsData['versi_rps'] = $request->versi_rps;
         $rpsData['id_dosen_pengembang'] = Auth::id();
         if ($request->file('dokumen')) {

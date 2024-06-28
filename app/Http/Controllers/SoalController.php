@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MatakuliahKBK;
+use App\Models\DosenPengampu;
 use App\Models\Soal;
 use App\Models\VerifikasiSoal;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +20,7 @@ class SoalController extends Controller
     }
     public function index()
     {
-        if (auth()->user()->id_level == 1) {
+        if (auth()->user()->id_level == 1 || auth()->user()->id_level == 2 || auth()->user()->id_level == 3) {
             $soalData = Soal::orderByDesc('id_soal')->get();
             return view('admin/dataSoal', compact('soalData'));
         } else {
@@ -33,17 +32,15 @@ class SoalController extends Controller
 
     public function create()
     {
-        $matakuliah = MatakuliahKBK::get();
-        // dd($matakuliah);
+        $matakuliah = DosenPengampu::get();
         return view('admin/createSoal', compact('matakuliah'));
     }
 
     public function store(Request $request)
     {
-        //dd($request); // Digunakan untuk debugging jika diperlukan
         $validator = Validator::make($request->all(), [
-            'id_matakuliah_kbk' => 'required',
-            'dokumen' => 'required|file|max:25000',
+            'id_matakuliah' => 'required',
+            'dokumen' => 'required|file|mimes:pdf|max:25000',
             'id_tahun_akademik' => 'required',
         ]);
 
@@ -54,9 +51,8 @@ class SoalController extends Controller
         DB::beginTransaction();
 
         try {
-            // Simpan data ke tabel 'ref_soal'
             $soalData = [
-                'id_matakuliah_kbk' => $request->id_matakuliah_kbk,
+                'id_matakuliah' => $request->id_matakuliah,
                 'dosen_pengampu' => Auth::id(),
                 'dokumen' => $request->dokumen->store('SOAL'),
                 'id_tahun_akademik' => $request->id_tahun_akademik,
@@ -88,7 +84,9 @@ class SoalController extends Controller
     public function edit(Request $request, $id_soal)
     {
         $soalData = Soal::find($id_soal);
-        return view('admin/editSoal', compact('soalData'));
+        $matakuliah = DosenPengampu::get();
+
+        return view('admin/editSoal', compact('soalData', 'matakuliah'));
     }
 
 
@@ -96,14 +94,14 @@ class SoalController extends Controller
     public function update(Request $request, $id_soal)
     {
         $validator = Validator::make($request->all(), [
-            'id_matakuliah_kbk' => 'required',
+            'id_matakuliah' => 'required',
             'id_tahun_akademik' => 'required',
-            'dokumen' => '|file|max:25000',
+            'dokumen' => 'file|mimes:pdf|max:25000',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        $soalData['id_matakuliah_kbk'] = $request->id_matakuliah_kbk;
+        $soalData['id_matakuliah'] = $request->id_matakuliah;
         $soalData['dosen_pengampu'] = Auth::id();
         $soalData['id_tahun_akademik'] = $request->id_tahun_akademik;
 

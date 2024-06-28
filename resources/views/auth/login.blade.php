@@ -15,9 +15,16 @@
     <link rel="stylesheet" href="{{ asset('lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}">
+    <style>
+        body {
+            background: url('img/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="hold-transition login-page">
+
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">

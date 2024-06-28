@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="utf-8">
@@ -89,6 +89,8 @@
         </div>
         <!-- /Modal Logout -->
 
+
+
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>
@@ -139,6 +141,7 @@
     <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -249,6 +252,15 @@
             swal('{{ $message }}');
         </script>
     @endif
+
+    @if ($message = Session::get('error'))
+        <script></script>
+        <script>
+            swal('{{ $message }}', " ", "error");
+        </script>
+    @endif
+
+
 
 </body>
 

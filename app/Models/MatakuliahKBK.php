@@ -13,6 +13,7 @@ class MatakuliahKBK extends Model
         'id_matakuliahkbk',
         'id_matakuliah',
         'id_kbk',
+        'semester',
         'id_kurikulum',
     ];
 
@@ -20,7 +21,6 @@ class MatakuliahKBK extends Model
 
     public static function updateMatakuliahKBK($id_matakuliahkbk, $matakuliahkbk)
     {
-        // Lakukan pembaruan data pada model Jurusan
         return self::where('id_matakuliahkbk', $id_matakuliahkbk)->update($matakuliahkbk);
     }
 
@@ -36,6 +36,6 @@ class MatakuliahKBK extends Model
 
     public function kurikulum()
     {
-        return $this->belongsTo('App\Models\Kurikulum', 'id_kurikulum');
+        return $this->belongsTo('App\Models\Kurikulum', 'id_kurikulum')->with('prodi');
     }
 }
