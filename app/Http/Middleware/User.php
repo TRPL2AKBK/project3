@@ -15,9 +15,9 @@ class User
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->id_level == 5) {
+        if (auth()->user()->hasRole('user')) {
             return $next($request);
         }
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Akses tidak sah ');
     }
 }

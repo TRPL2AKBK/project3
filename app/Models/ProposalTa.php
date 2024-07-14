@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProposalTa extends Model
 {
-    protected $table = 'ref_proposal_ta';
+    protected $table = 'proposal_ta';
     protected $primaryKey = 'id_proposal_ta';
     protected $fillable = [
         'id_proposal_ta',

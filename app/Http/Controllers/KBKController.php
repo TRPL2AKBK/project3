@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DosenKBK;
 use App\Models\KBK;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +23,8 @@ class KBKController extends Controller
 
     public function create()
     {
-        return view('admin/createKBK');
+        $dosenkbk = DosenKBK::get();
+        return view('admin/createKBK', compact('dosenkbk'));
     }
 
     public function store(Request $request)
@@ -31,6 +33,7 @@ class KBKController extends Controller
             'nama_kbk' => 'required',
             'kode_kbk' => 'required',
             'ketua' => 'required',
+            'sekretaris' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -38,6 +41,7 @@ class KBKController extends Controller
         $kbk['nama_kbk'] = $request->nama_kbk;
         $kbk['kode_kbk'] = $request->kode_kbk;
         $kbk['ketua_kbk'] = $request->ketua;
+        $kbk['sekretaris_kbk'] = $request->sekretaris;
 
         KBK::create($kbk);
         // dd($request->all());
@@ -47,8 +51,8 @@ class KBKController extends Controller
     public function edit(Request $request, $id_kbk)
     {
         $kbk = KBK::find($id_kbk);
-
-        return view('admin/editKBK', compact('kbk'));
+        $dosenkbk = DosenKBK::get();
+        return view('admin/editKBK', compact('kbk', 'dosenkbk'));
     }
 
     public function update(Request $request, $id_kbk)
@@ -58,6 +62,7 @@ class KBKController extends Controller
             'nama_kbk' => 'required',
             'kode_kbk' => 'required',
             'ketua' => 'required',
+            'sekretaris' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -65,6 +70,7 @@ class KBKController extends Controller
         $kbk['nama_kbk'] = $request->nama_kbk;
         $kbk['kode_kbk'] = $request->kode_kbk;
         $kbk['ketua_kbk'] = $request->ketua;
+        $kbk['sekretaris_kbk'] = $request->sekretaris;
 
         KBK::updateKBK($id_kbk, $kbk);
 

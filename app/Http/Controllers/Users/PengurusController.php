@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Models\DosenPengampu;
 use App\Models\Pengurus;
 use App\Models\RPS;
 use App\Models\Soal;
@@ -24,12 +25,15 @@ class PengurusController extends Controller
 
     public function index()
     {
+        $matakuliah = DosenPengampu::whereHas('tahun', function ($query) {
+            $query->where('status', 1);
+        })->count();
         $dataRps = RPS::get();
         $dataSoal = Soal::get();
         $verifSoal = VerifikasiSoal::whereNotNull('evaluasi')->get();
         $verifRps = VerifikasiRPS::whereNotNull('evaluasi')->get();
         // dd($dosenkbk);
-        return view('pengurus\dashboard', compact('dataRps', 'dataSoal', 'verifSoal', 'verifRps'));
+        return view('pengurus\dashboard', compact('dataRps', 'dataSoal', 'verifSoal', 'verifRps', 'matakuliah'));
     }
 
     // public function create()

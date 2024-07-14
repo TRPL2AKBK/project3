@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Jurusan --}}
@@ -49,7 +49,7 @@
                                             <th style="width: 1rem">No</th>
                                             <th>Kode Jurusan</th>
                                             <th>Jurusan</th>
-                                            <th>Action</th>
+                                            <th class="no-export">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

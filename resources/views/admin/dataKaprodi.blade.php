@@ -22,13 +22,13 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Prodi --}}
                         <div class="card">
                             <div class="card-header mb-3">
-                                <h3 class="card-title mt-2">Pimpinan Prodi</h3>
+                                <h3 class="card-title mt-2">Data Pimpinan Prodi</h3>
                                 {{-- Tombol Insert --}}
                                 {{-- <div class="card-title" style="float: right"><a href="{{ route('admin.kaprodi.create') }}"
                                         class="btn btn-primary" style="float: right">

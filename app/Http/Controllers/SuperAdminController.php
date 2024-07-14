@@ -64,7 +64,7 @@ class SuperAdminController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required|regex:/^[a-zA-Z0-9\s_]+$/',
             'email' => 'required|email|unique:user,email',
-            'nidn' => 'required|exists:ref_dosen,nidn',
+            'nidn' => 'required|exists:dosen,nidn',
             'password' => 'required|min:8',
             'roles' => 'required|array',
             'roles.*' => 'exists:roles,name',
@@ -104,7 +104,7 @@ class SuperAdminController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required|regex:/^[a-zA-Z0-9\s_]+$/',
             'email' => 'required|email|unique:user,email,' . $id,
-            'nidn' => 'required|exists:ref_dosen,nidn',
+            'nidn' => 'required|exists:dosen,nidn',
             'password' => 'nullable|min:8',
             'roles.*' => 'exists:roles,name',
         ]);

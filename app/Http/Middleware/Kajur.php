@@ -15,10 +15,10 @@ class Kajur
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->id_level == 3) {
+        if (auth()->user()->hasRole('pimpinan_jurusan')) {
 
             return $next($request);
         }
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Akses tidak sah ');
     }
 }

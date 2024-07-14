@@ -15,10 +15,10 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->id_level == 1) {
+        if (auth()->user()->hasRole('admin')) {
 
             return $next($request);
         }
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Akses tidak sah ');
     }
 }

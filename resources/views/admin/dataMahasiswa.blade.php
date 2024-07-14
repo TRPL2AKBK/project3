@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Mahasiswa --}}
@@ -46,7 +46,7 @@
                                             {{-- <th>Jurusan</th>
                                             <th>Prodi</th>
                                             <th>Gender</th> --}}
-                                            <th>Aksi</th> {{-- New Column --}}
+                                            <th class="no-export">Aksi</th> {{-- New Column --}}
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use App\Models\User;
 
 class DosenController extends Controller
 {
@@ -71,12 +72,32 @@ class DosenController extends Controller
     }
 
 
+    // public function index()
+    // {
+    //     $user = Auth::user();
+    //     $dataSoal = Soal::where('dosen_pengampu', $user->id)->orderByDesc('id_soal')->get();
+    //     $dataRps = RPS::where('id_dosen_pengembang', $user->id)->orderByDesc('id_rps')->get();
+    //     $matakuliah = DosenPengampu::where('nidn', $user->nidn)->get();
+    //     return view('dosen\dashboard', compact('dataRps', 'dataSoal', 'matakuliah'));
+    // }
+
     public function index()
     {
         $user = Auth::user();
-        $dataSoal = Soal::where('dosen_pengampu', $user->id)->orderByDesc('id_soal')->get();
-        $dataRps = RPS::where('id_dosen_pengembang', $user->id)->orderByDesc('id_rps')->get();
+        $dataSoal = Soal::where('dosen_pengampu', $user->id)->orderByDesc('id_soal')->count();
+        $dataRps = RPS::where('id_dosen_pengembang', $user->id)->orderByDesc('id_rps')->count();
+        $verifSoal = Soal::whereNotNull('evaluasi')
+            ->where('dosen_pengampu', $user->id)
+            ->orderByDesc('id_soal')
+            ->count();
+        $verifRps = RPS::whereNotNull('evaluasi')
+            ->where('id_dosen_pengembang', $user->id)
+            ->orderByDesc('id_rps')
+            ->count();
         $matakuliah = DosenPengampu::where('nidn', $user->nidn)->get();
-        return view('dosen\dashboard', compact('dataRps', 'dataSoal', 'matakuliah'));
+
+        $notifications = $user->unreadNotifications;
+        $user->unreadNotifications->markAsRead();
+        return view('dosen\dashboard', compact('dataRps', 'dataSoal', 'verifSoal', 'verifRps', 'matakuliah', 'notifications'));
     }
 }

@@ -11,4 +11,9 @@ class LandingController extends Controller
     {
         return view('landing');
     }
+
+    public function show()
+    {
+        return view('sibeka');
+    }
 }

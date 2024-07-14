@@ -15,10 +15,10 @@ class Pengurus
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->id_level == 2) {
+        if (auth()->user()->hasRole('pengurus_kbk')) {
 
             return $next($request);
         }
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Akses tidak sah ');
     }
 }

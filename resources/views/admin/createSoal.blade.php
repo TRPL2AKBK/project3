@@ -43,8 +43,10 @@
                                             <option value="" disabled selected>Select Matakuliah</option>
                                             @foreach ($matakuliah as $mk)
                                                 @if ($mk->nidn == Auth::user()->nidn)
-                                                    <option value="{{ $mk->id_matakuliah }}">
-                                                        {{ $mk->matakuliah->nama_matakuliah }}</option>
+                                                    <option value="{{ $mk->id_matakuliah }}"
+                                                        data-id_prodi="{{ $mk->matakuliah->kurikulum->prodi->id_prodi }}">
+                                                        {{ $mk->matakuliah->nama_matakuliah }}
+                                                    </option>
                                                     @php
                                                         $hasMatakuliah = true;
                                                     @endphp
@@ -58,22 +60,23 @@
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
                                     </div>
+                                    <input type="hidden" id="id_prodi" name="id_prodi" value="">
                                     <div class="form-group">
-                                        <label for="exampleInputid_tahun_akademik1">ID Tahun Akademik</label>
-                                        <input type="text" class="form-control" id="exampleInputVersi1"
-                                            name="id_tahun_akademik" value="{{ old('id_tahun_akademik') }}"
-                                            placeholder="tahun akademik">
+                                        <label for="exampleInputid_tahun_akademik1">Tahun Akademik</label>
+                                        <input type="hidden" name="id_tahun_akademik" value="{{ $tahun->id_smt_thn_akd }}">
+                                        <input type="text" class="form-control" name=""
+                                            value="{{ $tahun->smt_thn_akd }}" readonly>
                                         @error('id_tahun_akademik')
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputFile">File input</label>
+                                        <label for="exampleInputFile">Dokumen</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="exampleInputFile"
                                                     name="dokumen">
-                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
                                             </div>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">Upload</span>
@@ -86,7 +89,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>
                         </div>
@@ -99,4 +102,11 @@
         </section>
         <!-- /.content -->
     </div>
+    <script>
+        document.getElementById('exampleInputMatakuliah1').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var idProdi = selectedOption.getAttribute('data-id_prodi');
+            document.getElementById('id_prodi').value = idProdi;
+        });
+    </script>
 @endsection

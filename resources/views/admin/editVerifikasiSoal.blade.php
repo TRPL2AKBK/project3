@@ -21,7 +21,7 @@
         <!-- /.content-header -->
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="containe-fluidr">
                 <form action="{{ route('verifikasi.verifsoal.update', ['id' => $verifData->id_verif_soal]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -46,15 +46,24 @@
                                     <div class="form-group">
                                         <label for="exampleInputName1">Tahun Akademik</label>
                                         <input type="text" class="form-control" id="exampleInputid_tahun_akademik"
-                                            name="id_tahun_akademik" value="{{ $verifData->soal->id_tahun_akademik }}"
+                                            name="id_tahun_akademik" value="{{ $verifData->soal->tahun->smt_thn_akd }}"
                                             readonly>
                                     </div>
+                                    {{-- <div class="form-group">
+                                        @if ($verifData->rps->dokumen)
+                                            <div class="">
+                                                <label>Dokumen RPS:</label>
+                                                <a href="{{ asset('storage/' . $verifData->rps->dokumen) }}"
+                                                    target="_blank">Lihat dokumen</a>
+                                            </div>
+                                        @endif
+                                    </div> --}}
                                     <div class="form-group">
                                         @if ($verifData->soal->dokumen)
                                             <div class="">
                                                 <label>Document Soal:</label>
                                                 <a href="{{ asset('storage/' . $verifData->soal->dokumen) }}"
-                                                    target="_blank">{{ $verifData->soal->dokumen }}</a>
+                                                    target="_blank">Lihat dokumen</a>
                                             </div>
                                         @endif
                                     </div>
@@ -66,7 +75,8 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <a href="{{ url()->previous() }}" class="btn btn-secondary">Batal</a>
                                 </div>
                             </div>
                             <!-- /.card -->

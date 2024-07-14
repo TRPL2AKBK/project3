@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Matakuliah extends Model
 {
-    protected $table = 'ref_matakuliah';
+    protected $table = 'matakuliah';
     protected $primaryKey = 'id_matakuliah';
     protected $fillable = [
         'id_matakuliah',
@@ -29,7 +29,6 @@ class Matakuliah extends Model
 
     public function kurikulum()
     {
-        // minta data dari tabel kurikulum foreign key id_kurikulum
-        return $this->belongsTo('App\Models\Kurikulum', 'id_kurikulum')->with('prodi');
+        return $this->belongsTo(Kurikulum::class, 'id_kurikulum');
     }
 }

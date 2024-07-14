@@ -26,7 +26,7 @@ class VerifikasiRPS extends Model
 
     public function rps()
     {
-        return $this->belongsTo('App\Models\RPS', 'id_rps', 'id_rps');
+        return $this->belongsTo('App\Models\RPS', 'id_rps', 'id_rps')->with('matakuliah', 'matakuliahkbk')->withDefault();
     }
 
     public function verif1()

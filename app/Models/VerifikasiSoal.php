@@ -20,7 +20,6 @@ class VerifikasiSoal extends Model
 
     public static function updateVerifikasiSoal($id_verif_soal, $verifData)
     {
-        // Lakukan pembaruan data pada model Jurusan
         return self::where('id_verif_soal', $id_verif_soal)->update($verifData);
     }
 

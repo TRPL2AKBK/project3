@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Prodi --}}
@@ -32,7 +32,7 @@
                                 {{-- Tombol Insert --}}
                                 <div class="card-title" style="float: right"><a href="{{ route('admin.kbk.create') }}"
                                         class="btn btn-primary" style="float: right">
-                                        Insert</a>
+                                        Tambah</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive">
@@ -44,7 +44,8 @@
                                             <th>Nama KBK</th>
                                             <th>Kode KBK</th>
                                             <th>Ketua</th>
-                                            <th>Action</th>
+                                            <th>Sekretaris</th>
+                                            <th class="no-export">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,7 +54,11 @@
                                                 <td> {{ $loop->iteration }} </td>
                                                 <td> {{ $p->nama_kbk }} </td>
                                                 <td> {{ $p->kode_kbk }} </td>
-                                                <td> {{ $p->ketua->dosen->nama }} </td>
+                                                {{-- <td> {{ $p->ketua->dosen->nama }} </td>
+                                                <td> {{ $p->sekretaris->dosen->nama }} </td> --}}
+                                                <td> {{ $p->ketua->dosen->nama ?? 'Tidak ada data ketua' }} </td>
+                                                <td> {{ $p->sekretaris->dosen->nama ?? 'Tidak ada data sekretaris' }} </td>
+
                                                 <td>
                                                     <a
                                                         href="{{ route('admin.kbk.edit', ['id' => $p->id_kbk]) }}"class="btn btn-primary"><i

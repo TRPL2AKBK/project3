@@ -43,10 +43,20 @@
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="exampleInputEmail1">Status</label>
                                         <input type="number" class="form-control" id="exampleInputStatus1" name="status"
                                             placeholder="Enter Status" min="0" max="1" step="1">
+                                        @error('status')
+                                            <p style="color:red;"><small>{{ $message }}</small></p>
+                                        @enderror
+                                    </div> --}}
+                                    <div class="form-group">
+                                        <label for="exampleInputStatus1">Status</label>
+                                        <select class="form-control" id="exampleInputStatus1" name="status">
+                                            <option value="1">Aktif</option>
+                                            <option value="0">Tidak Aktif</option>
+                                        </select>
                                         @error('status')
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror

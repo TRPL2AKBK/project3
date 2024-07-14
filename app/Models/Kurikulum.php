@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kurikulum extends Model
 {
-    protected $table = 'ref_kurikulum';
+    protected $table = 'kurikulum';
     protected $primaryKey = 'id_kurikulum';
     protected $fillable = [
         'id_kurikulum',
@@ -21,6 +21,6 @@ class Kurikulum extends Model
 
     public function prodi()
     {
-        return $this->belongsTo('App\Models\Prodi', 'id_prodi');
+        return $this->belongsTo(Prodi::class, 'id_prodi');
     }
 }

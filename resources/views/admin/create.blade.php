@@ -16,7 +16,7 @@
                 <form action="{{ route('user.store') }}" method="POST">
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Form Tambah User</h3>

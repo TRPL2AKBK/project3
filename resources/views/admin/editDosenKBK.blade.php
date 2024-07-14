@@ -45,7 +45,7 @@
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="exampleInputName1">ID KBK</label>
                                             <input type="number" class="form-control" id="exampleInputid_kbk"
                                                 name="id_kbk" value="{{ $dosenkbk->id_kbk }}" placeholder="Enter id kbk">
@@ -61,7 +61,44 @@
                                             @error('id_jabatan_kbk')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
+                                        </div> --}}
+                                        <div class="form-group">
+                                            <label for="exampleRole">KBK</label>
+                                            <select name="id_kbk" id="exampleRole" class="form-control">
+                                                <option value="" disabled
+                                                    {{ old('id_kbk', $dosenkbk->id_kbk) == '' ? 'selected' : '' }}>Pilih KBK
+                                                </option>
+                                                @foreach ($kbk as $k)
+                                                    <option value="{{ $k->id_kbk }}"
+                                                        {{ old('id_kbk', $dosenkbk->id_kbk) == $k->id_kbk ? 'selected' : '' }}>
+                                                        {{ $k->kode_kbk }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('id_kbk')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleRole">Jabatan</label>
+                                            <select name="id_jabatan_kbk" id="exampleRole" class="form-control">
+                                                <option value="" disabled
+                                                    {{ old('id_jabatan_kbk', $dosenkbk->id_jabatan_kbk) == '' ? 'selected' : '' }}>
+                                                    Pilih Jabatan</option>
+                                                @foreach ($jabatan as $j)
+                                                    <option value="{{ $j->id_jabatan_kbk }}"
+                                                        {{ old('id_jabatan_kbk', $dosenkbk->id_jabatan_kbk) == $j->id_jabatan_kbk ? 'selected' : '' }}>
+                                                        {{ $j->nama_jabatan_kbk }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('id_jabatan_kbk')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div>
+
+
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">

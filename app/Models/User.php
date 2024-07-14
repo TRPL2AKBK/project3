@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(DosenPengampu::class, 'nidn', 'nidn');
     }
+
+    public function pimpinanProdi()
+    {
+        return $this->hasOne(PimpinanProdi::class, 'nidn', 'nidn');
+    }
 }

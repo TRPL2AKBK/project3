@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Prodi --}}
@@ -47,7 +47,7 @@
                                             <th>Kode Prodi</th>
                                             <th>Semester</th>
                                             <th>Kurikulum</th>
-                                            <th>Action</th>
+                                            <th class="no-export">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,10 +55,10 @@
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
                                                 <td> {{ $p->matakuliah->nama_matakuliah }} </td>
-                                                <td> {{ $p->kbk->nama_kbk }} </td>
-                                                <td> {{ $p->kurikulum->prodi->kode_prodi }} </td>
+                                                <td> {{ $p->kbk->kode_kbk }} </td>
+                                                <td> {{ $p->matakuliah->kurikulum->prodi->kode_prodi }} </td>
                                                 <td> {{ $p->matakuliah->semester }} </td>
-                                                <td> {{ $p->kurikulum->nama_kurikulum }} </td>
+                                                <td> {{ $p->matakuliah->kurikulum->nama_kurikulum }} </td>
                                                 <td>
                                                     <a
                                                         href="{{ route('admin.matakuliahkbk.edit', ['id' => $p->id_matakuliahkbk]) }}"class="btn btn-primary"><i
@@ -105,6 +105,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                {{-- <div>
+                                    {{ $matakuliahkbk->links() }}
+                                </div> --}}
                             </div>
                         </div>
                         {{-- /Table Prodi --}}

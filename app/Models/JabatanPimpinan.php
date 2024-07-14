@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class JabatanPimpinan extends Model
 {
-    protected $table = 'ref_jabatan_pimpinan';
+    protected $table = 'jabatan_pimpinan';
     protected $primaryKey = 'id_jabatan_pimpinan';
     protected $fillable = [
         'id_jabatan_pimpinan',

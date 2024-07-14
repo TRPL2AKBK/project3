@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Prodi</h1>
+                        <h1 class="m-0">Data Prodi</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         {{-- <ol class="breadcrumb float-sm-right">
@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Prodi --}}
@@ -35,7 +35,7 @@
                                             <th>ID Prodi</th>
                                             <th>Kode Prodi</th>
                                             <th>Prodi</th>
-                                            <th>Jurusan</th>
+                                            <th>ID Jurusan</th>
                                             <th>Jenjang</th>
                                         </tr>
                                     </thead>
@@ -70,7 +70,7 @@
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                         <button type="button" class="btn btn-secondary"
-                                            onclick="location.href='{{ route('admin.prodis') }}';">Cancel</button>
+                                            onclick="location.href='{{ route('admin.prodis') }}';">Batal</button>
                                     </div>
                                 </form>
                             </div>

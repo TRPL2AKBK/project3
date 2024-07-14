@@ -52,11 +52,37 @@
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="exampleInputNameKetua1">ID Dosen KBK</label>
                                             <input type="text" class="form-control" id="exampleInputKetua1"
                                                 name="ketua" placeholder="Enter id dosen kbk">
                                             @error('ketua')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div> --}}
+                                        <div class="form-group">
+                                            <label for="exampleRole">Ketua</label>
+                                            <select name="ketua" id="exampleRole" class="form-control">
+                                                <option value="" disabled selected>Pilih Ketua</option>
+                                                @foreach ($dosenkbk as $j)
+                                                    <option value="{{ $j->id_dosenkbk }}">{{ $j->dosen->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('ketua')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleRole">Sekretaris</label>
+                                            <select name="sekretaris" id="exampleRole" class="form-control">
+                                                <option value="" disabled selected>Pilih Sekretaris</option>
+                                                @foreach ($dosenkbk as $j)
+                                                    <option value="{{ $j->id_dosenkbk }}">{{ $j->dosen->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('sekretaris')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror
                                         </div>

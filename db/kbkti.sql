@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Jun 2024 pada 16.32
+-- Waktu pembuatan: 13 Jul 2024 pada 05.27
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `change_logs` (
   `id` int(11) UNSIGNED NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `changes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`changes`)),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -44,249 +44,21 @@ INSERT INTO `change_logs` (`id`, `user_id`, `changes`, `created_at`, `updated_at
 (17, 99, '{\"name\":{\"old_value\":\"Superadmin\",\"new_value\":\"amir\"}}', '2024-06-26 19:43:15', '2024-06-26 19:43:15'),
 (18, 99, '{\"name\":{\"old_value\":\"amir\",\"new_value\":\"Super Admin\"}}', '2024-06-26 19:44:51', '2024-06-26 19:44:51'),
 (19, 1, '{\"image\":{\"old_value\":null,\"new_value\":\"Image\\/5E6cgACC4CCDsiDcrZZs4AD2LQhCBXc7hY84Uo6i.png\"}}', '2024-06-27 00:04:20', '2024-06-27 00:04:20'),
-(20, 4, '{\"name\":{\"old_value\":\"dosen\",\"new_value\":\"tasa\"},\"email\":{\"old_value\":\"dosen@gmail.com\",\"new_value\":\"dosenhhhh@gmail.com\"},\"password\":{\"old_value\":\"$2y$12$oF65QStsu1O5vOidHxQcU.72KxjZK02raedGmkJ5Wc7I.nfqO1Z5e\",\"new_value\":\"$2y$12$KV8BvJmyEmAKhGg.p35fcONTqRpAGNE6Wg5XkmvrPi4avOIDMwB6e\"}}', '2024-06-27 00:05:33', '2024-06-27 00:05:33');
+(20, 4, '{\"name\":{\"old_value\":\"dosen\",\"new_value\":\"tasa\"},\"email\":{\"old_value\":\"dosen@gmail.com\",\"new_value\":\"dosenhhhh@gmail.com\"},\"password\":{\"old_value\":\"$2y$12$oF65QStsu1O5vOidHxQcU.72KxjZK02raedGmkJ5Wc7I.nfqO1Z5e\",\"new_value\":\"$2y$12$KV8BvJmyEmAKhGg.p35fcONTqRpAGNE6Wg5XkmvrPi4avOIDMwB6e\"}}', '2024-06-27 00:05:33', '2024-06-27 00:05:33'),
+(21, 4, '{\"password\":{\"old_value\":\"$2y$12$KV8BvJmyEmAKhGg.p35fcONTqRpAGNE6Wg5XkmvrPi4avOIDMwB6e\",\"new_value\":\"$2y$12$RtklcoPDqnwOX6tJYEVujORwa4C3jI8p1opmYjgb1tZ32oy4kJmre\"}}', '2024-06-28 09:58:53', '2024-06-28 09:58:53'),
+(22, 4, '{\"name\":{\"old_value\":\"tasa\",\"new_value\":\"dosen\"}}', '2024-06-28 09:59:16', '2024-06-28 09:59:16'),
+(23, 2, '{\"email\":{\"old_value\":\"kbk@gmail.com\",\"new_value\":\"penguruskbk@gmail.com\"}}', '2024-07-06 07:00:47', '2024-07-06 07:00:47'),
+(24, 2, '{\"name\":{\"old_value\":\"ketua kbk\",\"new_value\":\"ALDE ALANDA\"}}', '2024-07-06 07:03:31', '2024-07-06 07:03:31'),
+(25, 2, '{\"image\":{\"old_value\":null,\"new_value\":\"Image\\/NnSmdTeslOBDzQNLhBDM6xTtGt56xjgqz3BLZhTl.png\"}}', '2024-07-06 18:10:18', '2024-07-06 18:10:18'),
+(26, 3, '{\"password\":{\"old_value\":\"$2y$12$HzNz4DE88BxNDEcNREnYve3QcYH6afK\\/W51QFCGrBYETU9DbJJ4LW\",\"new_value\":\"$2y$12$aDNXItkuZgGnekucJCSvyuGQFAYrvxRyhJXO1H03ioiCy08WYrwp6\"}}', '2024-07-07 07:13:44', '2024-07-07 07:13:44');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Struktur dari tabel `dosen`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2024_03_08_185829_create_bidang_keahlian_table', 0),
-(2, '2024_03_08_185829_create_dosen_table', 0),
-(3, '2024_03_08_185829_create_jurusan_table', 0),
-(4, '2024_03_08_185829_create_level_table', 0),
-(5, '2024_03_08_185829_create_matkul_table', 0),
-(6, '2024_03_08_185829_create_pengurus_kbk_table', 0),
-(7, '2024_03_08_185829_create_prodi_table', 0),
-(8, '2024_03_08_185829_create_rps_table', 0),
-(9, '2024_03_08_185829_create_soal_table', 0),
-(10, '2024_03_08_185829_create_tahun_ajaran_table', 0),
-(11, '2024_03_08_185829_create_user_table', 0),
-(12, '2024_03_08_185829_create_verifikasi_rps_table', 0),
-(13, '2024_03_08_185829_create_verifikasi_soal_table', 0),
-(14, '2024_03_08_185832_add_foreign_keys_to_dosen_table', 0),
-(15, '2024_03_08_185832_add_foreign_keys_to_matkul_table', 0),
-(16, '2024_03_08_185832_add_foreign_keys_to_pengurus_kbk_table', 0),
-(17, '2024_03_08_185832_add_foreign_keys_to_prodi_table', 0),
-(18, '2024_03_08_185832_add_foreign_keys_to_rps_table', 0),
-(19, '2024_03_08_185832_add_foreign_keys_to_soal_table', 0),
-(20, '2024_03_08_185832_add_foreign_keys_to_user_table', 0),
-(21, '2024_03_08_185832_add_foreign_keys_to_verifikasi_rps_table', 0),
-(22, '2024_03_08_185832_add_foreign_keys_to_verifikasi_soal_table', 0),
-(23, '2024_03_09_110337_create_bidang_keahlian_table', 0),
-(24, '2024_03_09_110337_create_dosen_table', 0),
-(25, '2024_03_09_110337_create_jurusan_table', 0),
-(26, '2024_03_09_110337_create_level_table', 0),
-(27, '2024_03_09_110337_create_matkul_table', 0),
-(28, '2024_03_09_110337_create_pengurus_kbk_table', 0),
-(29, '2024_03_09_110337_create_prodi_table', 0),
-(30, '2024_03_09_110337_create_rps_table', 0),
-(31, '2024_03_09_110337_create_soal_table', 0),
-(32, '2024_03_09_110337_create_tahun_ajaran_table', 0),
-(33, '2024_03_09_110337_create_user_table', 0),
-(34, '2024_03_09_110337_create_verifikasi_rps_table', 0),
-(35, '2024_03_09_110337_create_verifikasi_soal_table', 0),
-(36, '2024_03_09_110340_add_foreign_keys_to_dosen_table', 0),
-(37, '2024_03_09_110340_add_foreign_keys_to_matkul_table', 0),
-(38, '2024_03_09_110340_add_foreign_keys_to_pengurus_kbk_table', 0),
-(39, '2024_03_09_110340_add_foreign_keys_to_prodi_table', 0),
-(40, '2024_03_09_110340_add_foreign_keys_to_rps_table', 0),
-(41, '2024_03_09_110340_add_foreign_keys_to_soal_table', 0),
-(42, '2024_03_09_110340_add_foreign_keys_to_user_table', 0),
-(43, '2024_03_09_110340_add_foreign_keys_to_verifikasi_rps_table', 0),
-(44, '2024_03_09_110340_add_foreign_keys_to_verifikasi_soal_table', 0),
-(45, '2024_03_21_174429_create_bidang_keahlian_table', 0),
-(46, '2024_03_21_174429_create_dosen_table', 0),
-(47, '2024_03_21_174429_create_jurusan_table', 0),
-(48, '2024_03_21_174429_create_level_table', 0),
-(49, '2024_03_21_174429_create_matkul_table', 0),
-(50, '2024_03_21_174429_create_pengurus_kbk_table', 0),
-(51, '2024_03_21_174429_create_prodi_table', 0),
-(52, '2024_03_21_174429_create_rps_table', 0),
-(53, '2024_03_21_174429_create_soal_table', 0),
-(54, '2024_03_21_174429_create_tahun_ajaran_table', 0),
-(55, '2024_03_21_174429_create_user_table', 0),
-(56, '2024_03_21_174429_create_verifikasi_rps_table', 0),
-(57, '2024_03_21_174429_create_verifikasi_soal_table', 0),
-(58, '2024_03_21_174432_add_foreign_keys_to_dosen_table', 0),
-(59, '2024_03_21_174432_add_foreign_keys_to_matkul_table', 0),
-(60, '2024_03_21_174432_add_foreign_keys_to_pengurus_kbk_table', 0),
-(61, '2024_03_21_174432_add_foreign_keys_to_prodi_table', 0),
-(62, '2024_03_21_174432_add_foreign_keys_to_rps_table', 0),
-(63, '2024_03_21_174432_add_foreign_keys_to_soal_table', 0),
-(64, '2024_03_21_174432_add_foreign_keys_to_user_table', 0),
-(65, '2024_03_21_174432_add_foreign_keys_to_verifikasi_rps_table', 0),
-(66, '2024_03_21_174432_add_foreign_keys_to_verifikasi_soal_table', 0),
-(67, '2024_03_24_081032_create_ref_bidang_keahlian_table', 0),
-(68, '2024_03_24_081032_create_ref_dosen_table', 0),
-(69, '2024_03_24_081032_create_ref_dosen_matakuliah_table', 0),
-(70, '2024_03_24_081032_create_ref_jabatan_pimpinan_table', 0),
-(71, '2024_03_24_081032_create_ref_jurusan_table', 0),
-(72, '2024_03_24_081032_create_ref_kelas_table', 0),
-(73, '2024_03_24_081032_create_ref_kurikulum_table', 0),
-(74, '2024_03_24_081032_create_ref_level_table', 0),
-(75, '2024_03_24_081032_create_ref_matakuliah_table', 0),
-(76, '2024_03_24_081032_create_ref_pengurus_kbk_table', 0),
-(77, '2024_03_24_081032_create_ref_pimpinan_jurusan_table', 0),
-(78, '2024_03_24_081032_create_ref_pimpinan_prodi_table', 0),
-(79, '2024_03_24_081032_create_ref_prodi_table', 0),
-(80, '2024_03_24_081032_create_ref_rps_table', 0),
-(81, '2024_03_24_081032_create_ref_smt_thn_akd_table', 0),
-(82, '2024_03_24_081032_create_ref_soal_table', 0),
-(83, '2024_03_24_081032_create_user_table', 0),
-(84, '2024_03_24_081032_create_verifikasi_rps_table', 0),
-(85, '2024_03_24_081032_create_verifikasi_soal_table', 0),
-(86, '2024_03_24_081035_add_foreign_keys_to_ref_pengurus_kbk_table', 0),
-(87, '2024_03_24_081035_add_foreign_keys_to_ref_rps_table', 0),
-(88, '2024_03_24_081035_add_foreign_keys_to_ref_soal_table', 0),
-(89, '2024_03_24_081035_add_foreign_keys_to_user_table', 0),
-(90, '2024_03_24_081035_add_foreign_keys_to_verifikasi_rps_table', 0),
-(91, '2024_03_24_081035_add_foreign_keys_to_verifikasi_soal_table', 0),
-(98, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(99, '2024_06_08_161301_create_permission_tables', 1);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `model_has_permissions`
---
-
-CREATE TABLE `model_has_permissions` (
-  `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `model_has_roles`
---
-
-CREATE TABLE `model_has_roles` (
-  `role_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(255) NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `model_has_roles`
---
-
-INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\User', 99),
-(2, 'App\\Models\\User', 6),
-(3, 'App\\Models\\User', 1),
-(4, 'App\\Models\\User', 4),
-(4, 'App\\Models\\User', 7),
-(5, 'App\\Models\\User', 2),
-(7, 'App\\Models\\User', 3),
-(8, 'App\\Models\\User', 5);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `password_reset_tokens`
---
-
-CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `password_reset_tokens`
---
-
-INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
-('dosen@gmail.com', 'gcp1NDuWylqZyBqDDNs51I5fFfpqS9WpVD1bdzwEdfNq6fVTJR9CXlCGndZr', '2024-06-25 20:19:25'),
-('kbk@gmail.com', 'pm4FDJK4GLAoITcAqN5BJBDzL21jsN70xM1v2qBcNj2MGCUAqT4Bq5S7A0PA', '2024-06-25 20:19:40'),
-('spongebob.jomblo@gmail.com', 'BQIXZYGUraXdsF9j7Ae0FL2B7xAh15z4Qo4uwMeINyyUBvmUYBHeBf3rYhRj', '2024-06-09 12:06:36');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `permissions`
---
-
-CREATE TABLE `permissions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `permissions`
---
-
-INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(24, 'view dashboard admin', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(25, 'view data user', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(26, 'view data change log', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(27, 'view data master', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(28, 'view data tahun akademik', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(29, 'view data kurikulum', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(30, 'view data matakuliah', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(31, 'view data dosen pengampu', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(32, 'view data manajemen kbk', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(33, 'view data mahasiswa', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(34, 'view data proposal ta', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(35, 'view data rps', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(36, 'view data verifikasi rps', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(37, 'view data soal', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(38, 'view data verifikasi soal', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
-(39, 'view dashboard super_admin', 'web', '2024-06-18 09:05:45', '2024-06-18 09:05:45'),
-(40, 'view data hak akses', 'web', '2024-06-19 14:16:29', '2024-06-19 14:16:29'),
-(41, 'view data role', 'web', '2024-06-25 10:54:04', '2024-06-25 10:54:04'),
-(42, 'view dashboard user', 'web', '2024-06-26 00:13:03', '2024-06-26 00:13:03'),
-(43, 'view dashboard dosen', 'web', '2024-06-26 00:13:03', '2024-06-26 00:13:03'),
-(44, 'view dashboard kaprodi', 'web', '2024-06-26 00:18:27', '2024-06-26 00:18:27'),
-(45, 'view dashboard pengurus', 'web', '2024-06-26 00:18:27', '2024-06-26 00:18:27'),
-(46, 'view dashboard kajur', 'web', '2024-06-26 15:44:57', '2024-06-26 15:44:57'),
-(47, 'crud rps', 'web', '2024-06-26 16:18:19', '2024-06-26 16:18:19'),
-(48, 'crud soal', 'web', '2024-06-26 16:18:19', '2024-06-26 16:18:19');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `personal_access_tokens`
---
-
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ref_dosen`
---
-
-CREATE TABLE `ref_dosen` (
+CREATE TABLE `dosen` (
   `id_dosen` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `nidn` varchar(100) NOT NULL,
@@ -300,10 +72,10 @@ CREATE TABLE `ref_dosen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `ref_dosen`
+-- Dumping data untuk tabel `dosen`
 --
 
-INSERT INTO `ref_dosen` (`id_dosen`, `nama`, `nidn`, `nip`, `gender`, `kode_jurusan`, `jurusan`, `kode_prodi`, `prodi`, `email`) VALUES
+INSERT INTO `dosen` (`id_dosen`, `nama`, `nidn`, `nip`, `gender`, `kode_jurusan`, `jurusan`, `kode_prodi`, `prodi`, `email`) VALUES
 (1, 'ALDE ALANDA, S.Kom, M.T', '0025088802', '198808252015041002', 'Laki-laki', 'TI', 'Teknologi Informasi', '3TK', 'Teknik Komputer D-3', 'alde@pnp.ac.id'),
 (2, 'ALDO ERIANDA, M.T, S.ST', '003078904', '198907032019031015', 'Laki-laki', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', 'aldo@pnp.ac.id'),
 (3, 'CIPTO PRABOWO, S.T, M.T', '0002037410', '197403022008121001', 'Laki-laki', 'TI', 'Teknologi Informasi', '3TK', 'Teknik Komputer D-3', 'cipto@pnp.ac.id'),
@@ -351,78 +123,96 @@ INSERT INTO `ref_dosen` (`id_dosen`, `nama`, `nidn`, `nip`, `gender`, `kode_juru
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_dosen_kbk`
+-- Struktur dari tabel `dosen_kbk`
 --
 
-CREATE TABLE `ref_dosen_kbk` (
+CREATE TABLE `dosen_kbk` (
   `id_dosenkbk` int(11) NOT NULL,
   `nidn` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `id_kbk` int(11) NOT NULL,
+  `id_kbk` int(11) DEFAULT NULL,
   `id_jabatan_kbk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_dosen_kbk`
+-- Dumping data untuk tabel `dosen_kbk`
 --
 
-INSERT INTO `ref_dosen_kbk` (`id_dosenkbk`, `nidn`, `id_kbk`, `id_jabatan_kbk`) VALUES
-(1, '0019038103', 1, 1),
+INSERT INTO `dosen_kbk` (`id_dosenkbk`, `nidn`, `id_kbk`, `id_jabatan_kbk`) VALUES
+(1, '1017078904', 1, 1),
 (2, '0025088802', 2, 1),
 (3, '0009058601', 3, 1),
 (4, '0218068801', 4, 1),
-(5, '0008069103', 5, 1);
+(5, '0008069103', 5, 3),
+(6, '0013017604', 1, 2),
+(7, '0029128003', 2, 2),
+(8, '0010088805', 5, 2),
+(9, '0018077099', 4, 2),
+(86, '0002037410', 3, 2);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_dosen_matakuliah`
+-- Struktur dari tabel `dosen_matakuliah`
 --
 
-CREATE TABLE `ref_dosen_matakuliah` (
+CREATE TABLE `dosen_matakuliah` (
   `id_dosen_matakuliah` int(11) NOT NULL,
   `nidn` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `id_matakuliah` int(11) NOT NULL,
-  `id_kelas` int(11) NOT NULL,
   `id_smt_thn_akd` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_dosen_matakuliah`
+-- Dumping data untuk tabel `dosen_matakuliah`
 --
 
-INSERT INTO `ref_dosen_matakuliah` (`id_dosen_matakuliah`, `nidn`, `id_matakuliah`, `id_kelas`, `id_smt_thn_akd`) VALUES
-(1, '0218068801', 13, 1, 3),
-(2, '0218068801', 14, 2, 3),
-(3, '0021078601', 16, 1, 1),
-(4, '0021078601', 17, 2, 2);
+INSERT INTO `dosen_matakuliah` (`id_dosen_matakuliah`, `nidn`, `id_matakuliah`, `id_smt_thn_akd`) VALUES
+(1, '0218068801', 13, 3),
+(2, '0218068801', 14, 3),
+(3, '0218068801', 16, 3),
+(4, '0218068801', 17, 3),
+(5, '0218068801', 1, 3),
+(6, '0218068801', 15, 3),
+(7, '0001067407', 18, 3),
+(8, '0001067407', 19, 3),
+(9, '0001067407', 20, 3),
+(10, '0001067407', 21, 3),
+(11, '0001067407', 22, 3),
+(12, '0001067407', 23, 3),
+(13, '0021078601', 24, 3),
+(14, '0021078601', 25, 3),
+(15, '0021078601', 26, 3),
+(16, '0021078601', 27, 3),
+(17, '0021078601', 28, 3),
+(18, '0021078601', 29, 3);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_jabatan_kbk`
+-- Struktur dari tabel `jabatan_kbk`
 --
 
-CREATE TABLE `ref_jabatan_kbk` (
+CREATE TABLE `jabatan_kbk` (
   `id_jabatan_kbk` int(11) NOT NULL,
   `nama_jabatan_kbk` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_jabatan_kbk`
+-- Dumping data untuk tabel `jabatan_kbk`
 --
 
-INSERT INTO `ref_jabatan_kbk` (`id_jabatan_kbk`, `nama_jabatan_kbk`) VALUES
-(1, 'ketua'),
-(2, 'sekretaris'),
-(3, 'anggota');
+INSERT INTO `jabatan_kbk` (`id_jabatan_kbk`, `nama_jabatan_kbk`) VALUES
+(1, 'Ketua'),
+(2, 'Sekretaris'),
+(3, 'Anggota');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_jabatan_pimpinan`
+-- Struktur dari tabel `jabatan_pimpinan`
 --
 
-CREATE TABLE `ref_jabatan_pimpinan` (
+CREATE TABLE `jabatan_pimpinan` (
   `id_jabatan_pimpinan` int(11) NOT NULL,
   `jabatan_pimpinan` varchar(20) NOT NULL,
   `kode_jabatan_pimpinan` varchar(10) NOT NULL,
@@ -430,10 +220,10 @@ CREATE TABLE `ref_jabatan_pimpinan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_jabatan_pimpinan`
+-- Dumping data untuk tabel `jabatan_pimpinan`
 --
 
-INSERT INTO `ref_jabatan_pimpinan` (`id_jabatan_pimpinan`, `jabatan_pimpinan`, `kode_jabatan_pimpinan`, `status`) VALUES
+INSERT INTO `jabatan_pimpinan` (`id_jabatan_pimpinan`, `jabatan_pimpinan`, `kode_jabatan_pimpinan`, `status`) VALUES
 (1, 'Ketua Jurusan', 'KAJUR', '1'),
 (2, 'Sekretaris Jurusan', 'SEKJUR', '1'),
 (3, 'Koordinator Program ', 'KAPRODI', '1');
@@ -441,20 +231,20 @@ INSERT INTO `ref_jabatan_pimpinan` (`id_jabatan_pimpinan`, `jabatan_pimpinan`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_jurusan`
+-- Struktur dari tabel `jurusan`
 --
 
-CREATE TABLE `ref_jurusan` (
+CREATE TABLE `jurusan` (
   `id_jurusan` int(11) NOT NULL,
   `kode_jurusan` varchar(5) NOT NULL,
   `jurusan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `ref_jurusan`
+-- Dumping data untuk tabel `jurusan`
 --
 
-INSERT INTO `ref_jurusan` (`id_jurusan`, `kode_jurusan`, `jurusan`) VALUES
+INSERT INTO `jurusan` (`id_jurusan`, `kode_jurusan`, `jurusan`) VALUES
 (1, 'AN', 'Administrasi Niaga'),
 (2, 'AK', 'Akuntansi'),
 (3, 'BI', 'Bahasa Inggris'),
@@ -466,56 +256,35 @@ INSERT INTO `ref_jurusan` (`id_jurusan`, `kode_jurusan`, `jurusan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_kbk`
+-- Struktur dari tabel `kbk`
 --
 
-CREATE TABLE `ref_kbk` (
+CREATE TABLE `kbk` (
   `id_kbk` int(11) NOT NULL,
   `kode_kbk` varchar(50) NOT NULL,
   `nama_kbk` varchar(100) NOT NULL,
-  `ketua_kbk` int(11) NOT NULL
+  `ketua_kbk` int(11) DEFAULT NULL,
+  `sekretaris_kbk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_kbk`
+-- Dumping data untuk tabel `kbk`
 --
 
-INSERT INTO `ref_kbk` (`id_kbk`, `kode_kbk`, `nama_kbk`, `ketua_kbk`) VALUES
-(1, 'SOFTAM', 'Software Engineering and Multimedia', 1),
-(2, 'CAIT', 'Computational and Artificial Intelligence Technology', 2),
-(3, 'Programming', 'Programming', 3),
-(4, 'NCS', 'Network and Computer Systems', 4),
-(5, 'Multimedia', 'Multimedia', 5);
+INSERT INTO `kbk` (`id_kbk`, `kode_kbk`, `nama_kbk`, `ketua_kbk`, `sekretaris_kbk`) VALUES
+(1, 'SOFTAM', 'Center of Software Technology and Management', 1, 6),
+(2, 'CAIT', 'Center of Artificial Intelligence Technology', 2, 7),
+(3, 'Programming', 'Center of Programming', 3, 86),
+(4, 'NCS', 'Center of Network and Cyber Security', 4, 9),
+(5, 'Multimedia', 'Center of IT Infrastructure', 5, 8);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_kelas`
+-- Struktur dari tabel `kurikulum`
 --
 
-CREATE TABLE `ref_kelas` (
-  `id_kelas` int(11) NOT NULL,
-  `kode_kelas` varchar(10) NOT NULL,
-  `nama_kelas` varchar(20) NOT NULL,
-  `id_prodi` int(11) NOT NULL,
-  `id_smt_thn_akd` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `ref_kelas`
---
-
-INSERT INTO `ref_kelas` (`id_kelas`, `kode_kelas`, `nama_kelas`, `id_prodi`, `id_smt_thn_akd`) VALUES
-(1, 'TRPL1A', 'TRPL 1A', 20, 1),
-(2, 'TRPL1B', 'TRPL 1B', 20, 3);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ref_kurikulum`
---
-
-CREATE TABLE `ref_kurikulum` (
+CREATE TABLE `kurikulum` (
   `id_kurikulum` int(11) NOT NULL,
   `kode_kurikulum` varchar(20) NOT NULL,
   `nama_kurikulum` varchar(50) NOT NULL,
@@ -525,46 +294,28 @@ CREATE TABLE `ref_kurikulum` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_kurikulum`
+-- Dumping data untuk tabel `kurikulum`
 --
 
-INSERT INTO `ref_kurikulum` (`id_kurikulum`, `kode_kurikulum`, `nama_kurikulum`, `tahun`, `id_prodi`, `status`) VALUES
+INSERT INTO `kurikulum` (`id_kurikulum`, `kode_kurikulum`, `nama_kurikulum`, `tahun`, `id_prodi`, `status`) VALUES
 (1, 'KUR TRPL 2017', 'Kurikulum TRPL 2017', 2017, 20, '0'),
 (2, 'KUR TRPL  2017 REV', 'Kurikulum TRPL 2017 Revisi', 2020, 20, '0'),
 (3, 'KUR TRPL 2022', 'Kurikulum TRPL 2022', 2022, 20, '1'),
 (4, 'KUR TRPL 2022 V.1', 'Kurikulum TRPL 2022 Versi 1', 2023, 20, '1'),
-(5, 'KUR TRPL  2022 V.2', 'Kurikulum TRPL 2022 Versi 2', 2024, 20, '1');
+(5, 'KUR TRPL  2022 V.2', 'Kurikulum TRPL 2022 Versi 2', 2024, 20, '1'),
+(6, 'KUR MI 2022', 'Kurikulum MI 2022', 2022, 18, '1'),
+(7, 'KUR TK 2022', 'Kurikulum TK 2022', 2022, 19, '1'),
+(8, 'KUR SI-TD 2022', 'Kurikulum SI-TD 2022', 2022, 21, '1'),
+(9, 'KUR TK-SS 2022', 'Kurikulum TK-SS 2022', 2022, 22, '1'),
+(10, 'KUR MI-P 2022', 'Kurikulum MI-P 2022', 2022, 23, '1');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_level`
+-- Struktur dari tabel `mahasiswa`
 --
 
-CREATE TABLE `ref_level` (
-  `id` int(11) NOT NULL,
-  `level` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `ref_level`
---
-
-INSERT INTO `ref_level` (`id`, `level`) VALUES
-(1, 'admin'),
-(2, 'kbk'),
-(3, 'kaprodi'),
-(4, 'dosen'),
-(5, 'user'),
-(6, 'superadmin');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ref_mahasiswa`
---
-
-CREATE TABLE `ref_mahasiswa` (
+CREATE TABLE `mahasiswa` (
   `id` int(11) UNSIGNED NOT NULL,
   `nim` varchar(15) NOT NULL,
   `nama` varchar(100) NOT NULL,
@@ -576,10 +327,10 @@ CREATE TABLE `ref_mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_mahasiswa`
+-- Dumping data untuk tabel `mahasiswa`
 --
 
-INSERT INTO `ref_mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `kode_prodi`, `prodi`, `gender`) VALUES
+INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `kode_prodi`, `prodi`, `gender`) VALUES
 (2, '1701091031', 'Wara Ulan Saputri', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', 'Perempuan'),
 (3, '1701081035', 'Silvia Angraini', 'TI', 'Teknologi Informasi', '3TK', 'Teknik Komputer D-3', 'Perempuan'),
 (4, '1701091033', 'Dea Annona Prayetno Putri', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', 'Perempuan'),
@@ -1017,7 +768,7 @@ INSERT INTO `ref_mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `ko
 (436, '1901093013', 'Sarifa Suhaila', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
 (437, '1901093014', 'Ghina Lianti Sastri', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
 (438, '1901093015', 'Friska Wulandari', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', '');
-INSERT INTO `ref_mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `kode_prodi`, `prodi`, `gender`) VALUES
+INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `kode_prodi`, `prodi`, `gender`) VALUES
 (439, '1901093022', 'Aura Syifa Listi', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
 (440, '1901093024', 'Muthari Al Furqani', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
 (441, '1901093025', 'Muhammad Irsyad', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
@@ -1450,7 +1201,7 @@ INSERT INTO `ref_mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `ko
 (868, '2101092015', 'Putri Dini Prameswari', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
 (869, '2101092062', 'Qurratu Aini', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
 (870, '2101092063', 'Rafi Citra Al Azis', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', '');
-INSERT INTO `ref_mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `kode_prodi`, `prodi`, `gender`) VALUES
+INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `kode_prodi`, `prodi`, `gender`) VALUES
 (871, '2101092078', 'Rafiansyah Darman', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
 (872, '2101092016', 'Rahmitul Hasanah', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
 (873, '2101092064', 'Raihan Adinata', 'TI', 'Teknologi Informasi', '3MI', 'Manajemen Informatika D-3', ''),
@@ -1543,10 +1294,10 @@ INSERT INTO `ref_mahasiswa` (`id`, `nim`, `nama`, `kode_jurusan`, `jurusan`, `ko
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_matakuliah`
+-- Struktur dari tabel `matakuliah`
 --
 
-CREATE TABLE `ref_matakuliah` (
+CREATE TABLE `matakuliah` (
   `id_matakuliah` int(11) NOT NULL,
   `kode_matakuliah` varchar(10) DEFAULT NULL,
   `nama_matakuliah` varchar(50) DEFAULT NULL,
@@ -1562,71 +1313,371 @@ CREATE TABLE `ref_matakuliah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_matakuliah`
+-- Dumping data untuk tabel `matakuliah`
 --
 
-INSERT INTO `ref_matakuliah` (`id_matakuliah`, `kode_matakuliah`, `nama_matakuliah`, `TP`, `sks`, `jam`, `sks_teori`, `sks_praktek`, `jam_teori`, `jam_praktek`, `semester`, `id_kurikulum`) VALUES
-(1, 'RPL3205', 'Pengantar Rekayasa Perangkat Lunak', 'T', 2, 2, 2, 0, 2, 0, 2, 5),
-(13, 'RPL3206', 'Bahasa Indonesia', 'T', 2, 2, 2, 0, 2, 0, 2, 5),
-(14, 'RPL3207', 'Basis Data', 'P', 2, 2, 3, 2, 2, 2, 3, 5),
-(15, 'RPL3208', 'Kecerdasan buatan', 'P', 2, 2, 3, 2, 2, 2, 3, 5),
-(16, 'RPL3209', 'Manajemen Proyek', 'T/P', 3, 6, 1, 2, 2, 4, 4, 3),
-(17, 'RPL3210', 'Matematika Diskrit', 'T', 2, 4, 2, 0, 4, 0, 2, 1);
+INSERT INTO `matakuliah` (`id_matakuliah`, `kode_matakuliah`, `nama_matakuliah`, `TP`, `sks`, `jam`, `sks_teori`, `sks_praktek`, `jam_teori`, `jam_praktek`, `semester`, `id_kurikulum`) VALUES
+(1, 'RPL3401', 'Pemrograman Web Framework', 'T', 2, 2, 2, 0, 2, 0, 2, 5),
+(13, 'RPL3402', 'Analisis dan perancangan Perangkat Lunak', 'T', 2, 2, 2, 0, 2, 0, 2, 5),
+(14, 'RPL3403', 'Kecerdasan Buatan', 'P', 2, 2, 3, 2, 2, 2, 3, 5),
+(15, 'RPL3404', 'Kesehatan dan keselamatan kerja', 'P', 2, 2, 3, 2, 2, 2, 3, 5),
+(16, 'RPL2402', 'Statistik dan Probabilitas', 'T/P', 3, 6, 1, 2, 2, 4, 4, 5),
+(17, 'RPL3210', 'Manajemen Proyek', 'T', 2, 4, 2, 0, 4, 0, 2, 5),
+(18, 'ISY3208', 'Manajemen Proyek SI', 'T', 2, 2, 2, 0, 2, 0, 2, 6),
+(19, 'ISY3210', 'Keamanan Sistem Informasi', 'T', 2, 2, 2, 0, 2, 0, 2, 6),
+(20, 'ISY3211', 'Probabilitas dan Statistika', 'P', 2, 2, 3, 2, 2, 2, 3, 6),
+(21, 'ISY3310', 'Pemograman Mobile Lanjut', 'P', 2, 2, 3, 2, 2, 2, 3, 6),
+(22, 'ISY3306', 'Pemrograman Desktop', 'T/P', 3, 6, 1, 2, 2, 4, 4, 6),
+(23, 'ISY3204', 'Interaksi Manusia dan Komputer', 'T', 2, 4, 2, 0, 4, 0, 2, 6),
+(24, 'CEN3101', 'Jaringan Komputer Dasar', 'T', 2, 2, 2, 0, 2, 0, 1, 7),
+(25, 'CEN3103', 'Algoritma Pemrograman', 'T', 2, 2, 2, 0, 2, 0, 1, 7),
+(26, 'CEN3201', 'Switching, Routing dan Wireless', 'P', 2, 2, 3, 2, 2, 2, 2, 7),
+(27, 'CEN3205', 'Pemrograman Berbasis Objek (PBO)', 'P', 2, 2, 3, 2, 2, 2, 2, 7),
+(28, 'CEN3301', 'Cloud Computing', 'T/P', 3, 6, 1, 2, 2, 4, 3, 7),
+(29, 'CEN3401', 'Keamanan Komputer dan Jaringan', 'T', 2, 4, 2, 0, 4, 0, 4, 7);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_matakuliah_kbk`
+-- Struktur dari tabel `matakuliah_kbk`
 --
 
-CREATE TABLE `ref_matakuliah_kbk` (
+CREATE TABLE `matakuliah_kbk` (
   `id_matakuliahkbk` int(11) NOT NULL,
   `id_matakuliah` int(11) NOT NULL,
-  `id_kbk` int(11) NOT NULL,
-  `id_kurikulum` int(11) NOT NULL
+  `id_kbk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_matakuliah_kbk`
+-- Dumping data untuk tabel `matakuliah_kbk`
 --
 
-INSERT INTO `ref_matakuliah_kbk` (`id_matakuliahkbk`, `id_matakuliah`, `id_kbk`, `id_kurikulum`) VALUES
-(15, 16, 3, 2),
-(16, 15, 2, 3),
-(17, 14, 3, 2),
-(25, 17, 1, 4),
-(27, 1, 1, 2);
+INSERT INTO `matakuliah_kbk` (`id_matakuliahkbk`, `id_matakuliah`, `id_kbk`) VALUES
+(15, 1, 1),
+(16, 13, 2),
+(17, 14, 3),
+(25, 15, 4),
+(27, 16, 5),
+(29, 17, 3),
+(30, 18, 1),
+(31, 19, 2),
+(32, 20, 3),
+(33, 21, 4),
+(34, 22, 5),
+(35, 23, 3),
+(36, 24, 1),
+(37, 25, 2),
+(38, 26, 3),
+(39, 27, 4),
+(40, 28, 5),
+(41, 29, 3);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_pimpinan_jurusan`
+-- Struktur dari tabel `migrations`
 --
 
-CREATE TABLE `ref_pimpinan_jurusan` (
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2024_03_08_185829_create_bidang_keahlian_table', 0),
+(2, '2024_03_08_185829_create_dosen_table', 0),
+(3, '2024_03_08_185829_create_jurusan_table', 0),
+(4, '2024_03_08_185829_create_level_table', 0),
+(5, '2024_03_08_185829_create_matkul_table', 0),
+(6, '2024_03_08_185829_create_pengurus_kbk_table', 0),
+(7, '2024_03_08_185829_create_prodi_table', 0),
+(8, '2024_03_08_185829_create_rps_table', 0),
+(9, '2024_03_08_185829_create_soal_table', 0),
+(10, '2024_03_08_185829_create_tahun_ajaran_table', 0),
+(11, '2024_03_08_185829_create_user_table', 0),
+(12, '2024_03_08_185829_create_verifikasi_rps_table', 0),
+(13, '2024_03_08_185829_create_verifikasi_soal_table', 0),
+(14, '2024_03_08_185832_add_foreign_keys_to_dosen_table', 0),
+(15, '2024_03_08_185832_add_foreign_keys_to_matkul_table', 0),
+(16, '2024_03_08_185832_add_foreign_keys_to_pengurus_kbk_table', 0),
+(17, '2024_03_08_185832_add_foreign_keys_to_prodi_table', 0),
+(18, '2024_03_08_185832_add_foreign_keys_to_rps_table', 0),
+(19, '2024_03_08_185832_add_foreign_keys_to_soal_table', 0),
+(20, '2024_03_08_185832_add_foreign_keys_to_user_table', 0),
+(21, '2024_03_08_185832_add_foreign_keys_to_verifikasi_rps_table', 0),
+(22, '2024_03_08_185832_add_foreign_keys_to_verifikasi_soal_table', 0),
+(23, '2024_03_09_110337_create_bidang_keahlian_table', 0),
+(24, '2024_03_09_110337_create_dosen_table', 0),
+(25, '2024_03_09_110337_create_jurusan_table', 0),
+(26, '2024_03_09_110337_create_level_table', 0),
+(27, '2024_03_09_110337_create_matkul_table', 0),
+(28, '2024_03_09_110337_create_pengurus_kbk_table', 0),
+(29, '2024_03_09_110337_create_prodi_table', 0),
+(30, '2024_03_09_110337_create_rps_table', 0),
+(31, '2024_03_09_110337_create_soal_table', 0),
+(32, '2024_03_09_110337_create_tahun_ajaran_table', 0),
+(33, '2024_03_09_110337_create_user_table', 0),
+(34, '2024_03_09_110337_create_verifikasi_rps_table', 0),
+(35, '2024_03_09_110337_create_verifikasi_soal_table', 0),
+(36, '2024_03_09_110340_add_foreign_keys_to_dosen_table', 0),
+(37, '2024_03_09_110340_add_foreign_keys_to_matkul_table', 0),
+(38, '2024_03_09_110340_add_foreign_keys_to_pengurus_kbk_table', 0),
+(39, '2024_03_09_110340_add_foreign_keys_to_prodi_table', 0),
+(40, '2024_03_09_110340_add_foreign_keys_to_rps_table', 0),
+(41, '2024_03_09_110340_add_foreign_keys_to_soal_table', 0),
+(42, '2024_03_09_110340_add_foreign_keys_to_user_table', 0),
+(43, '2024_03_09_110340_add_foreign_keys_to_verifikasi_rps_table', 0),
+(44, '2024_03_09_110340_add_foreign_keys_to_verifikasi_soal_table', 0),
+(45, '2024_03_21_174429_create_bidang_keahlian_table', 0),
+(46, '2024_03_21_174429_create_dosen_table', 0),
+(47, '2024_03_21_174429_create_jurusan_table', 0),
+(48, '2024_03_21_174429_create_level_table', 0),
+(49, '2024_03_21_174429_create_matkul_table', 0),
+(50, '2024_03_21_174429_create_pengurus_kbk_table', 0),
+(51, '2024_03_21_174429_create_prodi_table', 0),
+(52, '2024_03_21_174429_create_rps_table', 0),
+(53, '2024_03_21_174429_create_soal_table', 0),
+(54, '2024_03_21_174429_create_tahun_ajaran_table', 0),
+(55, '2024_03_21_174429_create_user_table', 0),
+(56, '2024_03_21_174429_create_verifikasi_rps_table', 0),
+(57, '2024_03_21_174429_create_verifikasi_soal_table', 0),
+(58, '2024_03_21_174432_add_foreign_keys_to_dosen_table', 0),
+(59, '2024_03_21_174432_add_foreign_keys_to_matkul_table', 0),
+(60, '2024_03_21_174432_add_foreign_keys_to_pengurus_kbk_table', 0),
+(61, '2024_03_21_174432_add_foreign_keys_to_prodi_table', 0),
+(62, '2024_03_21_174432_add_foreign_keys_to_rps_table', 0),
+(63, '2024_03_21_174432_add_foreign_keys_to_soal_table', 0),
+(64, '2024_03_21_174432_add_foreign_keys_to_user_table', 0),
+(65, '2024_03_21_174432_add_foreign_keys_to_verifikasi_rps_table', 0),
+(66, '2024_03_21_174432_add_foreign_keys_to_verifikasi_soal_table', 0),
+(67, '2024_03_24_081032_create_ref_bidang_keahlian_table', 0),
+(68, '2024_03_24_081032_create_ref_dosen_table', 0),
+(69, '2024_03_24_081032_create_ref_dosen_matakuliah_table', 0),
+(70, '2024_03_24_081032_create_ref_jabatan_pimpinan_table', 0),
+(71, '2024_03_24_081032_create_ref_jurusan_table', 0),
+(72, '2024_03_24_081032_create_ref_kelas_table', 0),
+(73, '2024_03_24_081032_create_ref_kurikulum_table', 0),
+(74, '2024_03_24_081032_create_ref_level_table', 0),
+(75, '2024_03_24_081032_create_ref_matakuliah_table', 0),
+(76, '2024_03_24_081032_create_ref_pengurus_kbk_table', 0),
+(77, '2024_03_24_081032_create_ref_pimpinan_jurusan_table', 0),
+(78, '2024_03_24_081032_create_ref_pimpinan_prodi_table', 0),
+(79, '2024_03_24_081032_create_ref_prodi_table', 0),
+(80, '2024_03_24_081032_create_ref_rps_table', 0),
+(81, '2024_03_24_081032_create_ref_smt_thn_akd_table', 0),
+(82, '2024_03_24_081032_create_ref_soal_table', 0),
+(83, '2024_03_24_081032_create_user_table', 0),
+(84, '2024_03_24_081032_create_verifikasi_rps_table', 0),
+(85, '2024_03_24_081032_create_verifikasi_soal_table', 0),
+(86, '2024_03_24_081035_add_foreign_keys_to_ref_pengurus_kbk_table', 0),
+(87, '2024_03_24_081035_add_foreign_keys_to_ref_rps_table', 0),
+(88, '2024_03_24_081035_add_foreign_keys_to_ref_soal_table', 0),
+(89, '2024_03_24_081035_add_foreign_keys_to_user_table', 0),
+(90, '2024_03_24_081035_add_foreign_keys_to_verifikasi_rps_table', 0),
+(91, '2024_03_24_081035_add_foreign_keys_to_verifikasi_soal_table', 0),
+(98, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(99, '2024_06_08_161301_create_permission_tables', 1),
+(100, '2024_07_08_123552_create_notifications_table', 2),
+(101, '2024_07_08_125534_create_notifications_table', 3),
+(102, '2024_07_08_133408_create_notifications_table', 4),
+(103, '2024_07_08_134607_modify_notifications_table', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 99),
+(2, 'App\\Models\\User', 6),
+(2, 'App\\Models\\User', 166),
+(3, 'App\\Models\\User', 1),
+(4, 'App\\Models\\User', 4),
+(4, 'App\\Models\\User', 7),
+(4, 'App\\Models\\User', 155),
+(5, 'App\\Models\\User', 2),
+(7, 'App\\Models\\User', 3),
+(7, 'App\\Models\\User', 156),
+(8, 'App\\Models\\User', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` char(36) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `notifiable_type` varchar(255) NOT NULL,
+  `notifiable_id` bigint(20) UNSIGNED NOT NULL,
+  `data` text NOT NULL,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
+('031b5f4a-cc2c-49c2-8915-b29b36f30a59', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 4, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi oleh ALDE ALANDA\"}', '2024-07-08 07:55:16', '2024-07-08 07:55:09', '2024-07-08 07:55:16'),
+('08cb1707-6b87-4665-ac53-44d52a3bff9a', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:23:32', '2024-07-08 09:23:29', '2024-07-08 09:23:32'),
+('09ed0286-0386-40d1-a51b-57036b995d56', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:07:52', '2024-07-08 09:07:49', '2024-07-08 09:07:52'),
+('0d84cd3e-276e-4114-b48f-ffeeff35f612', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:15:41', '2024-07-08 09:15:38', '2024-07-08 09:15:41'),
+('10b8ea04-662e-459d-8f61-3867cdd554ad', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:15:41', '2024-07-08 09:15:06', '2024-07-08 09:15:41'),
+('11ed7fe9-d598-4b5f-8242-0488aca12312', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 4, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-09 04:03:42', '2024-07-08 09:15:20', '2024-07-09 04:03:42'),
+('20b3d9f4-b856-49a6-8cb1-c8733c82844a', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 4, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 08:03:43', '2024-07-08 08:03:39', '2024-07-08 08:03:43'),
+('37249c42-518d-4d4d-b660-77d01c5e13ed', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:07:26', '2024-07-08 09:07:03', '2024-07-08 09:07:26'),
+('3cf72324-6061-4816-b63b-3f95d61d2ed4', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:08:50', '2024-07-08 09:08:41', '2024-07-08 09:08:50'),
+('44fd602c-2844-4297-8919-d81fe3f10ffa', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 4, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi oleh ALDE ALANDA\"}', '2024-07-08 07:06:01', '2024-07-08 07:05:45', '2024-07-08 07:06:01'),
+('48c44285-668a-47ac-bbaf-4a0d0b6331cd', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:24:05', '2024-07-08 09:24:02', '2024-07-08 09:24:05'),
+('5d7b9975-47c0-487e-9400-049a2284d32f', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:07:26', '2024-07-08 08:26:38', '2024-07-08 09:07:26'),
+('6616ccfc-ca5a-421e-be6a-1dea565ac5a0', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 7, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', NULL, '2024-07-09 19:04:03', '2024-07-09 19:04:03'),
+('68938b21-e837-4bc5-ac19-a578b60c4c5b', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:24:05', '2024-07-08 09:23:47', '2024-07-08 09:24:05'),
+('730fbba5-b482-4fad-a173-1d9d668a52b9', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 4, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 07:57:51', '2024-07-08 07:57:46', '2024-07-08 07:57:51'),
+('8f4e9e86-65cd-4fb8-8b2a-5d0073596c94', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:08:50', '2024-07-08 09:08:23', '2024-07-08 09:08:50'),
+('a3e12b75-5fc8-4109-b295-656ab01eaeef', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 4, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 08:27:32', '2024-07-08 08:27:27', '2024-07-08 08:27:32'),
+('b1b34365-fc87-49a6-ad42-3522c262d720', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:17:46', '2024-07-08 09:17:27', '2024-07-08 09:17:46'),
+('c21814a6-31ea-42d6-a3f7-8a47d9ec480f', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:11:42', '2024-07-08 09:11:38', '2024-07-08 09:11:42'),
+('c23cba3a-0dcd-441a-bd4d-33ca7e119740', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:17:09', '2024-07-08 09:17:07', '2024-07-08 09:17:09'),
+('caf5d9e1-8001-43bc-810f-48d42e3ecb4c', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:17:46', '2024-07-08 09:17:40', '2024-07-08 09:17:46'),
+('ce5bd293-b9f1-4cc4-a3aa-7148b1a7f9fc', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:15:41', '2024-07-08 09:15:27', '2024-07-08 09:15:41'),
+('d5d2863e-8ce4-4458-b5a3-aec798c33308', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:08:50', '2024-07-08 09:08:17', '2024-07-08 09:08:50'),
+('dc497d17-bc4b-41db-ac16-99233932a75f', 'App\\Notifications\\SoalVerifiedNotification', 'App\\Models\\User', 155, '{\"soal_id\":null,\"message\":\"Soal Anda telah diverifikasi\"}', '2024-07-08 09:08:09', '2024-07-08 09:08:07', '2024-07-08 09:08:09'),
+('e2b11a5e-1546-4640-9071-054c722bebd8', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:08:50', '2024-07-08 09:08:48', '2024-07-08 09:08:50'),
+('e5c79ca5-5039-4e13-bb04-eb4ab99b4879', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 4, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-09 04:03:42', '2024-07-08 09:15:13', '2024-07-09 04:03:42'),
+('eaefc50b-ef39-490d-9eb5-7e7c9d254de6', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 4, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 08:01:34', '2024-07-08 08:01:30', '2024-07-08 08:01:34'),
+('eff881cc-68a9-4e75-88ec-f49297f39dfe', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 4, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi oleh ALDE ALANDA\"}', '2024-07-08 07:18:33', '2024-07-08 07:18:28', '2024-07-08 07:18:33'),
+('f51b2436-ad78-4c46-8a96-b676d64909bb', 'App\\Notifications\\RPSVerifiedNotification', 'App\\Models\\User', 155, '{\"rps_id\":null,\"message\":\"RPS Anda telah diverifikasi\"}', '2024-07-08 09:11:42', '2024-07-08 09:11:31', '2024-07-08 09:11:42');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
+('dosen@gmail.com', 'gcp1NDuWylqZyBqDDNs51I5fFfpqS9WpVD1bdzwEdfNq6fVTJR9CXlCGndZr', '2024-06-25 20:19:25'),
+('kbk@gmail.com', 'pm4FDJK4GLAoITcAqN5BJBDzL21jsN70xM1v2qBcNj2MGCUAqT4Bq5S7A0PA', '2024-06-25 20:19:40'),
+('spongebob.jomblo@gmail.com', 'BQIXZYGUraXdsF9j7Ae0FL2B7xAh15z4Qo4uwMeINyyUBvmUYBHeBf3rYhRj', '2024-06-09 12:06:36');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(24, 'view dashboard admin', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(25, 'view data user', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(26, 'view data change log', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(27, 'view data master', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(28, 'view data tahun akademik', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(29, 'view data kurikulum', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(30, 'view data matakuliah', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(31, 'view data dosen pengampu', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(32, 'view data manajemen kbk', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(33, 'view data mahasiswa', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(34, 'view data proposal ta', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(35, 'view data rps', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(36, 'view data verifikasi rps', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(37, 'view data soal', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(38, 'view data verifikasi soal', 'web', '2024-06-18 08:49:30', '2024-06-18 08:49:30'),
+(39, 'view dashboard super_admin', 'web', '2024-06-18 09:05:45', '2024-06-18 09:05:45'),
+(40, 'view data hak akses', 'web', '2024-06-19 14:16:29', '2024-06-19 14:16:29'),
+(41, 'view data role', 'web', '2024-06-25 10:54:04', '2024-06-25 10:54:04'),
+(42, 'view dashboard user', 'web', '2024-06-26 00:13:03', '2024-06-26 00:13:03'),
+(43, 'view dashboard dosen', 'web', '2024-06-26 00:13:03', '2024-06-26 00:13:03'),
+(44, 'view dashboard kaprodi', 'web', '2024-06-26 00:18:27', '2024-06-26 00:18:27'),
+(45, 'view dashboard pengurus', 'web', '2024-06-26 00:18:27', '2024-06-26 00:18:27'),
+(46, 'view dashboard kajur', 'web', '2024-06-26 15:44:57', '2024-06-26 15:44:57'),
+(47, 'crud rps', 'web', '2024-06-26 16:18:19', '2024-06-26 16:18:19'),
+(48, 'crud soal', 'web', '2024-06-26 16:18:19', '2024-06-26 16:18:19'),
+(49, 'crud verif rps', 'web', '2024-07-06 03:39:37', '2024-07-06 03:39:37'),
+(50, 'crud verif soal', 'web', '2024-07-06 03:41:12', '2024-07-06 03:41:12');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pimpinan_jurusan`
+--
+
+CREATE TABLE `pimpinan_jurusan` (
   `id_pimpinan_jurusan` int(11) NOT NULL,
   `jabatan_pimpinan` varchar(100) NOT NULL,
-  `id_jurusan` int(11) NOT NULL DEFAULT 7,
+  `id_jurusan` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `periode` varchar(10) NOT NULL,
   `status` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_pimpinan_jurusan`
+-- Dumping data untuk tabel `pimpinan_jurusan`
 --
 
-INSERT INTO `ref_pimpinan_jurusan` (`id_pimpinan_jurusan`, `jabatan_pimpinan`, `id_jurusan`, `nama`, `periode`, `status`) VALUES
+INSERT INTO `pimpinan_jurusan` (`id_pimpinan_jurusan`, `jabatan_pimpinan`, `id_jurusan`, `nama`, `periode`, `status`) VALUES
 (1, 'Ketua Jurusan', 7, 'RONAL HADI, S.T, M.Kom', '2022-2026', '1'),
 (3, 'Sekretaris Jurusan', 7, 'HUMAIRA, S.T, M.T', '2022-2026', '1');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_pimpinan_prodi`
+-- Struktur dari tabel `pimpinan_prodi`
 --
 
-CREATE TABLE `ref_pimpinan_prodi` (
+CREATE TABLE `pimpinan_prodi` (
   `id_pimpinan_prodi` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `nidn` varchar(11) NOT NULL,
@@ -1641,19 +1692,24 @@ CREATE TABLE `ref_pimpinan_prodi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_pimpinan_prodi`
+-- Dumping data untuk tabel `pimpinan_prodi`
 --
 
-INSERT INTO `ref_pimpinan_prodi` (`id_pimpinan_prodi`, `nama`, `nidn`, `nip`, `kode_prodi`, `prodi`, `kode_jurusan`, `jurusan`, `periode`, `status`, `id_jabatan`) VALUES
-(4, 'MERI AZMI, S.T, M.Cs', '0029068102', '198106292006042001', '4TRPL', 'Teknologi Rekayasa Perangkat Lunak', 'TI', 'Teknologi Informasi', '2022-2026', '1', 3);
+INSERT INTO `pimpinan_prodi` (`id_pimpinan_prodi`, `nama`, `nidn`, `nip`, `kode_prodi`, `prodi`, `kode_jurusan`, `jurusan`, `periode`, `status`, `id_jabatan`) VALUES
+(4, 'MERI AZMI, S.T, M.Cs', '0029068102', '198106292006042001', '4TRPL', 'Teknologi Rekayasa Perangkat Lunak', 'TI', 'Teknologi Informasi', '2022-2026', '1', 3),
+(5, 'RONI PUTRA, S.Kom, M.T ', '0022078607', '198607222009121004', '3MI', 'Manajemen Informatika D3', 'TI', 'Teknologi Informasi', '2022-2026', '1', 3),
+(6, 'HIDRA AMNUR, S.E., S.Kom, M.Kom', '0015048209', '198204152012121002', '3TK', 'Teknik Komputer D-3', 'TI', 'Teknologi Informasi', '2022-2026', '1', 3),
+(7, 'DEFNI, S.Si, M.Kom', '0007128104', '198112072008122001', '3SI-TD', 'D-3 SISTEM INFORMASI (TANAH DATAR)', 'TI', 'Teknologi Informasi', '2022-2026', '1', 3),
+(8, 'ERVAN ASRI, S.Kom, M.Kom', '0001097802', '197809012008121001', '3TK-SS', 'D-3 Teknik Komputer (Solok Selatan)', 'TI', 'Teknologi Informasi', '2022-2026', '1', 3),
+(9, 'TAUFIK GUSMAN,  S.S.T, M.Ds', '0010088805', '198808102019031012', '3MI-P', 'Manajemen Informatika (Pelalawan)', 'TI', 'Teknologi Informasi', '2022-2026', '1', 3);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_prodi`
+-- Struktur dari tabel `prodi`
 --
 
-CREATE TABLE `ref_prodi` (
+CREATE TABLE `prodi` (
   `id_prodi` int(11) NOT NULL,
   `kode_prodi` varchar(10) NOT NULL,
   `prodi` varchar(500) NOT NULL,
@@ -1662,11 +1718,10 @@ CREATE TABLE `ref_prodi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `ref_prodi`
+-- Dumping data untuk tabel `prodi`
 --
 
-INSERT INTO `ref_prodi` (`id_prodi`, `kode_prodi`, `prodi`, `id_jurusan`, `id_jenjang`) VALUES
-(7, '4EC', 'D4 - Teknik Elektronika', 4, 'D4'),
+INSERT INTO `prodi` (`id_prodi`, `kode_prodi`, `prodi`, `id_jurusan`, `id_jenjang`) VALUES
 (18, '3MI', 'Manajemen Informatika D-3', 7, 'D3'),
 (19, '3TK', 'Teknik Komputer D-3', 7, 'D3'),
 (20, '4TRPL', 'Teknologi Rekayasa Perangkat Lunak', 7, 'D4'),
@@ -1677,25 +1732,25 @@ INSERT INTO `ref_prodi` (`id_prodi`, `kode_prodi`, `prodi`, `id_jurusan`, `id_je
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_proposal_ta`
+-- Struktur dari tabel `proposal_ta`
 --
 
-CREATE TABLE `ref_proposal_ta` (
+CREATE TABLE `proposal_ta` (
   `id_proposal_ta` int(255) NOT NULL,
   `nim` varchar(15) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `judul` varchar(255) DEFAULT NULL,
   `pembimbing_satu_nama` varchar(100) NOT NULL,
-  `pembimbing_satu_nidn` varchar(20) NOT NULL,
+  `pembimbing_satu_nidn` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `pembimbing_dua_nama` varchar(100) NOT NULL,
-  `pembimbing_dua_nidn` varchar(20) NOT NULL
+  `pembimbing_dua_nidn` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `ref_proposal_ta`
+-- Dumping data untuk tabel `proposal_ta`
 --
 
-INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembimbing_satu_nama`, `pembimbing_satu_nidn`, `pembimbing_dua_nama`, `pembimbing_dua_nidn`) VALUES
+INSERT INTO `proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembimbing_satu_nama`, `pembimbing_satu_nidn`, `pembimbing_dua_nama`, `pembimbing_dua_nidn`) VALUES
 (1, '1701091031', 'Wara Ulan Saputri', 'PERANCANGAN SISTEM INFORMASI PENDAFTARAN DAN TES ONLINE PADA PONDOK PESANTREN BERBASIS WEB MENGGUNAKAN FRAMEWORK CODEIGNITER', 'INDRI RAHMAYUNI, S.T, M.T', '0025068301', 'CIPTO PRABOWO, S.T, M.T', '0002037410'),
 (2, '1701091033', 'Dea Annona Prayetno Putri', 'Perancangan dan Implementasi Sistem Informasi Manajemen Rekam Medis dan Antrian Pasien pada Praktik Dokter Mandiri menggunakan Framework CodeIgniter', 'INDRI RAHMAYUNI, S.T, M.T', '0025068301', 'DENI SATRIA, S.Kom, M.Kom', '0028097803'),
 (3, '1701081035', 'Silvia Angraini', 'Perancang Dan Implementasi Management Central Log Menggunakan Wazuh Di Virtualbox', 'DWINY MEIDELFI, S.Kom, M.Cs', '0009058601', 'ALDO ERIANDA, M.T, S.ST', '003078904'),
@@ -1917,7 +1972,7 @@ INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembim
 (219, '1801082001', 'Fatzryah Virantika', 'IMPLEMENTASI CICD UNTUK AUTOMATIC DEPLOYMENT MENGGUNAKAN AWS CODEPIPELINE DI AWS', 'ALDE ALANDA, S.Kom, M.T', '0025088802', 'Ir. HANRIYAWAN ADNAN MOODUTO, M.Kom.', '0010056606'),
 (220, '1801082007', 'Indra Ramadani', 'MEMBANGUN INFRASTRUKTUR DAN KEAMANAN JARINGAN TERHADAP SERANGAN DOS DENGAN MENGGUNAKAN OPEN SOURCE PLATFORM PFSENSE', 'ALDE ALANDA, S.Kom, M.T', '0025088802', 'HIDRA AMNUR, S.E., S.Kom, M.Kom', '0015048209'),
 (221, '1801082011', 'Andre Kurniawan', 'Implementasi Konfigurasi Server Menggunakan Ansible', 'ALDE ALANDA, S.Kom, M.T', '0025088802', 'Ir. Rahmat Hidayat, S.T, M.Sc.IT', '1015047801');
-INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembimbing_satu_nama`, `pembimbing_satu_nidn`, `pembimbing_dua_nama`, `pembimbing_dua_nidn`) VALUES
+INSERT INTO `proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembimbing_satu_nama`, `pembimbing_satu_nidn`, `pembimbing_dua_nama`, `pembimbing_dua_nidn`) VALUES
 (222, '1801081002 ', 'Muhammad Idris', 'Sistem Kontrol dan Monitoring Kolam Ikan Berbasis IoT', 'ALDE ALANDA, S.Kom, M.T', '0025088802', 'FAZROL ROZI, M.Sc.', '0021078601'),
 (223, '1801082002 ', 'Dwi Suci Amelia', 'RANCANG BANGUN SISTEM MONITORING SUHU DAN KELEMBABAN TANAH SERTA PENYIRAMAN OTOMATIS PADA TANAMAN BUAH NAGA BERBASIS IOT MENGGUNAKAN SERVER AWS', 'HIDRA AMNUR, S.E., S.Kom, M.Kom', '0015048209', 'Ir. HANRIYAWAN ADNAN MOODUTO, M.Kom.', '0010056606'),
 (224, '1801082004', 'Nadila Wellyno Putri', 'RANCANG BANGUN PERANGKAT KERAS SMART FARMING PADA TANAMAN CABAI BERBASIS IOT DAN ANDROID', 'FITRI NOVA, M.T, S.ST', '1029058502', 'ERVAN ASRI, S.Kom, M.Kom', '0001097802'),
@@ -2135,7 +2190,7 @@ INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembim
 (436, '1811082003', 'Rayhan Putra', 'Sistem Pendukung Keputusan Pemilihan Mobil Bekas Secara Dinamis Menggunakan Metode Topsis', 'RONI PUTRA, S.Kom, M.T ', '0022078607', 'DWINY MEIDELFI, S.Kom, M.Cs', '0009058601'),
 (437, '1901092024', 'Imam Muhammad Rafifi', 'RANCANG BANGUN E COMMERCE TOKO KUE MENGGUNAKAN FRAMEWORK LARAVEL', 'RASYIDAH, S.Si, M.M.', '0001067407', 'Fanni Sukma, S.ST., M.T', '0006069009'),
 (438, '1901093006', 'Miftachul Khairiyah', 'Sistem Informasi Inventory Obat di Apotek Multazam Berbasis Progressive Web Apps Menggunakan Framework Laravel', 'Dr. Ir. YUHEFIZAR, S.Kom., M.Kom', '0013017604', 'ERVAN ASRI, S.Kom, M.Kom', '0001097802');
-INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembimbing_satu_nama`, `pembimbing_satu_nidn`, `pembimbing_dua_nama`, `pembimbing_dua_nidn`) VALUES
+INSERT INTO `proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembimbing_satu_nama`, `pembimbing_satu_nidn`, `pembimbing_dua_nama`, `pembimbing_dua_nidn`) VALUES
 (439, '1901091014', 'Juma Helda', 'PERANCANGAN SISTEM INFORMASI ALUMNI SMK NEGERI 2 PADANG PANJANG BERBASIS WEB MENGGUNAKAN FRAMEWORK CODEIGNITER', 'RONI PUTRA, S.Kom, M.T ', '0022078607', 'ALDE ALANDA, S.Kom, M.T', '0025088802'),
 (440, '1901091016', 'Nur Azizah', 'PERANCANGAN SISTEM INFORMASI BIMBINGAN PENASEHAT AKADEMIK \r\nJURUSAN TEKNOLOGI INFORMASI POLITEKNIK NEGERI PADANG\r\nMENGGUNAKAN FRAMEWORK CODEIGNITER\r\n', 'DWINY MEIDELFI, S.Kom, M.Cs', '0009058601', 'DEDDY PRAYAMA, S.Kom, M.ISD', '0015048105'),
 (441, '1701081041', 'Deby Hibatul Fadillah', 'IMPLEMENTASI WEB SERVICE PADA APLIKASI PENJUALAN PLAFON BERBASIS ANDROID DI KABUPATEN TANAH DATAR', 'ERVAN ASRI, S.Kom, M.Kom', '0001097802', 'RASYIDAH, S.Si, M.M.', '0001067407'),
@@ -2349,7 +2404,7 @@ INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembim
 (649, '1911082025', 'Haviz Alhadi', 'SISTEM PENDUKUNG KEPUTUSAN PENERIMAAN PEGAWAI BARU MENGGUNAKAN METODE WEIGHTED PRODUCT', 'DENI SATRIA, S.Kom, M.Kom', '0028097803', 'Ir. Rahmat Hidayat, S.T, M.Sc.IT', '1015047801'),
 (650, '1911081018', 'Anisa Fadilah', 'Analis Menu Rekomendasi Berdasarkan Rating Pelanggan Menggunakan metode logika fuzzy', 'YULHERNIWATI, S.Kom, M.T', '0019077609', 'CIPTO PRABOWO, S.T, M.T', '0002037410'),
 (651, '1911082013', 'Zelfriadi Abrar', 'PENERAPAN SISTEM PENDUKUNG KEPUTUSAN UNTUK PREDIKSI PENJUALAN MENGGUNAKAN METODE FUZZY TIME SERIES', 'Ir. Rahmat Hidayat, S.T, M.Sc.IT', '1015047801', 'DWINY MEIDELFI, S.Kom, M.Cs', '0009058601');
-INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembimbing_satu_nama`, `pembimbing_satu_nidn`, `pembimbing_dua_nama`, `pembimbing_dua_nidn`) VALUES
+INSERT INTO `proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembimbing_satu_nama`, `pembimbing_satu_nidn`, `pembimbing_dua_nama`, `pembimbing_dua_nidn`) VALUES
 (652, '1911082033', 'Farhan Maulidani', 'SISTEM ABSENSI KARYAWAN MENGGUNAKAN METODE \r\nMTCNN (MULTITASK CASCADED CONVOLUTIONAL \r\nNEURAL NETWORK) DENGAN BERBASIS FACE \r\nRECOGNITION', 'RONAL HADI, S.T, M.Kom', '0029017603', 'Andre Febrian Kasmar, S.T., M.T.', '0020028804'),
 (653, '2001082046', 'Ulfa Izmilia', 'IMPLEMENTASI QUEUE TREE DAN VLAN MENGGUNAKAN CAPsMAN DI KOS BUK ERNA CUPAK TANGAH\r\n', 'Ir. HANRIYAWAN ADNAN MOODUTO, M.Kom.', '0010056606', 'RITA AFYENNI, S.Kom, M.Kom', '0018077099'),
 (654, '2001092046', 'Benny Kurniawan', 'SISTEM INFORMASI RSP (RUMAH SINGGAH PASIEN) IZI SUMBAR', 'DENI SATRIA, S.Kom, M.Kom', '0028097803', 'FAZROL ROZI, M.Sc.', '0021078601'),
@@ -2372,75 +2427,6 @@ INSERT INTO `ref_proposal_ta` (`id_proposal_ta`, `nim`, `nama`, `judul`, `pembim
 (671, '1811081008', 'Meilinda Safitri Effendi', 'PENERAPAN ALGORITMA BOYER MOORE BESERTA FITUR FAQ CHATBOT UNTUK PENCARIAN DATA KELUHAN PENYAKIT\r\n(STUDI KASUS PADA SISTEM INFORMASI PUSKESMAS SINTUAK TOBOH GADANG)\r\n', 'RITA AFYENNI, S.Kom, M.Kom', '0018077099', 'RONAL HADI, S.T, M.Kom', '0029017603'),
 (672, '1901081003', 'Lia Febriyusni Audi', 'IMPLEMENTASI TEKNOLOGI WEB UNTUK SISTEM INFORMASI DAN PENDAFTARAN ONLINE PADA TPQ NUR TANJUNG', 'Ir. HANRIYAWAN ADNAN MOODUTO, M.Kom.', '0010056606', 'HUMAIRA, S.T, M.T', '0019038103'),
 (673, '1811082010', 'Rahmat Berlianda Avandi', 'SISTEM PENDUKUNG KEPUTUSAN PENENTUAN UANG KULIAH TUNGGAL MAHASISWA POLITEKNIK NEGERI PADANG DENGAN MENGGUNAKAN FUZZY LOGIC METODE TSUKAMOTO', 'RASYIDAH, S.Si, M.M.', '0001067407', 'CIPTO PRABOWO, S.T, M.T', '0002037410');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ref_rps`
---
-
-CREATE TABLE `ref_rps` (
-  `id_rps` int(11) NOT NULL,
-  `id_matakuliah` int(11) NOT NULL,
-  `versi_rps` varchar(20) NOT NULL,
-  `dokumen` varchar(100) NOT NULL,
-  `id_dosen_pengembang` int(11) NOT NULL,
-  `evaluasi` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `ref_rps`
---
-
-INSERT INTO `ref_rps` (`id_rps`, `id_matakuliah`, `versi_rps`, `dokumen`, `id_dosen_pengembang`, `evaluasi`) VALUES
-(56, 16, '2', 'RPS/DTv6fl4m0ihJHG7CdXx1YTbjb7DsjpKhKSXUcIis.pptx', 7, 'jksdhkjsjkd fghjkl;jksd hkjsjkdfghjk l;jks jksdhkjsjkd fghjkl;jksd hkjsjkdfghjk lkdfghjkl;jksd kjsjkdfghjkl ;jksdhkjsjkd fghjkl;jksd hkjsjkdfghjkl;jksdhk sjkdfghjkl ; fghjkl dfghjkl;jksdhk s'),
-(58, 17, '2', 'RPS/mb9yLfhtdKmdGnVFYTI3GQj9ukhRig5uFiNXcdRh.pdf', 7, NULL),
-(59, 13, '1', 'RPS/YMcM2uUn3Ca0eFvQQs4LbBEzolH7kdWfyay6HlUT.pdf', 4, NULL);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ref_smt_thn_akd`
---
-
-CREATE TABLE `ref_smt_thn_akd` (
-  `id_smt_thn_akd` int(11) NOT NULL,
-  `smt_thn_akd` varchar(30) NOT NULL,
-  `status` enum('1','0') DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `ref_smt_thn_akd`
---
-
-INSERT INTO `ref_smt_thn_akd` (`id_smt_thn_akd`, `smt_thn_akd`, `status`) VALUES
-(1, '2022/2023-Genap', '0'),
-(2, '2023/2024-Ganjil', '0'),
-(3, '2023/2024-Genap', '0');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `ref_soal`
---
-
-CREATE TABLE `ref_soal` (
-  `id_soal` int(11) NOT NULL,
-  `id_matakuliah` int(11) NOT NULL,
-  `dosen_pengampu` varchar(50) NOT NULL,
-  `dokumen` varchar(100) NOT NULL,
-  `id_tahun_akademik` int(11) NOT NULL,
-  `evaluasi` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `ref_soal`
---
-
-INSERT INTO `ref_soal` (`id_soal`, `id_matakuliah`, `dosen_pengampu`, `dokumen`, `id_tahun_akademik`, `evaluasi`) VALUES
-(12, 17, '7', 'SOAL/6QTvbdVnjfJF5XlchqIa3uWKWNX3v9Whg1REb5VQ.xlsx', 1, 'okokokkkkkkkkkkkkkkkk'),
-(14, 16, '7', 'SOAL/64vFdauLUoBDyOaKXjijZV9ddJhy9TadrEz01UDN.pdf', 3, 'okoookk'),
-(15, 13, '4', 'SOAL/bwQwCvllHMAOVmGibwlOd2Jk9xY3ovh2e9s7PUOZ.pdf', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -2499,21 +2485,20 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (32, 3),
 (33, 3),
 (34, 3),
-(35, 3),
+(34, 5),
+(34, 7),
+(34, 8),
 (35, 4),
 (35, 5),
 (35, 7),
 (35, 8),
-(36, 3),
 (36, 5),
 (36, 7),
 (36, 8),
-(37, 3),
 (37, 4),
 (37, 5),
 (37, 7),
 (37, 8),
-(38, 3),
 (38, 5),
 (38, 7),
 (38, 8),
@@ -2527,7 +2512,103 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (45, 5),
 (46, 8),
 (47, 4),
-(48, 4);
+(48, 4),
+(49, 5),
+(50, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `rps`
+--
+
+CREATE TABLE `rps` (
+  `id_rps` int(11) NOT NULL,
+  `id_matakuliah` int(11) NOT NULL,
+  `id_tahun_akademik` int(11) NOT NULL,
+  `dokumen` varchar(100) NOT NULL,
+  `id_dosen_pengembang` int(11) NOT NULL,
+  `evaluasi` text DEFAULT NULL,
+  `id_prodi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `rps`
+--
+
+INSERT INTO `rps` (`id_rps`, `id_matakuliah`, `id_tahun_akademik`, `dokumen`, `id_dosen_pengembang`, `evaluasi`, `id_prodi`) VALUES
+(78, 24, 3, 'RPS/vraXZlKgBgOAIBvpnjNm6RvVAerczks5Km4y63Ti.pdf', 7, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 19),
+(79, 25, 3, 'RPS/4fGcjNmhRpnhat1kyU64RpGVvRWelPnoapFJwMwo.pdf', 7, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 19),
+(80, 26, 3, 'RPS/9ge12RzLIpxVw2nqwwtJ7KreVC08zgdniPg1HUAH.pdf', 7, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 19),
+(81, 27, 3, 'RPS/DQaf9dhKGD7oCW3JQBpMx7rV445zvkaffrrUNkbA.pdf', 7, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 19),
+(84, 18, 3, 'RPS/0q3qAtFxR9kT5h2JDWRoJHtMC3imCOvHeRwhLcM3.pdf', 155, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(85, 19, 3, 'RPS/jfJjNEVMVhqTHQjnxdLiPPs1XV77WaJwwxaLDVAL.pdf', 155, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(86, 20, 3, 'RPS/60QLe98qCjBK9CS8FkVIQve1fA5z0pqChgAR853G.pdf', 155, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(87, 21, 3, 'RPS/NxRiyCKwjvnZs3Q390VqFa6jdzVq1T5zXVamY9aN.pdf', 155, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(88, 22, 3, 'RPS/cud2oNgSszI327DnlseQLJa20nB2hi0PKEMwLhSC.pdf', 155, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(89, 23, 3, 'RPS/Z82ygRyfSrjEqfe3NCGdEjnHazmb8vlYuawQs0Cl.pdf', 155, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(92, 13, 3, 'RPS/ScMENGxSuGyCjpE2mg2UdpSucYx2Mez3DxwBW3BW.pdf', 4, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 20),
+(93, 14, 3, 'RPS/kfGpMxhm2cKoeXi7xXKmcq9CMV9spb8mmdhvwSfV.pdf', 4, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 20);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `smt_thn_akd`
+--
+
+CREATE TABLE `smt_thn_akd` (
+  `id_smt_thn_akd` int(11) NOT NULL,
+  `smt_thn_akd` varchar(30) NOT NULL,
+  `status` enum('1','0') DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `smt_thn_akd`
+--
+
+INSERT INTO `smt_thn_akd` (`id_smt_thn_akd`, `smt_thn_akd`, `status`) VALUES
+(1, '2022/2023-Genap', '0'),
+(2, '2023/2024-Ganjil', '0'),
+(3, '2023/2024-Genap', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `soal`
+--
+
+CREATE TABLE `soal` (
+  `id_soal` int(11) NOT NULL,
+  `id_matakuliah` int(11) NOT NULL,
+  `dosen_pengampu` varchar(50) NOT NULL,
+  `dokumen` varchar(100) NOT NULL,
+  `id_tahun_akademik` int(11) NOT NULL,
+  `evaluasi` text DEFAULT NULL,
+  `id_prodi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `soal`
+--
+
+INSERT INTO `soal` (`id_soal`, `id_matakuliah`, `dosen_pengampu`, `dokumen`, `id_tahun_akademik`, `evaluasi`, `id_prodi`) VALUES
+(18, 13, '4', 'SOAL/CQcyfGIZ1MfZ38ikqk8P4JsgYgApHGDkFEue78va.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 20),
+(19, 14, '4', 'SOAL/1zM9RMWqm7UR3zDATqlpconeVAzhymqwWtnxSUym.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 20),
+(20, 16, '4', 'SOAL/YPJruz3PbgvouxT96LvMi66XpkjDnAjsAfeYTkxY.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 20),
+(21, 17, '4', 'SOAL/hbQJV2ccP7JJCJdGh7uTlBOpGgy6gS0P6APGxRzK.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 20),
+(22, 1, '4', 'SOAL/QDLb5uhWGxynujeQT6T5zpsdqrSutZpl1B1juEuF.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 20),
+(23, 15, '4', 'SOAL/v6uHAX6W7k5TLQnU2t3axgCpkCCyqT14h6GUCRqQ.pdf', 3, 'Sudah sesuai dengan jian dan Profil Lulusan prodi', 20),
+(24, 24, '7', 'SOAL/jXhRt9GEaEdZY2F67IXqjeVpi5Ed8qW2gDNBqV7s.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 19),
+(25, 25, '7', 'SOAL/8fsgAzdbdigg6ZVKB3tcM4TKMDunWWRoZKP3sOo8.pdf', 3, 'ai dengan bahan kajian dan Profil Lulusan prodi', 19),
+(26, 26, '7', 'SOAL/3EmAoPRq5k2Qyggx1WRKmIVWAAEsYsuipRhQqr2Y.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 19),
+(27, 27, '7', 'SOAL/jvErSPLmhJKDS3pa1050yWSc4zoVWX6dIlAxFBbC.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 19),
+(30, 18, '155', 'SOAL/9lKBbumWT41MDdljy8ZeUpCT6KKPvbMKxQ85FQY1.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi.', 18),
+(31, 19, '155', 'SOAL/n3WuMllHSd2tFtEgenpZ5OB9ZktQbHzQxQDejAlE.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(32, 20, '155', 'SOAL/7BgE6OGCgZauclhKAzGIDHAOhGahg5noEio6GQdz.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(33, 21, '155', 'SOAL/1tcBoy42vWrIVUWTCtj861CYLLGCKOCPRP6XEPEw.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(34, 22, '155', 'SOAL/3P8OdYkvA03ZA0Rqe8unn3yoN5guLIjZP4RACGxM.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(35, 23, '155', 'SOAL/OkfyCaFWJvAPF7Vg9qTTtbhAXCLKhVBnyj8jQ6co.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 18),
+(36, 28, '7', 'SOAL/txVbPSgktMEoZdyh2fucBD8CfF10e9es6KeFvQ9m.pdf', 3, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', 19);
 
 -- --------------------------------------------------------
 
@@ -2536,12 +2617,11 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `nidn` varchar(100) NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nidn` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL DEFAULT '12345678',
-  `id_level` int(11) NOT NULL DEFAULT 5,
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -2551,17 +2631,17 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `nidn`, `name`, `email`, `password`, `id_level`, `image`, `created_at`, `updated_at`) VALUES
-(1, '0019038103', 'admin', 'admin@gmail.com', '$2y$12$qxGy4KGlitBr1xE5CABEQOiMlT54hEEshiCpE8avgk1UUBlmvm.Fm', 1, 'Image/5E6cgACC4CCDsiDcrZZs4AD2LQhCBXc7hY84Uo6i.png', '2024-06-16 10:07:12', '2024-06-27 00:04:20'),
-(2, '0025088802', 'ketua kbk', 'kbk@gmail.com', '$2y$12$uzPXJn.N/x4UJbnWXjMfFeGlUMvRFpEPBFyWsqOSs/psXdTT0DAGG', 2, NULL, '2024-06-16 10:07:12', '2024-06-16 10:07:12'),
-(3, '0029068102', 'kaprodi', 'kaprodi@gmail.com', '$2y$12$QFKtFRXx7S.yH0PM1hu6X.Bafe2ROgOr1MZh/ooHPg/vUp1ye0DI6', 3, NULL, '2024-06-16 10:07:12', '2024-06-16 10:07:12'),
-(4, '0218068801', 'tasa', 'dosenhhhh@gmail.com', '$2y$12$KV8BvJmyEmAKhGg.p35fcONTqRpAGNE6Wg5XkmvrPi4avOIDMwB6e', 4, NULL, '2024-06-16 10:07:13', '2024-06-27 00:05:32'),
-(5, '0029017603', 'kajur', 'kajur@gmail.com', '$2y$12$OmJI5fQ6yJfgAfsfnmc2..GXU0bxat8qiCwAlMjr4RbFO7tmMWs/O', 3, NULL, '2024-06-26 15:33:15', '2024-06-26 15:33:15'),
-(7, '0021078601', 'FAZROL ROZI', 'fazrol@pnp.ac.id', '$2y$12$A2lC00sYl15vbkO3VCUedO.bSkAv1pPrzk4S.5DHOziylZTjiq52i', 4, NULL, '2024-06-19 05:04:31', '2024-06-21 21:08:50'),
-(99, '0020028804', 'Super Admin', 'superadmin@gmail.com', '$2y$12$FbBcwZmEQUel7X0DMWvGY.ZnbKAURhrJfag7i7evtvYXUqpLRjzvO', 6, 'Image/DV24yS9lv0vSQIehA9C2q0b2RLD61bdEfwquGAKh.png', '2024-06-18 07:42:11', '2024-06-26 19:44:51'),
-(148, '0001107505', 'jhgf', 'kbkjjnkncj@gmail.com', '$2y$12$eSRzXp5.CFE23VgXRNzOx.Ld36WarcD6T.ZsXo.31wrVQK/YBSM1a', 5, NULL, '2024-06-26 18:08:34', '2024-06-26 18:08:34'),
-(149, '0025068301', 'kjhgf', 'kaprodyfhjchjdi@gmail.com', '$2y$12$y69Swh3M0FjcWj.WJ/RsKu47.rjJTfSPzrMUaYgirDUSXO6L8HAIm', 5, NULL, '2024-06-26 18:08:35', '2024-06-26 18:08:35'),
-(150, '0029068102', 'kjhgf', 'dosenjkhsddsu@gmail.com', '$2y$12$o0kgL5suU1lVu/JTiqylAOvWqRfc20w8wG5gGu2KQ.1GMe7rdd4CS', 5, NULL, '2024-06-26 18:08:35', '2024-06-26 18:08:35');
+INSERT INTO `user` (`id`, `nidn`, `name`, `email`, `password`, `image`, `created_at`, `updated_at`) VALUES
+(1, '0019038103', 'admin', 'admin@gmail.com', '$2y$12$G/.uSnMI6RPGUiE5kmzvQ.plZ/XryarKqhM.ZqFUN9fZqt8Z5/u4a', 'Image/5E6cgACC4CCDsiDcrZZs4AD2LQhCBXc7hY84Uo6i.png', '2024-06-16 10:07:12', '2024-06-27 00:04:20'),
+(2, '0025088802', 'ALDE ALANDA', 'penguruskbk@gmail.com', '$2y$12$ryZGSsZwFym1gslMLoQriuHYzV07Qy16vrU4qCj8glfsIvzUPQ/XC', 'Image/NnSmdTeslOBDzQNLhBDM6xTtGt56xjgqz3BLZhTl.png', '2024-06-16 10:07:12', '2024-07-06 18:10:18'),
+(3, '0029068102', 'kaprodi', 'kaprodi@gmail.com', '$2y$12$aDNXItkuZgGnekucJCSvyuGQFAYrvxRyhJXO1H03ioiCy08WYrwp6', NULL, '2024-06-16 10:07:12', '2024-07-07 07:13:44'),
+(4, '0218068801', 'dosen', 'dosen@gmail.com', '$2y$12$xiP3j2EQ2z2SGwxNNnbWbe.5GnbovDOr9orjV8ulGlUx5yCMFSWbe', NULL, '2024-06-16 10:07:13', '2024-06-28 09:59:16'),
+(5, '0029017603', 'kajur', 'kajur@gmail.com', '$2y$12$oZsrFjUJ/MhyST7cW/ncJON6mhDltol8L4sU4zCQgHPg24l.rC0Te', NULL, '2024-06-26 15:33:15', '2024-06-26 15:33:15'),
+(7, '0021078601', 'FAZROL ROZI', 'fazrol@pnp.ac.id', '$2y$12$9o54b4nOm9obgpYyKX.GtuTzgBO14noDIIpzcQ8skMzBOHNUwfYSW', NULL, '2024-06-19 05:04:31', '2024-06-21 21:08:50'),
+(99, '0020028804', 'Super Admin', 'superadmin@gmail.com', '$2y$12$B5Qr4LcLHn8SyMW.Uc27y.IfEAF0KRINxqOHfaP2LVURTXrtYfV6q', 'Image/DV24yS9lv0vSQIehA9C2q0b2RLD61bdEfwquGAKh.png', '2024-06-18 07:42:11', '2024-06-26 19:44:51'),
+(155, '0001067407', 'RASYIDAH', 'rasyidah@pnp.ac.id', '$2y$12$CujWX.cYq9ld5bfj0k0/VO2ypdJ3Hfqn1wh1nwqVz7FxUJ2Js6H82', NULL, NULL, NULL),
+(156, '0022078607', 'RONI PUTRA', 'rn.putra@gmail.com', '$2y$12$uSFmq/EG6qChXNthUlhEpOxPXW6xV8H9I.Y1UAPKmZFyR5RxI2lqG', NULL, NULL, NULL),
+(166, '0015048105', 'Muhammad Amir Shafwan', 'kakekmekar@gmail.com', '$2y$12$wnaPX6Y1vsQkORV34Mt8fuXxFIO01vMfefgGd7Sc6lXujtDV8tCGK', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2581,8 +2661,18 @@ CREATE TABLE `verifikasi_rps` (
 --
 
 INSERT INTO `verifikasi_rps` (`id_verif_rps`, `id_rps`, `evaluasi`, `tanggal`) VALUES
-(30, 58, NULL, NULL),
-(31, 59, NULL, NULL);
+(50, 78, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-05'),
+(51, 79, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-05'),
+(52, 80, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-05'),
+(53, 81, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-05'),
+(56, 84, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-05'),
+(57, 85, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(58, 86, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-05'),
+(59, 87, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-05'),
+(60, 88, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(61, 89, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(64, 92, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(65, 93, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08');
 
 -- --------------------------------------------------------
 
@@ -2593,7 +2683,7 @@ INSERT INTO `verifikasi_rps` (`id_verif_rps`, `id_rps`, `evaluasi`, `tanggal`) V
 CREATE TABLE `verifikasi_soal` (
   `id_verif_soal` int(11) NOT NULL,
   `id_soal` int(11) NOT NULL,
-  `evaluasi` varchar(255) DEFAULT NULL,
+  `evaluasi` text DEFAULT NULL,
   `tanggal` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -2602,9 +2692,23 @@ CREATE TABLE `verifikasi_soal` (
 --
 
 INSERT INTO `verifikasi_soal` (`id_verif_soal`, `id_soal`, `evaluasi`, `tanggal`) VALUES
-(11, 12, 'okokokkkkkkkkkkkkkkkk', '2024-06-25'),
-(13, 14, 'okoookk', '2024-06-26'),
-(14, 15, NULL, NULL);
+(17, 18, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(18, 19, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(19, 20, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(20, 21, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(21, 22, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(22, 23, 'Sudah sesuai dengan jian dan Profil Lulusan prodi', '2024-07-08'),
+(23, 24, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(24, 25, 'ai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(25, 26, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(26, 27, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(29, 30, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi.', '2024-07-08'),
+(30, 31, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(31, 32, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-06'),
+(32, 33, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(33, 34, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(34, 35, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-08'),
+(35, 36, 'Sudah sesuai dengan bahan kajian dan Profil Lulusan prodi', '2024-07-10');
 
 --
 -- Indexes for dumped tables
@@ -2614,7 +2718,87 @@ INSERT INTO `verifikasi_soal` (`id_verif_soal`, `id_soal`, `evaluasi`, `tanggal`
 -- Indeks untuk tabel `change_logs`
 --
 ALTER TABLE `change_logs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indeks untuk tabel `dosen`
+--
+ALTER TABLE `dosen`
+  ADD PRIMARY KEY (`id_dosen`),
+  ADD UNIQUE KEY `nidn` (`nidn`);
+
+--
+-- Indeks untuk tabel `dosen_kbk`
+--
+ALTER TABLE `dosen_kbk`
+  ADD PRIMARY KEY (`id_dosenkbk`),
+  ADD KEY `fk_jabatan_kbk` (`id_jabatan_kbk`),
+  ADD KEY `fk_kbk` (`id_kbk`),
+  ADD KEY `fk_dosenkbk_nidn` (`nidn`);
+
+--
+-- Indeks untuk tabel `dosen_matakuliah`
+--
+ALTER TABLE `dosen_matakuliah`
+  ADD PRIMARY KEY (`id_dosen_matakuliah`),
+  ADD KEY `fk_dosen_matakuliah` (`id_matakuliah`);
+
+--
+-- Indeks untuk tabel `jabatan_kbk`
+--
+ALTER TABLE `jabatan_kbk`
+  ADD PRIMARY KEY (`id_jabatan_kbk`);
+
+--
+-- Indeks untuk tabel `jabatan_pimpinan`
+--
+ALTER TABLE `jabatan_pimpinan`
+  ADD PRIMARY KEY (`id_jabatan_pimpinan`);
+
+--
+-- Indeks untuk tabel `jurusan`
+--
+ALTER TABLE `jurusan`
+  ADD PRIMARY KEY (`id_jurusan`);
+
+--
+-- Indeks untuk tabel `kbk`
+--
+ALTER TABLE `kbk`
+  ADD PRIMARY KEY (`id_kbk`),
+  ADD KEY `fk_kbk_ketua` (`ketua_kbk`),
+  ADD KEY `fk_kbk_sekretaris` (`sekretaris_kbk`);
+
+--
+-- Indeks untuk tabel `kurikulum`
+--
+ALTER TABLE `kurikulum`
+  ADD PRIMARY KEY (`id_kurikulum`),
+  ADD KEY `fk_kurikulum_prodi` (`id_prodi`);
+
+--
+-- Indeks untuk tabel `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nobp` (`nim`),
+  ADD KEY `fk_mahasiswa_prodi` (`kode_jurusan`);
+
+--
+-- Indeks untuk tabel `matakuliah`
+--
+ALTER TABLE `matakuliah`
+  ADD PRIMARY KEY (`id_matakuliah`),
+  ADD KEY `fk_matakuliah_kurikulum` (`id_kurikulum`);
+
+--
+-- Indeks untuk tabel `matakuliah_kbk`
+--
+ALTER TABLE `matakuliah_kbk`
+  ADD PRIMARY KEY (`id_matakuliahkbk`),
+  ADD KEY `fk_matakuliah_kbk` (`id_matakuliah`),
+  ADD KEY `fk_id_kbk` (`id_kbk`);
 
 --
 -- Indeks untuk tabel `migrations`
@@ -2637,6 +2821,13 @@ ALTER TABLE `model_has_roles`
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
+-- Indeks untuk tabel `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`);
+
+--
 -- Indeks untuk tabel `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
@@ -2650,149 +2841,35 @@ ALTER TABLE `permissions`
   ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
--- Indeks untuk tabel `personal_access_tokens`
+-- Indeks untuk tabel `pimpinan_jurusan`
 --
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+ALTER TABLE `pimpinan_jurusan`
+  ADD PRIMARY KEY (`id_pimpinan_jurusan`),
+  ADD KEY `fk_pimpinan_jurusan` (`id_jurusan`);
 
 --
--- Indeks untuk tabel `ref_dosen`
+-- Indeks untuk tabel `pimpinan_prodi`
 --
-ALTER TABLE `ref_dosen`
-  ADD PRIMARY KEY (`id_dosen`),
-  ADD UNIQUE KEY `nidn` (`nidn`);
+ALTER TABLE `pimpinan_prodi`
+  ADD PRIMARY KEY (`id_pimpinan_prodi`),
+  ADD KEY `fk_jabatan_prodi` (`id_jabatan`);
 
 --
--- Indeks untuk tabel `ref_dosen_kbk`
+-- Indeks untuk tabel `prodi`
 --
-ALTER TABLE `ref_dosen_kbk`
-  ADD PRIMARY KEY (`id_dosenkbk`),
-  ADD KEY `fk_jabatan_kbk` (`id_jabatan_kbk`),
-  ADD KEY `fk_kbk` (`id_kbk`),
-  ADD KEY `fk_dosenkbk_nidn` (`nidn`);
-
---
--- Indeks untuk tabel `ref_dosen_matakuliah`
---
-ALTER TABLE `ref_dosen_matakuliah`
-  ADD PRIMARY KEY (`id_dosen_matakuliah`),
-  ADD KEY `fk_dosen_matakuliah` (`id_matakuliah`);
-
---
--- Indeks untuk tabel `ref_jabatan_kbk`
---
-ALTER TABLE `ref_jabatan_kbk`
-  ADD PRIMARY KEY (`id_jabatan_kbk`);
-
---
--- Indeks untuk tabel `ref_jabatan_pimpinan`
---
-ALTER TABLE `ref_jabatan_pimpinan`
-  ADD PRIMARY KEY (`id_jabatan_pimpinan`);
-
---
--- Indeks untuk tabel `ref_jurusan`
---
-ALTER TABLE `ref_jurusan`
-  ADD PRIMARY KEY (`id_jurusan`);
-
---
--- Indeks untuk tabel `ref_kbk`
---
-ALTER TABLE `ref_kbk`
-  ADD PRIMARY KEY (`id_kbk`),
-  ADD KEY `fk_kbk_ketua` (`ketua_kbk`);
-
---
--- Indeks untuk tabel `ref_kelas`
---
-ALTER TABLE `ref_kelas`
-  ADD PRIMARY KEY (`id_kelas`);
-
---
--- Indeks untuk tabel `ref_kurikulum`
---
-ALTER TABLE `ref_kurikulum`
-  ADD PRIMARY KEY (`id_kurikulum`);
-
---
--- Indeks untuk tabel `ref_level`
---
-ALTER TABLE `ref_level`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `ref_mahasiswa`
---
-ALTER TABLE `ref_mahasiswa`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nobp` (`nim`),
-  ADD KEY `fk_mahasiswa_prodi` (`kode_jurusan`);
-
---
--- Indeks untuk tabel `ref_matakuliah`
---
-ALTER TABLE `ref_matakuliah`
-  ADD PRIMARY KEY (`id_matakuliah`);
-
---
--- Indeks untuk tabel `ref_matakuliah_kbk`
---
-ALTER TABLE `ref_matakuliah_kbk`
-  ADD PRIMARY KEY (`id_matakuliahkbk`),
-  ADD KEY `fk_matakuliah_kbk` (`id_matakuliah`),
-  ADD KEY `fk_id_kbk` (`id_kbk`),
-  ADD KEY `fk_kurikulum_kbk` (`id_kurikulum`);
-
---
--- Indeks untuk tabel `ref_pimpinan_jurusan`
---
-ALTER TABLE `ref_pimpinan_jurusan`
-  ADD PRIMARY KEY (`id_pimpinan_jurusan`);
-
---
--- Indeks untuk tabel `ref_pimpinan_prodi`
---
-ALTER TABLE `ref_pimpinan_prodi`
-  ADD PRIMARY KEY (`id_pimpinan_prodi`);
-
---
--- Indeks untuk tabel `ref_prodi`
---
-ALTER TABLE `ref_prodi`
+ALTER TABLE `prodi`
   ADD PRIMARY KEY (`id_prodi`),
   ADD KEY `id_jurusan` (`id_jurusan`),
   ADD KEY `jenjang_fk` (`id_jenjang`);
 
 --
--- Indeks untuk tabel `ref_proposal_ta`
+-- Indeks untuk tabel `proposal_ta`
 --
-ALTER TABLE `ref_proposal_ta`
-  ADD PRIMARY KEY (`id_proposal_ta`);
-
---
--- Indeks untuk tabel `ref_rps`
---
-ALTER TABLE `ref_rps`
-  ADD PRIMARY KEY (`id_rps`),
-  ADD KEY `fk_pengembng_rps` (`id_dosen_pengembang`),
-  ADD KEY `fk_rps_matakuliah` (`id_matakuliah`);
-
---
--- Indeks untuk tabel `ref_smt_thn_akd`
---
-ALTER TABLE `ref_smt_thn_akd`
-  ADD PRIMARY KEY (`id_smt_thn_akd`);
-
---
--- Indeks untuk tabel `ref_soal`
---
-ALTER TABLE `ref_soal`
-  ADD PRIMARY KEY (`id_soal`),
-  ADD KEY `fk_soal_matakuliah` (`id_matakuliah`) USING BTREE,
-  ADD KEY `fk_soal_tahun` (`id_tahun_akademik`);
+ALTER TABLE `proposal_ta`
+  ADD PRIMARY KEY (`id_proposal_ta`),
+  ADD KEY `fk_pembimbing1_nidn` (`pembimbing_satu_nidn`),
+  ADD KEY `fk_pembimbing2_nidn` (`pembimbing_dua_nidn`),
+  ADD KEY `fk_nim_mahasiswa` (`nim`);
 
 --
 -- Indeks untuk tabel `roles`
@@ -2809,12 +2886,34 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
+-- Indeks untuk tabel `rps`
+--
+ALTER TABLE `rps`
+  ADD PRIMARY KEY (`id_rps`),
+  ADD KEY `fk_pengembng_rps` (`id_dosen_pengembang`),
+  ADD KEY `fk_rps_matakuliah` (`id_matakuliah`),
+  ADD KEY `fk_rps_tahun_akademik` (`id_tahun_akademik`);
+
+--
+-- Indeks untuk tabel `smt_thn_akd`
+--
+ALTER TABLE `smt_thn_akd`
+  ADD PRIMARY KEY (`id_smt_thn_akd`);
+
+--
+-- Indeks untuk tabel `soal`
+--
+ALTER TABLE `soal`
+  ADD PRIMARY KEY (`id_soal`),
+  ADD KEY `fk_soal_matakuliah` (`id_matakuliah`) USING BTREE,
+  ADD KEY `fk_soal_tahun` (`id_tahun_akademik`);
+
+--
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_nidn_index` (`nidn`),
-  ADD KEY `user_id_level_index` (`id_level`);
+  ADD KEY `user_nidn_index` (`nidn`);
 
 --
 -- Indeks untuk tabel `verifikasi_rps`
@@ -2838,139 +2937,103 @@ ALTER TABLE `verifikasi_soal`
 -- AUTO_INCREMENT untuk tabel `change_logs`
 --
 ALTER TABLE `change_logs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT untuk tabel `dosen`
+--
+ALTER TABLE `dosen`
+  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT untuk tabel `dosen_kbk`
+--
+ALTER TABLE `dosen_kbk`
+  MODIFY `id_dosenkbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+
+--
+-- AUTO_INCREMENT untuk tabel `dosen_matakuliah`
+--
+ALTER TABLE `dosen_matakuliah`
+  MODIFY `id_dosen_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT untuk tabel `jabatan_kbk`
+--
+ALTER TABLE `jabatan_kbk`
+  MODIFY `id_jabatan_kbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `jurusan`
+--
+ALTER TABLE `jurusan`
+  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT untuk tabel `kbk`
+--
+ALTER TABLE `kbk`
+  MODIFY `id_kbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT untuk tabel `kurikulum`
+--
+ALTER TABLE `kurikulum`
+  MODIFY `id_kurikulum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT untuk tabel `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=959;
+
+--
+-- AUTO_INCREMENT untuk tabel `matakuliah`
+--
+ALTER TABLE `matakuliah`
+  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT untuk tabel `matakuliah_kbk`
+--
+ALTER TABLE `matakuliah_kbk`
+  MODIFY `id_matakuliahkbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT untuk tabel `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT untuk tabel `personal_access_tokens`
+-- AUTO_INCREMENT untuk tabel `pimpinan_jurusan`
 --
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `ref_dosen`
---
-ALTER TABLE `ref_dosen`
-  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
---
--- AUTO_INCREMENT untuk tabel `ref_dosen_kbk`
---
-ALTER TABLE `ref_dosen_kbk`
-  MODIFY `id_dosenkbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT untuk tabel `ref_dosen_matakuliah`
---
-ALTER TABLE `ref_dosen_matakuliah`
-  MODIFY `id_dosen_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT untuk tabel `ref_jabatan_kbk`
---
-ALTER TABLE `ref_jabatan_kbk`
-  MODIFY `id_jabatan_kbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT untuk tabel `ref_jurusan`
---
-ALTER TABLE `ref_jurusan`
-  MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT untuk tabel `ref_kbk`
---
-ALTER TABLE `ref_kbk`
-  MODIFY `id_kbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT untuk tabel `ref_kelas`
---
-ALTER TABLE `ref_kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `ref_kurikulum`
---
-ALTER TABLE `ref_kurikulum`
-  MODIFY `id_kurikulum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT untuk tabel `ref_level`
---
-ALTER TABLE `ref_level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT untuk tabel `ref_mahasiswa`
---
-ALTER TABLE `ref_mahasiswa`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=959;
-
---
--- AUTO_INCREMENT untuk tabel `ref_matakuliah`
---
-ALTER TABLE `ref_matakuliah`
-  MODIFY `id_matakuliah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT untuk tabel `ref_matakuliah_kbk`
---
-ALTER TABLE `ref_matakuliah_kbk`
-  MODIFY `id_matakuliahkbk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT untuk tabel `ref_pimpinan_jurusan`
---
-ALTER TABLE `ref_pimpinan_jurusan`
+ALTER TABLE `pimpinan_jurusan`
   MODIFY `id_pimpinan_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `ref_pimpinan_prodi`
+-- AUTO_INCREMENT untuk tabel `pimpinan_prodi`
 --
-ALTER TABLE `ref_pimpinan_prodi`
-  MODIFY `id_pimpinan_prodi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `pimpinan_prodi`
+  MODIFY `id_pimpinan_prodi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `ref_prodi`
+-- AUTO_INCREMENT untuk tabel `prodi`
 --
-ALTER TABLE `ref_prodi`
+ALTER TABLE `prodi`
   MODIFY `id_prodi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT untuk tabel `ref_proposal_ta`
+-- AUTO_INCREMENT untuk tabel `proposal_ta`
 --
-ALTER TABLE `ref_proposal_ta`
+ALTER TABLE `proposal_ta`
   MODIFY `id_proposal_ta` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=674;
-
---
--- AUTO_INCREMENT untuk tabel `ref_rps`
---
-ALTER TABLE `ref_rps`
-  MODIFY `id_rps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
-
---
--- AUTO_INCREMENT untuk tabel `ref_smt_thn_akd`
---
-ALTER TABLE `ref_smt_thn_akd`
-  MODIFY `id_smt_thn_akd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT untuk tabel `ref_soal`
---
-ALTER TABLE `ref_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `roles`
@@ -2979,26 +3042,90 @@ ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT untuk tabel `rps`
+--
+ALTER TABLE `rps`
+  MODIFY `id_rps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT untuk tabel `smt_thn_akd`
+--
+ALTER TABLE `smt_thn_akd`
+  MODIFY `id_smt_thn_akd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT untuk tabel `soal`
+--
+ALTER TABLE `soal`
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT untuk tabel `verifikasi_rps`
 --
 ALTER TABLE `verifikasi_rps`
-  MODIFY `id_verif_rps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_verif_rps` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT untuk tabel `verifikasi_soal`
 --
 ALTER TABLE `verifikasi_soal`
-  MODIFY `id_verif_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_verif_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `change_logs`
+--
+ALTER TABLE `change_logs`
+  ADD CONSTRAINT `change_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `dosen_kbk`
+--
+ALTER TABLE `dosen_kbk`
+  ADD CONSTRAINT `fk_dosenkbk_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `kbk` (`id_kbk`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_dosenkbk_nidn` FOREIGN KEY (`nidn`) REFERENCES `dosen` (`nidn`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_jabatan_kbk` FOREIGN KEY (`id_jabatan_kbk`) REFERENCES `jabatan_kbk` (`id_jabatan_kbk`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `dosen_matakuliah`
+--
+ALTER TABLE `dosen_matakuliah`
+  ADD CONSTRAINT `fk_dosen_matakuliah` FOREIGN KEY (`id_matakuliah`) REFERENCES `matakuliah` (`id_matakuliah`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `kbk`
+--
+ALTER TABLE `kbk`
+  ADD CONSTRAINT `fk_kbk_ketua` FOREIGN KEY (`ketua_kbk`) REFERENCES `dosen_kbk` (`id_dosenkbk`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_kbk_sekretaris` FOREIGN KEY (`sekretaris_kbk`) REFERENCES `dosen_kbk` (`id_dosenkbk`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `kurikulum`
+--
+ALTER TABLE `kurikulum`
+  ADD CONSTRAINT `fk_kurikulum_prodi` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `matakuliah`
+--
+ALTER TABLE `matakuliah`
+  ADD CONSTRAINT `fk_matakuliah_kurikulum` FOREIGN KEY (`id_kurikulum`) REFERENCES `kurikulum` (`id_kurikulum`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `matakuliah_kbk`
+--
+ALTER TABLE `matakuliah_kbk`
+  ADD CONSTRAINT `fk_id_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `kbk` (`id_kbk`),
+  ADD CONSTRAINT `fk_matakuliah_kbk` FOREIGN KEY (`id_matakuliah`) REFERENCES `matakuliah` (`id_matakuliah`);
 
 --
 -- Ketidakleluasaan untuk tabel `model_has_permissions`
@@ -3013,45 +3140,30 @@ ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `ref_dosen_kbk`
+-- Ketidakleluasaan untuk tabel `pimpinan_jurusan`
 --
-ALTER TABLE `ref_dosen_kbk`
-  ADD CONSTRAINT `fk_dosenkbk_nidn` FOREIGN KEY (`nidn`) REFERENCES `ref_dosen` (`nidn`),
-  ADD CONSTRAINT `fk_jabatan_kbk` FOREIGN KEY (`id_jabatan_kbk`) REFERENCES `ref_jabatan_kbk` (`id_jabatan_kbk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `ref_kbk` (`id_kbk`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `pimpinan_jurusan`
+  ADD CONSTRAINT `fk_pimpinan_jurusan` FOREIGN KEY (`id_jurusan`) REFERENCES `jurusan` (`id_jurusan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `ref_dosen_matakuliah`
+-- Ketidakleluasaan untuk tabel `pimpinan_prodi`
 --
-ALTER TABLE `ref_dosen_matakuliah`
-  ADD CONSTRAINT `fk_dosen_matakuliah` FOREIGN KEY (`id_matakuliah`) REFERENCES `ref_matakuliah` (`id_matakuliah`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `pimpinan_prodi`
+  ADD CONSTRAINT `fk_jabatan_prodi` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan_pimpinan` (`id_jabatan_pimpinan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `ref_kbk`
+-- Ketidakleluasaan untuk tabel `prodi`
 --
-ALTER TABLE `ref_kbk`
-  ADD CONSTRAINT `fk_kbk_ketua` FOREIGN KEY (`ketua_kbk`) REFERENCES `ref_dosen_kbk` (`id_dosenkbk`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `prodi`
+  ADD CONSTRAINT `prodi_ibfk_1` FOREIGN KEY (`id_jurusan`) REFERENCES `jurusan` (`id_jurusan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `ref_matakuliah_kbk`
+-- Ketidakleluasaan untuk tabel `proposal_ta`
 --
-ALTER TABLE `ref_matakuliah_kbk`
-  ADD CONSTRAINT `fk_id_kbk` FOREIGN KEY (`id_kbk`) REFERENCES `ref_kbk` (`id_kbk`),
-  ADD CONSTRAINT `fk_kurikulum_kbk` FOREIGN KEY (`id_kurikulum`) REFERENCES `ref_kurikulum` (`id_kurikulum`),
-  ADD CONSTRAINT `fk_matakuliah_kbk` FOREIGN KEY (`id_matakuliah`) REFERENCES `ref_matakuliah` (`id_matakuliah`);
-
---
--- Ketidakleluasaan untuk tabel `ref_rps`
---
-ALTER TABLE `ref_rps`
-  ADD CONSTRAINT `fk_rps_matakuliah` FOREIGN KEY (`id_matakuliah`) REFERENCES `ref_matakuliah` (`id_matakuliah`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `ref_soal`
---
-ALTER TABLE `ref_soal`
-  ADD CONSTRAINT `fk_soal_matakuliah` FOREIGN KEY (`id_matakuliah`) REFERENCES `ref_matakuliah` (`id_matakuliah`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_soal_tahun` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `ref_smt_thn_akd` (`id_smt_thn_akd`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `proposal_ta`
+  ADD CONSTRAINT `fk_nim_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pembimbing1_nidn` FOREIGN KEY (`pembimbing_satu_nidn`) REFERENCES `dosen` (`nidn`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pembimbing2_nidn` FOREIGN KEY (`pembimbing_dua_nidn`) REFERENCES `dosen` (`nidn`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `role_has_permissions`
@@ -3061,16 +3173,36 @@ ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
+-- Ketidakleluasaan untuk tabel `rps`
+--
+ALTER TABLE `rps`
+  ADD CONSTRAINT `fk_rps_matakuliah` FOREIGN KEY (`id_matakuliah`) REFERENCES `matakuliah` (`id_matakuliah`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_rps_tahun_akademik` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `smt_thn_akd` (`id_smt_thn_akd`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `soal`
+--
+ALTER TABLE `soal`
+  ADD CONSTRAINT `fk_soal_matakuliah` FOREIGN KEY (`id_matakuliah`) REFERENCES `matakuliah` (`id_matakuliah`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_soal_tahun` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `smt_thn_akd` (`id_smt_thn_akd`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `fk_user_nidn` FOREIGN KEY (`nidn`) REFERENCES `dosen` (`nidn`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Ketidakleluasaan untuk tabel `verifikasi_rps`
 --
 ALTER TABLE `verifikasi_rps`
-  ADD CONSTRAINT `fk_verif_rps` FOREIGN KEY (`id_rps`) REFERENCES `ref_rps` (`id_rps`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_verif_rps` FOREIGN KEY (`id_rps`) REFERENCES `rps` (`id_rps`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `verifikasi_soal`
 --
 ALTER TABLE `verifikasi_soal`
-  ADD CONSTRAINT `fk_verif_soal` FOREIGN KEY (`id_soal`) REFERENCES `ref_soal` (`id_soal`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_verif_soal` FOREIGN KEY (`id_soal`) REFERENCES `soal` (`id_soal`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -22,13 +22,13 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Prodi --}}
                         <div class="card">
                             <div class="card-header mb-3">
-                                <h3 class="card-title mt-2">Matakuliah</h3>
+                                <h3 class="card-title mt-2">Data Matakuliah</h3>
                                 {{-- Tombol Insert --}}
                                 {{-- <div class="card-title" style="float: right"><a href="{{ route('admin.kurikulum.create') }}"
                                         class="btn btn-primary" style="float: right">
@@ -58,7 +58,7 @@
                                             <th>Semester</th>
                                             <th>Kurikulum</th>
                                             <th>Prodi</th>
-                                            <th>Aksi</th> <!-- Kolom Aksi -->
+                                            <th class="no-export">Aksi</th> <!-- Kolom Aksi -->
                                         </tr>
                                     </thead>
                                     <tbody>

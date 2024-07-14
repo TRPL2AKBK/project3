@@ -83,7 +83,7 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('view dashboard super_admin')
+                        {{-- @can('view dashboard super_admin')
                             <li class="nav-item">
                                 <a href="{{ route('dashboard') }}"
                                     class="nav-link {{ request()->is('dashboard*') ? 'active' : '' }}">
@@ -93,10 +93,11 @@
                                     </p>
                                 </a>
                             </li>
-                        @endcan
+                        @endcan --}}
                         @can('view dashboard pengurus')
                             <li class="nav-item">
-                                <a href="{{ route('pengurus.dashboard') }}" class="nav-link">
+                                <a href="{{ route('pengurus.dashboard') }}"
+                                    class="nav-link {{ request()->is('pengurus/dashboard*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Dashboard
@@ -106,7 +107,8 @@
                         @endcan
                         @can('view dashboard kaprodi')
                             <li class="nav-item">
-                                <a href="{{ route('kaprodi.dashboard') }}" class="nav-link">
+                                <a href="{{ route('kaprodi.dashboard') }}"
+                                    class="nav-link {{ request()->is('kaprodi/dashboard*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Dashboard
@@ -116,8 +118,8 @@
                         @endcan
                         @can('view dashboard kajur')
                             <li class="nav-item">
-                                <a href="{{ route('kajur.dashboard') }}" class="nav-link"
-                                    {{ request()->is('kajur/dashboar') ? 'active' : '' }}>
+                                <a href="{{ route('kajur.dashboard') }}"
+                                    class="nav-link {{ request()->is('kajur/dashboard*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Dashboard
@@ -127,7 +129,8 @@
                         @endcan
                         @can('view dashboard dosen')
                             <li class="nav-item">
-                                <a href="{{ route('dosen.dashboard') }}" class="nav-link">
+                                <a href="{{ route('dosen.dashboard') }}"
+                                    class="nav-link {{ request()->is('dosen/dashboard*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Dashboard
@@ -137,7 +140,8 @@
                         @endcan
                         @can('view dashboard user')
                             <li class="nav-item">
-                                <a href="{{ route('user.dashboard') }}" class="nav-link">
+                                <a href="{{ route('user.dashboard') }}"
+                                    class="nav-link {{ request()->is('user/dashboard*') ? 'active' : '' }} ">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Dashboard
@@ -356,8 +360,8 @@
                         @endcan
                         @can('view data proposal ta')
                             <li class="nav-item">
-                                <a href="{{ route('admin.proposalta') }}"
-                                    class="nav-link {{ request()->is('admin/proposalta*') ? 'active' : '' }} ">
+                                <a href="{{ route('proposal') }}"
+                                    class="nav-link {{ request()->is('proposalta*') ? 'active' : '' }} ">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Proposal TA
@@ -419,7 +423,7 @@
                             <ul class="nav nav-treeview" style="background-color: rgb(73, 74, 78)">
                                 <li class="nav-item">
                                     <a href="{{ route('profile.edit', ['id' => Auth::user()->id]) }}"
-                                        class="nav-link">
+                                        class="nav-link {{ request()->is('profile/edit*') ? 'active' : '' }} ">
                                         <i class="nav-icon fas fa-user"></i>
                                         <p>
                                             Edit Profile

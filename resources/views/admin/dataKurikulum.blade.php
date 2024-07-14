@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Prodi --}}
@@ -50,7 +50,7 @@
                                             {{-- <th>Tahun</th> --}}
                                             <th>Prodi</th>
                                             {{-- <th>Status</th> --}}
-                                            <th>Aksi</th>
+                                            <th class="no-export">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

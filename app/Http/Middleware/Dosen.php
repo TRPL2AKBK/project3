@@ -15,11 +15,10 @@ class Dosen
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->id_level == 4) {
+        if (auth()->user()->hasRole('dosen_pengampu')) {
             return $next($request);
         }
-        abort(403, 'Role tidak sesuai');
-
-        return redirect()->back();
+        // abort(403, 'Role tidak sesuai');
+        return redirect()->back()->with('error', 'Akses tidak sah ');
     }
 }

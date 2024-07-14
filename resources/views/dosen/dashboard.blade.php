@@ -1,3 +1,35 @@
+@section('notif')
+
+    <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            @if (count($notifications) == 0)
+            @else
+                <span class="badge badge-warning navbar-badge">{{ count($notifications) }}</span>
+            @endif
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <span class="dropdown-item dropdown-header">{{ count($notifications) }} Notifikasi</span>
+            <div class="dropdown-divider"></div>
+            @foreach ($notifications as $notification)
+                @if ($notification->data['message'] === 'RPS Anda telah diverifikasi')
+                    <a href="{{ route('verifikasi.rps') }}" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> {{ $notification->data['message'] }}
+                        <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                @elseif ($notification->data['message'] === 'Soal Anda telah diverifikasi')
+                    <a href="{{ route('verifikasi.soal') }}" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> {{ $notification->data['message'] }}
+                        <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                @endif
+            @endforeach
+        </div>
+    </li>
+
+@endsection
 @extends('layout.main')
 @section('title', 'Dosen Dashboard')
 @section('content')
@@ -23,92 +55,93 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-6 col-md-3 ">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-book-open"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Matakuliah Ampu</span>
+                                <span class="info-box-number">
+                                    @if ($matakuliah->count())
+                                        {{ $matakuliah->count() }} Matakuliah
+                                    @else
+                                        0
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>{{ $dataRps->count() }}</h3>
-                                <p>RPS yang diupload</p>
-                                @php
-                                    $countWithEvaluasi = 0;
-                                @endphp
-                                @foreach ($dataRps as $rps)
-                                    @if (!is_null($rps->evaluasi))
-                                        @php
-                                            $countWithEvaluasi++;
-                                        @endphp
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-file"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">RPS diupload</span>
+                                <span class="info-box-number">
+                                    @if ($matakuliah->count() > 0)
+                                        {{ number_format(($dataRps / $matakuliah->count()) * 100) }} %<small> dari
+                                            {{ $matakuliah->count() }}</small>
+                                    @else
+                                        0<small>%</small>
                                     @endif
-                                @endforeach
-                                <h3>{{ $countWithEvaluasi }}</h3>
-                                <p>Diverifikasi</p>
+                                </span>
                             </div>
-                            <div class="icon">
-                                <i class="fa fa-file"></i>
-                            </div>
-                            <a href="{{ route('verifikasi.rps') }}" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>{{ $dataSoal->count() }}</h3>
-                                <p>Soal yang diupload</p>
-                                @php
-                                    $countWithEvaluasi = 0;
-                                @endphp
-                                @foreach ($dataSoal as $soal)
-                                    @if (!is_null($soal->evaluasi))
-                                        @php
-                                            $countWithEvaluasi++;
-                                        @endphp
-                                    @endif
-                                @endforeach
-                                <h3>{{ $countWithEvaluasi }}</h3>
-                                <p>Diverifikasi</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-file"></i>
-                            </div>
-                            <a href="{{ route('verifikasi.soal') }}" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3>{{ $matakuliah->count() }}</h3>
-                                <p>Matakuliah Ampu</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-person-add"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>65</h3>
 
-                                <p>Lorem ipsum</p>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">RPS diverifikasi</span>
+                                <span class="info-box-number">
+                                    @if ($dataRps > 0)
+                                        {{ number_format(($dataRps / $verifRps) * 100) }} %<small> dari
+                                            {{ $dataRps }}</small>
+                                    @else
+                                        0<small>%</small>
+                                    @endif
+                                </span>
                             </div>
-                            <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- /.col -->
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-file"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Soal diupload</span>
+                                <span class="info-box-number">
+                                    @if ($matakuliah->count() > 0)
+                                        {{ number_format(($dataSoal / $matakuliah->count()) * 100) }} %<small> dari
+                                            {{ $matakuliah->count() }}</small>
+                                    @else
+                                        0<small>%</small>
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Soal diverifikasi</span>
+                                <span class="info-box-number">
+                                    @if ($dataSoal > 0)
+                                        {{ number_format(($dataSoal / $verifSoal) * 100) }} %<small> dari
+                                            {{ $dataSoal }}</small>
+                                    @else
+                                        0<small>%</small>
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <!-- /.row -->
             </div>

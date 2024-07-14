@@ -19,12 +19,12 @@
         </div>
 
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header mb-3">
-                                <h3 class="card-title mt-2">Dosen Pengampu</h3>
+                                <h3 class="card-title mt-2">Data Dosen Pengampu</h3>
                             </div>
                             <div class="card-body table-responsive ">
                                 <table id="example1" class="table table-bordered table-striped">
@@ -38,7 +38,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @if (auth()->user()->id_level == 1)
+                                        @if (auth()->user()->hasRole('admin'))
                                             <!-- Admin bisa melihat semua data -->
                                             @php
                                                 $counter = 0;

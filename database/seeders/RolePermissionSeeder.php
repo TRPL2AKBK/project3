@@ -40,7 +40,8 @@ class RolePermissionSeeder extends Seeder
         Permission::updateOrcreate(['name' => 'view dashboard pengurus']);
         Permission::updateOrcreate(['name' => 'crud rps']);
         Permission::updateOrcreate(['name' => 'crud soal']);
-        // Permission::updateOrcreate(['name' => 'view']);
+        Permission::updateOrcreate(['name' => 'crud verif rps']);
+        Permission::updateOrcreate(['name' => 'crud verif soal']);
         // Permission::updateOrcreate(['name' => 'view']);
         // Permission::updateOrcreate(['name' => 'view']);
 
@@ -63,10 +64,7 @@ class RolePermissionSeeder extends Seeder
             'view data manajemen kbk',
             'view data mahasiswa',
             'view data proposal ta',
-            'view data rps',
-            'view data verifikasi rps',
-            'view data soal',
-            'view data verifikasi soal',
+
         );
         $role3 = Role::updateOrcreate(['name' => 'dosen_pengampu']);
         $role3->givePermissionTo(
@@ -84,6 +82,8 @@ class RolePermissionSeeder extends Seeder
             'view data soal',
             'view data verifikasi soal',
             'view dashboard pengurus',
+            'crud verif rps',
+            'crud verif soal',
         );
 
         $role5 = Role::updateOrcreate(['name' => 'dosen_kbk']);

@@ -31,7 +31,7 @@
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Form Prodi</h3>
+                                    <h3 class="card-title">Form Edit Tahun</h3>
                                 </div>
                                 <!-- form start -->
                                 <div class="card-body">
@@ -43,7 +43,7 @@
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="exampleInputProdi1">Status</label>
                                         <input type="number" class="form-control" id="exampleInputProdi1" name="status"
                                             value="{{ $tahun->status }}" placeholder="Enter Status" min="0"
@@ -51,7 +51,20 @@
                                         @error('status')
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
+                                    </div> --}}
+                                    <div class="form-group">
+                                        <label for="exampleInputProdi1">Status</label>
+                                        <select class="form-control" id="exampleInputProdi1" name="status">
+                                            <option value="1" {{ $tahun->status == 1 ? 'selected' : '' }}>Aktif
+                                            </option>
+                                            <option value="0" {{ $tahun->status == 0 ? 'selected' : '' }}>Tidak Aktif
+                                            </option>
+                                        </select>
+                                        @error('status')
+                                            <p style="color:red;"><small>{{ $message }}</small></p>
+                                        @enderror
                                     </div>
+
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">

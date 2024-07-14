@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
 
@@ -30,10 +30,15 @@
                         <div class="card">
                             <div class="card-header mb-3">
                                 <h3 class="card-title">Data Tahun Akademik</h3>
-                                {{-- Tombol Insert --}}
-                                <div class="card-title" style="float: right"><a href="{{ route('admin.tahun.create') }}"
-                                        class="btn btn-primary" style="float: right">
-                                        Insert</a>
+
+                                <div class="card-title" style="float: right;">
+                                    <a href="{{ route('admin.tahun.create') }}" class="btn btn-primary"
+                                        style="margin-right: 10px;">
+                                        Tambah
+                                    </a>
+                                    <a href="{{ route('admin.tahun.api') }}" class="btn btn-primary">
+                                        Perbarui Data
+                                    </a>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -44,7 +49,7 @@
                                             <th style="width: 1rem">No</th>
                                             <th>Tahun Akademik</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,7 +57,13 @@
                                             <tr>
                                                 <td> {{ $loop->iteration }} </td>
                                                 <td> {{ $d->smt_thn_akd }} </td>
-                                                <td> {{ $d->status }} </td>
+                                                <td>
+                                                    @if (!$d->status == 1)
+                                                        <span>{{ 'Tidak Aktif' }}</span> <br>
+                                                    @else
+                                                        {{ 'Aktif' }} <br>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a
                                                         href="{{ route('admin.tahun.edit', ['id' => $d->id_smt_thn_akd]) }}"class="btn btn-primary"><i

@@ -22,6 +22,10 @@ class PimpinanJurusanController extends Controller
         return view('admin/dataKajur', compact('kajur'));
     }
 
+    public function dashboard()
+    {
+    }
+
     public function fetchAndSaveData()
     {
         // URL atau path ke data JSON Anda

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ChangeLogController;
 use App\Http\Controllers\DosenKBKController;
 use App\Http\Controllers\DosenPengampuController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\MatakuliahKBKController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PimpinanJurusanController;
 use App\Http\Controllers\PimpinanProdiController;
 use App\Http\Controllers\ProdiController;
@@ -37,6 +39,7 @@ use App\Models\Matakuliah;
 use App\Models\MatakuliahKBK;
 use App\Models\PimpinanProdi;
 use App\Models\ProposalTa;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -47,21 +50,13 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-Route::get('/ambil-data-json', function () {
-   try {
-      $response = Http::get('https://umkm-pnp.com/heni/index.php?folder=mahasiswa&file=proposal');
-      $data = $response->json(); // Mendapatkan data JSON dari respons
-
-      return $data; // Mengembalikan data JSON sebagai respons
-   } catch (Exception $e) {
-      return response()->json(['error' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
-   }
-});
-
+Route::resource('/berita', BeritaController::class);
+Route::post('/berita-rps/cetak', [BeritaController::class, 'rps'])->name('berita-rps.cetak');
+Route::post('/berita-soal/cetak', [BeritaController::class, 'soal'])->name('berita-soal.cetak');
 
 
 Route::get('/', [LandingController::class, 'index']);
+Route::get('/sibeka', [LandingController::class, 'show']);
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -107,7 +102,6 @@ Route::group(['middleware' => ['auth', 'role:super_admin']], function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'as' => 'admin.'], function () {
-   // Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function () {
    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
    // view halaman admin
@@ -124,7 +118,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'as' 
    Route::get('/dosenkbk/data', [DosenKBKController::class, 'index'])->name('dosenkbk');
    Route::get('/matakuliahkbk/data', [MatakuliahKBKController::class, 'index'])->name('matakuliahkbk');
    Route::get('/mahasiswa/data', [MahasiswaController::class, 'index'])->name('mahasiswa');
-   Route::get('/proposalta/data', [ProposalTaController::class, 'index'])->name('proposalta');
 
    //data API
    Route::get('/fetch-and-save-prodi', [ProdiController::class, 'fetchAndSaveData'])->name('prodi.api');
@@ -137,12 +130,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'as' 
    Route::get('/fetch-and-save-matakuliah', [MatakuliahController::class, 'fetchAndSaveData'])->name('matakuliah.api');
    Route::get('/fetch-and-save-mahasiswa', [MahasiswaController::class, 'fetchAndSaveData'])->name('mahasiswa.api');
    Route::get('/fetch-and-save-proposalta', [ProposalTaController::class, 'fetchAndSaveData'])->name('proposalta.api');
+   Route::get('/fetch-and-save-tahunapi', [TahunController::class, 'fetchAndSaveData'])->name('tahun.api');
 
 
    // CRUD Data Prodi
    Route::get('/prodi/create', [ProdiController::class, 'createProdi'])->name('prodi.create');
    Route::post('/store/prodi', [ProdiController::class, 'storeProdi'])->name('prodi.store');
-
    Route::get('/prodi/edit/{id}', [ProdiController::class, 'editProdi'])->name('prodi.edit');
    Route::put('/prodi/update/{id}', [ProdiController::class, 'updateProdi'])->name('prodi.update');
    Route::delete('/prodi/delete/{id}', [ProdiController::class, 'deleteProdi'])->name('prodi.delete');
@@ -150,7 +143,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'as' 
    // CRUD Data Jurusan
    Route::get('/jurusan/create', [JurusanController::class, 'createJurusan'])->name('jurusan.create');
    Route::post('/jurusan/store', [JurusanController::class, 'storeJurusan'])->name('jurusan.store');
-
    Route::get('/jurusan/edit/{id}', [JurusanController::class, 'editJurusan'])->name('jurusan.edit');
    Route::put('/jurusan/update/{id}', [JurusanController::class, 'updateJurusan'])->name('jurusan.update');
    Route::delete('/jurusan/delete/{id}', [JurusanController::class, 'deleteJurusan'])->name('jurusan.delete');
@@ -158,7 +150,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'as' 
    // CRUD Data Tahun Akademik
    Route::get('/tahun/create', [TahunController::class, 'createTahun'])->name('tahun.create');
    Route::post('/tahun/store', [TahunController::class, 'storeTahun'])->name('tahun.store');
-
    Route::get('/tahun/edit/{id}', [TahunController::class, 'editTahun'])->name('tahun.edit');
    Route::put('/tahun/update/{id}', [TahunController::class, 'updateTahun'])->name('tahun.update');
    Route::delete('/tahun/delete/{id}', [TahunController::class, 'deleteTahun'])->name('tahun.delete');
@@ -166,7 +157,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'as' 
    // CRUD Data KBK
    Route::get('/kbk/create', [KBKController::class, 'create'])->name('kbk.create');
    Route::post('/kbk/store', [KBKController::class, 'store'])->name('kbk.store');
-
    Route::get('/kbk/edit/{id}', [KBKController::class, 'edit'])->name('kbk.edit');
    Route::put('/kbk/update/{id}', [KBKController::class, 'update'])->name('kbk.update');
    Route::delete('/kbk/delete/{id}', [KBKController::class, 'destroy'])->name('kbk.delete');
@@ -174,7 +164,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'as' 
    // CRUD Data Matakuliah KBK
    Route::get('/matakuliahkbk/create', [MatakuliahKBKController::class, 'create'])->name('matakuliahkbk.create');
    Route::post('/matakuliahkbk/store', [MatakuliahKBKController::class, 'store'])->name('matakuliahkbk.store');
-
    Route::get('/matakuliahkbk/edit/{id}', [MatakuliahKBKController::class, 'edit'])->name('matakuliahkbk.edit');
    Route::put('/matakuliahkbk/update/{id}', [MatakuliahKBKController::class, 'update'])->name('matakuliahkbk.update');
    Route::delete('/matakuliahkbk/delete/{id}', [MatakuliahKBKController::class, 'destroy'])->name('matakuliahkbk.delete');
@@ -182,15 +171,28 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin'], 'as' 
    // CRUD Data Dosen KBK
    Route::get('/dosenkbk/create', [DosenKBKController::class, 'create'])->name('dosenkbk.create');
    Route::post('/dosenkbk/store', [DosenKBKController::class, 'store'])->name('dosenkbk.store');
-
    Route::get('/dosenkbk/edit/{id}', [DosenKBKController::class, 'edit'])->name('dosenkbk.edit');
    Route::put('/dosenkbk/update/{id}', [DosenKBKController::class, 'update'])->name('dosenkbk.update');
    Route::delete('/dosenkbk/delete/{id}', [DosenKBKController::class, 'destroy'])->name('dosenkbk.delete');
+   Route::get('/dosenkbk/importfile', [DosenKBKController::class, 'importFile'])->name('dosenkbk.importfile');
+   Route::post('/dosenkbk/insert', [DosenKBKController::class, 'importExcel'])->name('dosenkbk.insert');
 });
 
-Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-Route::get('/pengampu/data', [DosenPengampuController::class, 'index'])->name('pengampu');
+Route::group(['middleware' => 'auth'], function () {
+   Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+   Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+
+Route::group(['middleware' => ['role:pimpinan_jurusan,pimpinan_prodi,admin,pengurus_kbk']], function () {
+   Route::get('/proposalta/data', [ProposalTaController::class, 'index'])->name('proposal');
+});
+Route::group(['middleware' => ['role:admin,dosen_pengampu']], function () {
+   // Route::get('/proposalta/data', [ProposalTaController::class, 'index'])->name('proposal');
+   Route::get('/pengampu/data', [DosenPengampuController::class, 'index'])->name('pengampu');
+});
+
+
 
 
 

@@ -55,10 +55,44 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="exampleInputketua1">ID dosen KBK</label>
                                             <input type="text" class="form-control" id="exampleInputketua" name="ketua"
                                                 value="{{ $kbk->ketua_kbk }}" placeholder="Enter id dosen kbk">
+                                            @error('ketua')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div> --}}
+                                        <div class="form-group">
+                                            <label for="exampleRole">Ketua</label>
+                                            <select name="ketua" class="form-control">
+                                                <option value="" disabled
+                                                    {{ old('ketua', $kbk->ketua_kbk) == '' ? 'selected' : '' }}>
+                                                    Pilih Ketua</option>
+                                                @foreach ($dosenkbk as $j)
+                                                    <option value="{{ $j->id_dosenkbk }}"
+                                                        {{ old('ketua', $kbk->ketua_kbk) == $j->id_dosenkbk ? 'selected' : '' }}>
+                                                        {{ $j->dosen->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('ketua')
+                                                <p style="color:red;"><small>{{ $message }}</small></p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleRole">Sekretaris</label>
+                                            <select name="sekretaris" class="form-control">
+                                                <option value="" disabled
+                                                    {{ old('sekretaris', $kbk->sekretaris_kbk) == '' ? 'selected' : '' }}>
+                                                    Pilih Sekretaris</option>
+                                                @foreach ($dosenkbk as $k)
+                                                    <option value="{{ $k->id_dosenkbk }}"
+                                                        {{ old('sekretaris', $kbk->sekretaris_kbk) == $k->id_dosenkbk ? 'selected' : '' }}>
+                                                        {{ $k->dosen->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             @error('ketua')
                                                 <p style="color:red;"><small>{{ $message }}</small></p>
                                             @enderror

@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Profile</h1>
+                        <h1 class="m-0">Profil</h1>
                     </div>
                     <div class="col-sm-6">
                         {{-- <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
                         <div class="col-6">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Profile</h3>
+                                    <h3 class="card-title">Edit profil</h3>
                                 </div>
                                 <div class="card-body">
 
@@ -52,7 +52,8 @@
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="exampleInputFile"
                                                     name="image" onchange="previewImage()">
-                                                <label class="custom-file-label" for="exampleInputFile">Upload image</label>
+                                                <label class="custom-file-label" for="exampleInputFile">Unggah foto
+                                                    profil</label>
                                             </div>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">Upload</span>
@@ -98,7 +99,7 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary width:100px;">Save</button>
+                                    <button type="submit" class="btn btn-primary width:100px;">Simpan</button>
                                 </div>
 
 

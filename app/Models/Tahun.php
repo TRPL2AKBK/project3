@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tahun extends Model
+class Tahun extends Model
 {
-    protected $table = 'ref_smt_thn_akd';
+    protected $table = 'smt_thn_akd';
     protected $primaryKey = 'id_smt_thn_akd';
     protected $fillable = [
         'id_smt_thn_akd',

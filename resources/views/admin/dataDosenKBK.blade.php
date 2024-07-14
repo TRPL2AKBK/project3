@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Prodi --}}
@@ -30,9 +30,23 @@
                             <div class="card-header mb-3">
                                 <h3 class="card-title mt-2">Dosen KBK</h3>
                                 {{-- Tombol Insert --}}
-                                <div class="card-title" style="float: right"><a href="{{ route('admin.dosenkbk.create') }}"
+                                {{-- <div class="card-title" style="float: right"><a href="{{ route('admin.dosenkbk.create') }}"
                                         class="btn btn-primary" style="float: right">
-                                        Insert</a>
+                                        Tambah</a>
+                                </div> --}}
+                                <div class="card-title" style="float: right;">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Tambah data
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('admin.dosenkbk.create') }}">Tambah satu
+                                                data</a>
+                                            <a class="dropdown-item" href="{{ route('admin.dosenkbk.importfile') }}">Tambah
+                                                banyak data</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body table-responsive ">
@@ -44,7 +58,7 @@
                                             <th>Dosen</th>
                                             <th>KBK</th>
                                             <th>Jabatan</th>
-                                            <th>Action</th>
+                                            <th class="no-export">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

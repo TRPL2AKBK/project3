@@ -22,7 +22,6 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-
                 <form action="{{ route('verifikasi.soal.update', ['id' => $soalData->id_soal]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -38,7 +37,7 @@
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <div class="card-body">
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         @php
                                             $hasMatakuliah = false;
                                         @endphp
@@ -63,12 +62,42 @@
                                         @error('id_matakuliah')
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
-                                        <label for="exampleInputid_tahun_akademik1">ID Tahun Akademik</label>
-                                        <input type="text" class="form-control" id="exampleInputVersi1"
-                                            name="id_tahun_akademik" value="{{ $soalData->id_tahun_akademik }}"
-                                            placeholder="tahun akademik">
+                                        @php
+                                            $hasMatakuliah = false;
+                                        @endphp
+                                        <label for="exampleInputMatakuliah1">Matakuliah</label>
+                                        <select class="form-control" id="exampleInputMatakuliah1" name="id_matakuliah">
+                                            <option value="" disabled>Select Matakuliah</option>
+                                            @foreach ($matakuliah as $mk)
+                                                @if ($mk->nidn == Auth::user()->nidn)
+                                                    <option value="{{ $mk->id_matakuliah }}"
+                                                        data-id_prodi="{{ $mk->matakuliah->kurikulum->prodi->id_prodi }}"
+                                                        {{ $soalData->id_matakuliah == $mk->id_matakuliah ? 'selected' : '' }}>
+                                                        {{ $mk->matakuliah->nama_matakuliah }}
+                                                    </option>
+                                                    @php
+                                                        $hasMatakuliah = true;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+                                            @if (!$hasMatakuliah)
+                                                <option value="" disabled>Tidak ada mata kuliah yang diampu</option>
+                                            @endif
+                                        </select>
+                                        @error('id_matakuliah')
+                                            <p style="color:red;"><small>{{ $message }}</small></p>
+                                        @enderror
+                                    </div>
+                                    <input type="hidden" id="id_prodi" name="id_prodi"
+                                        value="{{ old('id_prodi', $soalData->matakuliah->kurikulum->prodi->id_prodi) }}">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputid_tahun_akademik1">Tahun Akademik</label>
+                                        <input type="hidden" name="id_tahun_akademik" value="{{ $tahun->id_smt_thn_akd }}">
+                                        <input type="text" class="form-control" name=""
+                                            value="{{ $tahun->smt_thn_akd }}" readonly>
                                         @error('id_tahun_akademik')
                                             <p style="color:red;"><small>{{ $message }}</small></p>
                                         @enderror
@@ -115,4 +144,11 @@
         </section>
         <!-- /.content -->
     </div>
+    <script>
+        document.getElementById('exampleInputMatakuliah1').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var idProdi = selectedOption.getAttribute('data-id_prodi');
+            document.getElementById('id_prodi').value = idProdi;
+        });
+    </script>
 @endsection

@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class KBK extends Model
 {
-    protected $table = 'ref_kbk';
+    protected $table = 'kbk';
     protected $primaryKey = 'id_kbk';
     protected $fillable = [
         'id_kbk',
         'kode_kbk',
         'nama_kbk',
-        'ketua_kbk'
+        'ketua_kbk',
+        'sekretaris_kbk'
     ];
 
     public $timestamps = false;
@@ -30,5 +31,9 @@ class KBK extends Model
     public function ketua()
     {
         return $this->belongsTo('App\Models\DosenKBK', 'ketua_kbk', 'id_dosenkbk')->with('dosen');
+    }
+    public function sekretaris()
+    {
+        return $this->belongsTo('App\Models\DosenKBK', 'sekretaris_kbk', 'id_dosenkbk')->with('dosen');
     }
 }

@@ -64,48 +64,6 @@ class ProfileController extends Controller
         return view('profile.index', compact('data'));
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'nama' => 'required|regex:/^[a-zA-Z0-9\s_]+$/',
-    //         'nidn' => 'required',
-    //         'image' => 'image|file|max:1024',
-    //         'email' => 'required|email|unique:user,email,' . $id,
-    //         'password' => 'sometimes|nullable||min:8',
-    //     ]);
-
-    //     if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-    //     $data = [
-    //         'id_level' => $request->id_level,
-    //         'name' => $request->nama,
-    //         'nidn' => $request->nidn,
-    //         'updated_at' => Carbon::now(),
-    //     ];
-
-    //     if ($request->email) {
-    //         $data['email'] = $request->email;
-    //     }
-
-    //     if ($request->password) {
-    //         $data['password'] = Hash::make($request->password);
-    //     }
-
-    //     if ($request->file('image')) {
-    //         if ($request->oldDokumen) {
-    //             Storage::delete($request->oldDokumen);
-    //         }
-    //         $data['image'] = $request->image->store('Image');
-    //     }
-
-    //     // Update pengguna di database
-    //     User::whereId($id)->update($data);
-
-    //     // Redirect ke halaman pengguna admin
-    //     return redirect()->route('profile.edit', ['id' => Auth::user()->id])->with('success', 'Data berhasil di perbarui');
-    // }
-
-
     public function update(Request $request, $id)
     {
         // Mendapatkan data user sebelum update
@@ -113,7 +71,9 @@ class ProfileController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required|regex:/^[a-zA-Z0-9\s_]+$/',
-            'nidn' => 'required',
+            // 'nidn' => 'required',
+            'nidn' => 'required|exists:dosen,nidn',
+
             'image' => 'image|file|max:1024',
             'email' => 'required|email|unique:user,email,' . $id,
             'password' => 'sometimes|nullable|min:8',
@@ -122,7 +82,6 @@ class ProfileController extends Controller
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         $data = [
-            'id_level' => $request->id_level,
             'name' => $request->nama,
             'nidn' => $request->nidn,
             'updated_at' => Carbon::now(),

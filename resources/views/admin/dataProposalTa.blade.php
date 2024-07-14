@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         {{-- Table Proposal --}}
@@ -45,7 +45,7 @@
                                             <th>Judul</th>
                                             {{-- <th>Pembimbing 1</th>
                                             <th>Pembimbing 2</th> --}}
-                                            <th>Aksi</th>
+                                            <th class="no-export">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

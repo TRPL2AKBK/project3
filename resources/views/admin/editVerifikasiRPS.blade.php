@@ -44,16 +44,11 @@
                                             value="{{ $verifData->rps->matakuliah->nama_matakuliah }}" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputName1">Versi</label>
-                                        <input type="text" class="form-control" id="exampleInputversi" name="versi_rps"
-                                            value="{{ $verifData->rps->versi_rps }}" readonly>
-                                    </div>
-                                    <div class="form-group">
                                         @if ($verifData->rps->dokumen)
                                             <div class="">
-                                                <label>Document RPS:</label>
+                                                <label>Dokumen RPS:</label>
                                                 <a href="{{ asset('storage/' . $verifData->rps->dokumen) }}"
-                                                    target="_blank">{{ $verifData->rps->dokumen }}</a>
+                                                    target="_blank">Lihat dokumen</a>
                                             </div>
                                         @endif
                                     </div>
@@ -66,7 +61,8 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <a href="{{ url()->previous() }}" class="btn btn-secondary">Batal</a>
                                 </div>
                             </div>
                             <!-- /.card -->

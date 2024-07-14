@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class RPS extends Model
 {
-    protected $table = 'ref_rps';
+    protected $table = 'rps';
     protected $primaryKey = 'id_rps';
     protected $fillable = [
         'id_rps',
         'id_matakuliah',
-        'versi_rps',
+        'id_tahun_akademik',
         'dokumen',
         'evaluasi',
         'id_dosen_pengembang',
+        'id_prodi',
     ];
 
     public $timestamps = false;
@@ -25,19 +26,23 @@ class RPS extends Model
         return self::where('id_rps', $id_rps)->update($rpsData);
     }
 
+    public function tahun()
+    {
+        return $this->belongsTo('App\Models\Tahun', 'id_tahun_akademik');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'id_dosen_pengembang');
+    }
+
+    public function mkbk()
+    {
+        return $this->belongsTo('App\Models\MatakuliahKBK', 'id_matakuliah')->with('kbk')->withDefault();
+    }
+
     public function verifrps()
     {
         return $this->hasOne('App\Models\VerifikasiRPS', 'id_rps', 'id_rps');
-    }
-
-    public function verifrps1()
-    {
-        return $this->belongsTo('App\Models\VerifikasiRPS', 'id_rps', 'id_rps')->with('verif1')->withDefault();
-    }
-
-    public function verifrps2()
-    {
-        return $this->belongsTo('App\Models\VerifikasiRPS', 'id_rps', 'id_rps')->with('verif2')->withDefault();
     }
 
     public function dosenpengampu()
@@ -52,7 +57,12 @@ class RPS extends Model
 
     public function matakuliah()
     {
-        return $this->belongsTo(MataKuliah::class, 'id_matakuliah', 'id_matakuliah');
+        return $this->belongsTo(MataKuliah::class, 'id_matakuliah', 'id_matakuliah')->with('kurikulum')->withDefault();
         // Sesuaikan 'foreign_key' dan 'other_key' dengan kolom yang sesuai di tabel Anda
+    }
+
+    public function matakuliahkbk()
+    {
+        return $this->belongsTo(MatakuliahKBK::class, 'id_matakuliah', 'id_matakuliah');
     }
 }
